@@ -56,7 +56,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost',
-    ]
+]
 
 ROOT_URLCONF = 'abm_Salus3.urls'
 
@@ -83,22 +83,22 @@ WSGI_APPLICATION = 'abm_Salus3.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-		'sqlite': {
-			'ENGINE': 'django.db.backends.sqlite3',
-			'NAME': BASE_DIR / 'db.sqlite3',
-		},
-		'default': {
-			'ENGINE': 'django.db.backends.mysql',
-			'NAME': 'abm_SalusE3',
-			'USER': 'root',
-			'PASSWORD': 'root',
-			'HOST': 'localhost',
-			'PORT': '3306',
-			'OPTIONS': {
-				'sql_mode': 'traditional',
-			}
-		}
-	}
+    'sqlite': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'abm_SalusE3',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        }
+    }
+}
 
 
 # Password validation
