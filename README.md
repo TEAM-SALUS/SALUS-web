@@ -20,9 +20,6 @@ Por otra parte, los profesionales de la salud podrán acceder al historial médi
 > * Python
 > * SQL
 > * MySQL
-<<<<<<< HEAD
-> * Django
-=======
 > * Django
 
 ***
@@ -41,4 +38,3 @@ Por otra parte, los profesionales de la salud podrán acceder al historial médi
 * Rosana Quispe
 * Verónica Elena Nievas Guardia
 
->>>>>>> a8756bd7754056febeffa180abc11d923c64f52e
