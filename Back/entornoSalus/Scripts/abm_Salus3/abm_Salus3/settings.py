@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'abm_Salus3.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-<<<<<<< HEAD
+
 		'sqlite': {
 			'ENGINE': 'django.db.backends.sqlite3',
 			'NAME': BASE_DIR / 'db.sqlite3',
@@ -92,7 +92,7 @@ DATABASES = {
 			'ENGINE': 'django.db.backends.mysql',
 			'NAME': 'abm_SalusE3',
 			'USER': 'root',
-			'PASSWORD': 'SQLROS24',
+			'PASSWORD': '',
 			'HOST': 'localhost',
 			'PORT': '3306',
 			'OPTIONS': {
@@ -100,24 +100,7 @@ DATABASES = {
 			}
 		}
 	}
-=======
-    'sqlite': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'abm_SalusE3',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-            'sql_mode': 'traditional',
-        }
-    }
-}
->>>>>>> fe4161de7a07a3b72949bf879ab3b4d4193aa29e
+
 
 
 # Password validation
