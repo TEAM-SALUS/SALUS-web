@@ -1,4 +1,3 @@
-
 __author__ = "Inada Naoki <songofacandy@gmail.com>"
-version_info = (2,1,1,'final',0)
-__version__ = "2.1.1"
+__version__ = "2.2.4"
+version_info = (2, 2, 4, "final", 0)
