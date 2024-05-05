@@ -26,6 +26,8 @@ import { FormEditDoctorComponent } from './medicos/form-edit-doctor/form-edit-do
 import { PagoComponent } from './ecommerce/pago/pago.component';
 import { PagoAdminComponent } from './ecommerce/pago-admin/pago-admin.component';
 import { PagoClienteComponent } from './ecommerce/pago-cliente/pago-cliente.component';
+import { EspecialidadComponent } from './pages/especialidad/especialidad.component';
+import { DetalleEspecialidadComponent } from './pages/detalle-especialidad/detalle-especialidad.component';
 
 
 
@@ -52,6 +54,8 @@ import { PagoClienteComponent } from './ecommerce/pago-cliente/pago-cliente.comp
     PagoComponent,
     PagoAdminComponent,
     PagoClienteComponent,
+    EspecialidadComponent,
+    DetalleEspecialidadComponent,
   ],
   imports: [
     BrowserModule,

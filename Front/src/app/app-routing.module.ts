@@ -17,11 +17,15 @@ import { FormEditDoctorComponent } from './medicos/form-edit-doctor/form-edit-do
 import { PagoComponent } from './ecommerce/pago/pago.component';
 import { PagoAdminComponent } from './ecommerce/pago-admin/pago-admin.component';
 import { PagoClienteComponent } from './ecommerce/pago-cliente/pago-cliente.component';
+import { EspecialidadComponent } from './pages/especialidad/especialidad.component';
+import { DetalleEspecialidadComponent } from './pages/detalle-especialidad/detalle-especialidad.component';
 
 
 const routes: Routes = [
   {path:'home', component:HomeComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path:'servicios', component:EspecialidadComponent},
+  {path:'detalle-servicio/:id', component:DetalleEspecialidadComponent},
   {path:'nosotros', component:NosotrosComponent},
   {path:'contacto', component:ContactoComponent},
   {path:'registro', component:RegistroComponent},
