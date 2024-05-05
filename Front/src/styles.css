@@ -1,0 +1,41 @@
+/* GLOBALES */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #6ea8c9;
+  --secondary-color: #2b78a2;
+  --terciary-color: #b6dcb6;
+  --primary-font: "Poppins", sans-serif;
+  --secondary-font: "Roboto", sans-serif;
+}
+
+.btn {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+p {
+  font-family: var(--primary-font);
+}
+
+h1,
+h2 {
+  font-family: var(--secondary-font);
+}
+
+.ng-valid:not(form).ng-touched {
+  border: 1px solid green;
+  margin-bottom: 5px;
+}
+
+.ng-invalid:not(form).ng-touched {
+  border: 1px solid red;
+  margin-bottom: 10px;
+}

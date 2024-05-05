@@ -1,0 +1,128 @@
+<main class="form-background">
+  <div class="container form-pago">
+    <form [formGroup]="pagoForm" (ngSubmit)="nuevoPago()">
+      <div class="row">
+        <div class="col-6">
+          <h1>Tarjeta de Crédito o Débito</h1>
+        </div>
+        <div class="col-6 text-end">
+          <img src="../../../assets/img-ecommerce/tarjeta-visa.png" alt="Visa" style="margin-right: 15px;">
+          <img src="../../../assets/img-ecommerce/tarjeta-mastercard.png" alt="Mastercard" style="margin-right: 15px;">
+          <img src="../../../assets/img-ecommerce/tarjeta-american_express.png" alt="American Express">
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col">
+          <label for="numeroTarjeta">Número de Tarjeta</label>
+          <input type="text" id="numeroTarjeta" class="form-control" placeholder="4517 5124 5678 2215" formControlName="nroTarjeta">
+          <div *ngIf="nroTarjeta.invalid && (nroTarjeta.dirty || nroTarjeta.touched)" class="text-danger">
+            <div *ngIf="nroTarjeta.errors?.['required']">
+              el Número de Tarjeta es requerido.
+            </div>
+            <div *ngIf="nroTarjeta.errors?.['minlength']">
+              el Número de Tarjeta debe tener 16 carácteres.
+            </div>
+            <div *ngIf="nroTarjeta.errors?.['maxlength']">
+              el Número de Tarjeta debe tener 16 carácteres.
+            </div>
+            <div *ngIf="nroTarjeta.errors?.['pattern']">
+              el Número de Tarjeta debe contener SOLO números.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col">
+          <label for="vencimiento">Vencimiento</label>
+          <input type="text" id="vencimiento" class="form-control" [(ngModel)]="vencimiento" (input)="formatVencimiento()"
+          placeholder="08/25" formControlName="vencimientoTarjeta">
+          <div *ngIf="vencimientoTarjeta.invalid && (vencimientoTarjeta.dirty || vencimientoTarjeta.touched)" class="text-danger">
+            <div *ngIf="vencimientoTarjeta.errors?.['required']">
+              el Vencimiento es requerido.
+            </div>
+            <div *ngIf="vencimientoTarjeta.errors?.['pattern']">
+              el Vencimiento debe contener SOLO números.
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <label for="codigoSeguridad">Código de Seguridad</label>
+          <input type="text" id="codigoSeguridad" class="form-control" placeholder="XXX" formControlName="codSeguridad">
+          <div *ngIf="codSeguridad.invalid && (codSeguridad.dirty || codSeguridad.touched)" class="text-danger">
+            <div *ngIf="codSeguridad.errors?.['required']">
+              el Código de Seguridad es requerido.
+            </div>
+            <div *ngIf="codSeguridad.errors?.['minlength']">
+              el Código de Seguridad debe tener 3 carácteres.
+            </div>
+            <div *ngIf="codSeguridad.errors?.['maxlength']">
+              el Código de Seguridad debe tener 3 carácteres.
+            </div>
+            <div *ngIf="codSeguridad.errors?.['pattern']">
+              el Código de Seguridad debe contener SOLO números.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col">
+          <label for="nombreTitular">Nombre del Titular</label>
+          <input type="text" id="nombreTitular" class="form-control" placeholder="Nombre Apellido" formControlName="nombre">
+          <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger">
+            <div *ngIf="nombre.errors?.['required']">
+              el Nombre del Titular es requerido.
+            </div>
+            <div *ngIf="nombre.errors?.['minlength']">
+              el Nombre del Titular debe tener al menos 3 caracteres.
+            </div>
+            <div *ngIf="nombre.errors?.['pattern']">
+              el Nombre del Titular SOLO debe contener letras.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col">
+          <label for="dniTitular">DNI del Titular</label>
+          <input type="text" id="dniTitular" class="form-control" placeholder="12345678" formControlName="dni">
+          <div *ngIf="dni.invalid && (dni.dirty || dni.touched)" class="text-danger">
+            <div *ngIf="dni.errors?.['required']">
+              el DNI del Titular es requerido.
+            </div>
+            <div *ngIf="dni.errors?.['minlength']">
+              el DNI debe tener 8 carácteres.
+            </div>
+            <div *ngIf="dni.errors?.['maxlength']">
+              el DNI debe tener 8 carácteres.
+            </div>
+            <div *ngIf="dni.errors?.['pattern']">
+              el DNI debe contener SOLO números.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" class="form-control" placeholder="ejemplo@gmail.com" formControlName="email">
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+            <div *ngIf="email.errors?.['required']">
+              el E-mail es requerido.
+            </div>
+            <div *ngIf="email.errors?.['minlength']">
+              el email debe tener al menos 4 caracteres.
+            </div>
+            <div *ngIf="email.errors?.['email']">
+              se debe insertar un formato email correcto.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col">
+          <input class="botons" type="submit" value="PAGAR SUSCRIPCION">
+        </div>
+      </div>
+    </form>
+  </div>
+</main>

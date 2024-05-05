@@ -1,0 +1,30 @@
+<main>
+  <button type="button" class="btn bg-success btn-success"><a class="nav-link" routerLink="/formDoctor">NUEVO DOCTOR</a></button>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">DNI</th>
+        <th scope="col">Localidad</th>
+        <th scope="col">Matricula</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dato of myDoctors">
+        <th scope="row">{{dato.id}}</th>
+        <td>{{dato.Nombre_UM}}</td>
+        <td>{{dato.Apellido_UM}}</td>
+        <td>{{dato.Dni_UM}}</td>
+        <td>{{dato.Localidad_UM}}</td>
+        <td>{{"Nro " + dato.Matricula_UM}}</td>
+        <td class="buttonAccion">
+          <button type="button buttonEdit" class="btn bg-primary btn-primary" (click)="editDoctor(dato)">Editar</button>
+          <button type="button" class="btn bg-danger btn-danger" (click)="deleteDoctor(dato.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>

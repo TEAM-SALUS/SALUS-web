@@ -1,0 +1,26 @@
+<main>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Email</th>
+        <th scope="col">Suscripcion</th>
+        <th scope="col">Inicio Susc.</th>
+        <th scope="col">Fin Susc.</th>
+        <th scope="col">Valor Susc.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dato of myVentas">
+        <td>{{dato.Nombre_UP}}</td>
+        <td>{{dato.Apellido_UP}}</td>
+        <td>{{dato.Email_UP}}</td>
+        <td>{{dato.TipoServicio_S}}</td>
+        <td>{{dato.FechaVenta_V | date: 'dd/MM/yyyy'}}</td>
+        <td>{{dato.FechaFin_V | date: 'dd/MM/yyyy'}}</td>
+        <td>{{dato.Precio_S | currency}}</td>
+      </tr>
+    </tbody>
+  </table>
+</main>

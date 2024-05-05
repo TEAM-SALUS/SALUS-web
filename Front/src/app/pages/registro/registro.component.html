@@ -1,0 +1,58 @@
+<main class="form-background">
+  <section class="form-register">
+    <form [formGroup]="registryForm">
+      <h1>Formulario Registro</h1>
+      <!-- nombre -->
+      <input class="controls" type="text" name="nombres" placeholder="Ingrese su nombre" formControlName="Nombre_UP">
+      <div
+        *ngIf="registryForm.controls.Nombre_UP.invalid && (registryForm.controls.Nombre_UP.dirty || registryForm.controls.Nombre_UP.touched)"
+        class="alert-danger">
+        <div *ngIf="registryForm.controls.Nombre_UP.errors?.['required']">
+          el nombre es requerido
+        </div>
+        <div *ngIf="registryForm.controls.Nombre_UP.errors?.['minlength']">
+          el nombre debe tener al menos 3 letras
+        </div>
+      </div>
+      <!-- apellido -->
+      <input class="controls" type="text" name="apellidos" placeholder="Ingrese su apellido"
+        formControlName="Apellido_UP">
+      <div
+        *ngIf="registryForm.controls.Apellido_UP.invalid && (registryForm.controls.Apellido_UP.dirty || registryForm.controls.Apellido_UP.touched)"
+        class="alert-danger">
+        <div *ngIf="registryForm.controls.Apellido_UP.errors?.['required']">
+          el apellido es requerido
+        </div>
+        <div *ngIf="registryForm.controls.Apellido_UP.errors?.['minlength']">
+          el apellido debe tener al menos 3 letras
+        </div>
+      </div>
+      <!-- email -->
+      <input class="controls" type="email" name="usuario" placeholder="Ingrese su usuario" formControlName="Email_UP">
+      <div
+        *ngIf="registryForm.controls.Email_UP.invalid && (registryForm.controls.Email_UP.dirty || registryForm.controls.Email_UP.touched)"
+        class="alert-danger">
+        <div *ngIf="registryForm.controls.Email_UP.errors?.['required']">
+          el email es requerido.
+        </div>
+        <div *ngIf="registryForm.controls.Email_UP.errors?.['minlength']">
+          el email debe tener al menos 4 caracteres.
+        </div>
+      </div>
+      <!-- password -->
+      <input class="controls" type="password" name="password" placeholder="Ingrese su contraseña"
+        formControlName="Clave_UP">
+      <div
+        *ngIf="registryForm.controls.Clave_UP.invalid && (registryForm.controls.Clave_UP.dirty || registryForm.controls.Clave_UP.touched)"
+        class="alert-danger">
+        <div *ngIf="registryForm.controls.Clave_UP.errors?.['required']">
+          la contraseña es requerida.
+        </div>
+      </div>
+      <p>Estoy de acuerdo con <a href="#">Términos y Condiciones</a></p>
+      <input class="botons" type="submit" value="PACIENTE" (click)="registry()">
+      <!--  <a href="#"><input class="botons" type="submit" value="MÉDICO"></a> -->
+      <p><a href="#">¿Ya tengo cuenta?</a></p>
+    </form>
+  </section>
+</main>

@@ -1,0 +1,30 @@
+section {
+  padding: 4rem;
+  width: 100%;
+}
+
+h1 {
+  color: var(--secondary-color);
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+p {
+  color: var(--primary-color);
+}
+
+@media screen and (min-width: 768px) {
+  section {
+    display: flex;
+  }
+  p {
+    text-align: justify;
+    margin-right: 3rem;
+  }
+
+  img {
+    width: 800px;
+    height: 300px;
+    object-fit: cover;
+  }
+}

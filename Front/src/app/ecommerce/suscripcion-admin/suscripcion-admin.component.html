@@ -1,0 +1,26 @@
+<main>
+  <button type="button" class="btn bg-success btn-success"><a class="nav-link" routerLink="/formSuscripcion">NUEVA SUSCRIPCION</a></button>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Tipo Suscripcion</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Servicios</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dato of mySuscriptions">
+        <th scope="row">{{dato.id}}</th>
+        <td>{{dato.TipoServicio_S}}</td>
+        <td>{{dato.Precio_S}}</td>
+        <td>{{dato.DescripcionAdmin}}</td>
+        <td class="buttonAccion">
+          <button type="button buttonEdit" class="btn bg-primary btn-primary" (click)="editSuscription(dato)">Editar</button>
+          <button type="button" class="btn bg-danger btn-danger" (click)="deleteSuscription(dato.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>

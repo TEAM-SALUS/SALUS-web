@@ -1,0 +1,27 @@
+<main>
+  <div class="container mb-5 mt-2 ">
+    <div class="row">
+      <div class="col-lg-4" *ngFor="let dato of mySuscriptions">
+        <div class="mb-5 mb-lg-0">
+          <div class="card-body suscription-register">
+            <h3 class="card-title text-muted text-uppercase text-center">
+              {{dato.TipoServicio_S}}
+            </h3>
+            <h5 class="card-price text-center">
+              {{dato.Precio_S | currency:"$"}}<span class="period">/mes</span>
+            </h5>
+            <hr />
+            <ul class="fa-ul">
+              <li *ngFor="let item of dato.DescripcionList">
+                <span class="fa-li"><i class="fas fa-check"></i></span>{{item}}
+              </li>
+            </ul>
+            <div class="d-grid">
+              <button type="btn" class="botons text-uppercase" (click)="pagarSuscripcion(dato)">Suscríbete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

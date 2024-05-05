@@ -1,0 +1,25 @@
+<main>
+
+
+  <div class="form-register">
+    <h1>Datos:</h1>
+    <form class="formPaciente" [formGroup]="formulario">
+      <div>
+        <label for="name">Nombre:</label>
+        <input class="controls" type="text" name="name" formControlName="Nombre_UP">
+      </div>
+      <div>
+        <label for="lastName">Apellido:</label>
+        <input class="controls" type="text" name="lastName" formControlName="Apellido_UP">
+      </div>
+      <div>
+        <label for="email">Email:</label>
+        <input class="controls" type="email" name="email" formControlName="Email_UP">
+      </div>
+
+      <button class="botons" (click)="actualizarPaciente()">Actualizar Datos</button>
+      <button class="botons" (click)="eliminarPaciente()">Eliminar Paciente</button>
+    </form>
+  </div>
+
+</main>

@@ -1,0 +1,116 @@
+<main class="form-background">
+  <section class="form-doctor">
+    <form [formGroup]="formDoctor" (ngSubmit)="nuevoDoctor()">
+      <h1>Nuevo Medico</h1>
+      <!-- NOMBRE MEDICO -->
+      <input class="controls" type="text" name="tipo de servicio" placeholder="Ingrese el nombre del médico"
+        formControlName="Nombre_UM">
+      <div *ngIf="Nombre_UM.invalid && (Nombre_UM.dirty || Nombre_UM.touched)" class="text-danger">
+        <div *ngIf="Nombre_UM.errors?.['required']">
+          el Nombre es requerida.
+        </div>
+        <div *ngIf="Nombre_UM.errors?.['minlength']">
+          el Nombre debe tener al menos 3 caracteres.
+        </div>
+        <div *ngIf="Nombre_UM.errors?.['maxlength']">
+          el Nombre no debe tener mas de 25 caracteres.
+        </div>
+        <div *ngIf="Nombre_UM.errors?.['pattern']">
+          el Nombre SOLO debe contener letras.
+        </div>
+      </div>
+      <!-- APELLIDO MEDICO -->
+      <input class="controls" type="text" name="tipo de servicio" placeholder="Ingrese el apellido del médico"
+        formControlName="Apellido_UM">
+      <div *ngIf="Apellido_UM.invalid && (Apellido_UM.dirty || Apellido_UM.touched)" class="text-danger">
+        <div *ngIf="Apellido_UM.errors?.['required']">
+          el Apellido es requerida.
+        </div>
+        <div *ngIf="Apellido_UM.errors?.['minlength']">
+          el Apellido debe tener al menos 3 caracteres.
+        </div>
+        <div *ngIf="Apellido_UM.errors?.['maxlength']">
+          el Apellido no debe tener mas de 25 caracteres.
+        </div>
+        <div *ngIf="Apellido_UM.errors?.['pattern']">
+          el Apellido SOLO debe contener letras.
+        </div>
+      </div>
+      <!-- LOCALIDAD MEDICO -->
+      <select class="controls" id="" formControlName="Localidad_UM">
+        <option value="" disabled selected>Selecciona una Localidad</option>
+        <option value="Cordoba">Córdoba</option>
+        <option value="Cosquin">Cosquín</option>
+        <option value="Rio Cuarto">Río Cuarto</option>
+      </select>
+      <div *ngIf="Localidad_UM.invalid && (Localidad_UM.dirty || Localidad_UM.touched)" class="text-danger">
+        <div *ngIf="Localidad_UM.errors?.['required']">
+          la Localidad es requerida.
+        </div>
+      </div>
+      <!-- DIRECCION MEDICO -->
+      <input class="controls" type="text" name="tipo de servicio" placeholder="Ingrese la dirección del médico"
+        formControlName="Direccion_UM">
+      <div *ngIf="Direccion_UM.invalid && (Direccion_UM.dirty || Direccion_UM.touched)" class="text-danger">
+        <div *ngIf="Direccion_UM.errors?.['required']">
+          la Dirección es requerida.
+        </div>
+        <div *ngIf="Direccion_UM.errors?.['minlength']">
+          la Dirección debe tener al menos 5 caracteres.
+        </div>
+        <div *ngIf="Direccion_UM.errors?.['maxlength']">
+          la Dirección no debe tener mas de 35 caracteres.
+        </div>
+      </div>
+      <!-- DNI MEDICO -->
+      <input class="controls" type="text" name="precio" placeholder="Ingrese el DNI" formControlName="Dni_UM">
+      <div *ngIf="Dni_UM.invalid && (Dni_UM.dirty || Dni_UM.touched)" class=" text-danger">
+        <div *ngIf="Dni_UM.errors?.['required']">
+          el DNI es requerida.
+        </div>
+        <div *ngIf="Dni_UM.errors?.['minlength']">
+          el DNI debe tener 8 carácteres.
+        </div>
+        <div *ngIf="Dni_UM.errors?.['maxlength']">
+          el DNI debe tener 8 carácteres.
+        </div>
+        <div *ngIf="Dni_UM.errors?.['pattern']">
+          el DNI debe contener SOLO números.
+        </div>
+      </div>
+      <!-- CELULAR MEDICO -->
+      <input class="controls" type="tel" name="precio" placeholder="Ingrese el Celular" formControlName="Celular_UM">
+      <div *ngIf="Celular_UM.invalid && (Celular_UM.dirty || Celular_UM.touched)" class=" text-danger">
+        <div *ngIf="Celular_UM.errors?.['required']">
+          el Celular es requerida.
+        </div>
+        <div *ngIf="Celular_UM.errors?.['minlength']">
+          el Celular debe tener 8 carácteres.
+        </div>
+        <div *ngIf="Celular_UM.errors?.['maxlength']">
+          el Celular debe tener 15 carácteres.
+        </div>
+        <div *ngIf="Celular_UM.errors?.['pattern']">
+          el DNI debe contener SOLO números.
+        </div>
+      </div>
+      <!-- MATRICULA MEDICO -->
+      <input class="controls" type="tel" name="precio" placeholder="Ingrese la Matrícula" formControlName="Matricula_UM">
+      <div *ngIf="Matricula_UM.invalid && (Matricula_UM.dirty || Matricula_UM.touched)" class=" text-danger">
+        <div *ngIf="Matricula_UM.errors?.['required']">
+          la Matrícula es requerida.
+        </div>
+        <div *ngIf="Matricula_UM.errors?.['minlength']">
+          la Matrícula debe tener 5 carácteres.
+        </div>
+        <div *ngIf="Matricula_UM.errors?.['maxlength']">
+          la Matrícula debe tener 5 carácteres.
+        </div>
+        <div *ngIf="Matricula_UM.errors?.['pattern']">
+          la Matrícula debe contener SOLO números.
+        </div>
+      </div>
+      <input class="botons" type="submit" value="AGREGAR MEDICO">
+    </form>
+  </section>
+</main>

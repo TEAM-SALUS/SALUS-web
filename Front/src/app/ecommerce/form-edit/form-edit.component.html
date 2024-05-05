@@ -1,0 +1,53 @@
+<main class="form-background">
+  <section class="form-suscripcion">
+    <form [formGroup]="suscripcionFormEdit" (ngSubmit)="editarSuscripcion()">
+      <h1>Editar Suscripción</h1>
+      <!-- TIPO DE SERVICIO -->
+      <input class="controls" type="text" name="tipo de servicio" placeholder="Ingrese el tipo de servicio"
+        formControlName="TipoServicio_S">
+      <div *ngIf="TipoServicio_S?.invalid && (TipoServicio_S?.dirty || TipoServicio_S?.touched)" class="text-danger">
+        <div *ngIf="TipoServicio_S?.errors?.['required']">
+          el Tipo de Suscripcion es requerida.
+        </div>
+        <div *ngIf="TipoServicio_S?.errors?.['minlength']">
+          el Tipo de Suscripcion debe tener al menos 4 caracteres.
+        </div>
+        <div *ngIf="TipoServicio_S?.errors?.['maxlength']">
+          el Tipo de Suscripcion no debe tener mas de 25 caracteres.
+        </div>
+        <div *ngIf="TipoServicio_S?.errors?.['pattern']">
+          el Tipo de Suscripcion SOLO debe contener letras.
+        </div>
+      </div>
+      <!-- PRECIO -->
+      <input class="controls" type="number" name="precio" placeholder="Ingrese el precio" formControlName="Precio_S">
+      <div *ngIf="Precio_S?.invalid && (Precio_S?.dirty || Precio_S?.touched)" class=" text-danger">
+        <div *ngIf="Precio_S?.errors?.['required']">
+          el Precio es requerido.
+        </div>
+        <div *ngIf="Precio_S?.errors?.['min']">
+          el Precio no puede ser menor a $2.000.
+        </div>
+      </div>
+      <!-- SERVICIOS DINAMICOS -->
+      <input class="botons" type="button" value="AGREGAR SERVICIO" (click)="addServiciosField()">
+      <div formArrayName="servicios">
+        <div *ngFor="let serv of ServiciosField.controls; let i=index" [formGroupName]="i">
+          <input class="controls" type="text" placeholder="Ingrese el servicio N° {{i+1}}"
+            formControlName="servicio">
+          <div *ngIf="serv.get('servicio')?.invalid && (serv.get('servicio')?.dirty || serv.get('servicio')?.touched)" class=" text-danger">
+            <div *ngIf="serv.get('servicio')?.errors?.['required']">
+              el Servicio {{i+1}} es requerido.
+            </div>
+            <div *ngIf="serv.get('servicio')?.errors?.['minlength']">
+              el Servicio {{i+1}} debe tener al menos 5 caracteres.
+            </div>
+          </div>
+          <button class="controls" type="button" (click)="eliminarInput(i)">ELIMINAR SERV N° {{i+1}}</button>
+        </div>
+      </div>
+      <input class="botons" type="submit" value="EDITAR SUSCRIPCION">
+    </form>
+  </section>
+</main>
+

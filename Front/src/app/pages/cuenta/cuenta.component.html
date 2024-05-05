@@ -1,0 +1,9 @@
+<main>
+  <input class="botons" type="submit" value="CREAR CUENTA" (click)="crearCuenta()">
+  <p>PROBANDO CUENTAS</p>
+  <div *ngFor="let dato of myCuentas">
+    <h3 class="card-title text-muted text-uppercase text-center">
+      {{dato.Saldo_C}}
+    </h3>
+  </div>
+</main>

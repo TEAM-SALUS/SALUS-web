@@ -1,0 +1,8 @@
+.navbar a {
+  color: var(--primary-color);
+  font-family: var(--primary-font);
+}
+
+.navbar-nav .nav-link.active {
+  color: var(--terciary-color);
+}

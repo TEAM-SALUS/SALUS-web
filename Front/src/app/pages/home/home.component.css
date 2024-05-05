@@ -1,0 +1,150 @@
+.carousel-caption {
+  background-color: #2b78a265;
+  border-radius: 1rem;
+}
+
+/* index main */
+.index-first {
+  padding: 2rem;
+  color: var(--primary-color);
+}
+
+.index-first h2 {
+  font-family: var(--secondary-font);
+  color: var(--secondary-color);
+  font-size: 3rem;
+}
+
+.index-first-img1 {
+  width: 250px;
+  height: 343px;
+  border-radius: 1rem;
+  object-fit: cover;
+  display: block;
+  margin: auto;
+}
+
+.index-first-img2 {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .carousel-item {
+    height: 85vh;
+  }
+  .index-first {
+    padding: 7rem 4rem 4rem 4rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .index-first-info {
+    width: 45%;
+  }
+
+  .index-first-img {
+    position: relative;
+    width: 50%;
+  }
+
+  .index-first-img1 {
+    width: 288px;
+    height: 343px;
+
+    position: absolute;
+    top: 3rem;
+    z-index: 2;
+  }
+
+  .index-first-img2 {
+    display: block;
+    width: 392px;
+    height: 436px;
+    border-radius: 1rem;
+    object-fit: cover;
+    position: absolute;
+    right: 0;
+  }
+}
+
+.index-second {
+  padding: 2rem;
+  font-family: var(--primary-font);
+  color: white;
+}
+
+.index-second h2 {
+  font-family: var(--secondary-font);
+  color: var(--secondary-color);
+  text-align: center;
+  margin-bottom: 4rem;
+  font-size: 3rem;
+}
+
+.index-card {
+  background-color: var(--terciary-color);
+  width: 250px;
+  height: 150px;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.index-card img {
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .index-second {
+    padding: 6rem 4rem 4rem;
+  }
+
+  .index-cards {
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .index-card {
+    width: 300px;
+    margin-bottom: 0;
+  }
+}
+
+.index-third {
+  padding: 2rem;
+  color: var(--primary-color);
+  font-family: var(--primary-font);
+}
+
+.index-third h2 {
+  font-size: 3rem;
+  font-family: var(--secondary-font);
+  color: var(--secondary-color);
+  margin-bottom: 3rem;
+}
+
+.index-third-info p {
+  margin-bottom: 2rem;
+}
+
+.index-third .iphone img {
+  width: 100%;
+  object-fit: cover;
+}
+
+@media screen and (min-width: 768px) {
+  .index-third {
+    padding: 0rem 4rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .index-third-info {
+    width: 50%;
+  }
+
+  .index-third .iphone {
+    width: 400px;
+  }
+}

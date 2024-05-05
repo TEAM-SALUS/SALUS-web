@@ -1,0 +1,33 @@
+.form-pago {
+  width: 50%;
+  background: #004d40;
+  padding: 30px;
+  margin: auto;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  font-family: "calibri";
+  color: white;
+  box-shadow: 7px 13px 37px #000;
+}
+
+.form-pago h1 {
+  font-size: 22px;
+  margin-top: 5px;
+}
+
+.form-pago .botons {
+  display: inline-block;
+  width: 50%;
+  padding: 12px;
+  align-items: center;
+  justify-content: center;
+  background: #027668;
+  margin: 8px 0;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 1px 2px #6ea8c9;
+  cursor: pointer;
+  letter-spacing: 3px;
+  text-decoration: none;
+}
