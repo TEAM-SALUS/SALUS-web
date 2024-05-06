@@ -3,10 +3,15 @@ from django.shortcuts import render
 # Create your views here.
 # Model Serializer
 from .models import (
-    Paciente
+    Paciente,
+    Especialidad,
+    Turno,
 )
 from .serializers import (
-    PacienteSerializer
+    PacienteSerializer,
+    EspecialidadSerializer,
+    TurnoSerializer,
+    
 )
 ''' API REST FRAMEWORK CORS '''
 from rest_framework import viewsets
@@ -38,6 +43,24 @@ class PacientePorUserView(APIView):
         pacienteUser = Paciente.objects.filter(pacienteUser=idpu)
         serializer = PacienteSerializer(pacienteUser,many=True)
         return Response(serializer.data)
+
+# Tabla Especialidad
+class EspecialidadViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAdminUser,)
+    queryset = Especialidad.objects.all()
+    serializer_class = EspecialidadSerializer
+class EspecialidadPorIdView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    def get(self,request,ide=None):
+        especialidadId = Especialidad.objects.filter(id=ide)
+        serializer = EspecialidadSerializer(especialidadId,many=True)
+        return Response(serializer.data)
+
+# Tabla Turno
+class TurnoViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAdminUser,)
+    queryset = Turno.objects.all()
+    serializer_class = TurnoSerializer
 
 # ------------ API usuario token
 class RegisterAPI(generics.GenericAPIView):

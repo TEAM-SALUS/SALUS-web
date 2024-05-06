@@ -2,7 +2,9 @@ from rest_framework import serializers
 
 # Tablas Paciente
 from.models import (
-    Paciente
+    Paciente,
+    Especialidad,
+    Turno,
 )
 # --- User
 from django.contrib.auth.models import User
@@ -13,6 +15,19 @@ class PacienteSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Paciente
 		fields = '__all__'
+
+# EspecialidadSerializer
+class EspecialidadSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Especialidad
+		fields = '__all__'
+
+# TurnoSerializer
+class TurnoSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Turno
+		fields = '__all__'
+
 # User Serializer
 class UserSerializer(serializers.ModelSerializer):
 	class Meta:
@@ -28,3 +43,4 @@ class RegisterSerializer(serializers.ModelSerializer):
 	def create(self, validated_data):
 		user = User.objects.create_user(validated_data['username'],validated_data['email'],validated_data['password'])
 		return user
+
