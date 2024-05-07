@@ -26,10 +26,10 @@ import { FormEditDoctorComponent } from './medicos/form-edit-doctor/form-edit-do
 import { PagoComponent } from './ecommerce/pago/pago.component';
 import { PagoAdminComponent } from './ecommerce/pago-admin/pago-admin.component';
 import { PagoClienteComponent } from './ecommerce/pago-cliente/pago-cliente.component';
+import { CEspecialidadComponent } from './pages/components/c-especialidad/c-especialidad.component';
+import { CDetalleEspecialidadComponent } from './pages/components/c-detalle-especialidad/c-detalle-especialidad.component';
 import { EspecialidadComponent } from './pages/especialidad/especialidad.component';
 import { DetalleEspecialidadComponent } from './pages/detalle-especialidad/detalle-especialidad.component';
-
-
 
 @NgModule({
   declarations: [
@@ -54,6 +54,8 @@ import { DetalleEspecialidadComponent } from './pages/detalle-especialidad/detal
     PagoComponent,
     PagoAdminComponent,
     PagoClienteComponent,
+    CEspecialidadComponent,
+    CDetalleEspecialidadComponent,
     EspecialidadComponent,
     DetalleEspecialidadComponent,
   ],
