@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 
 from django.contrib.auth.models import User
@@ -35,12 +36,13 @@ class Paciente(models.Model):
 class Especialidad(models.Model):
     nombre = models.CharField(max_length=150)
     precio = models.DecimalField(max_digits=10,decimal_places=2)
+    duracion = models.TimeField(default=datetime.time(1))
 
     def __unicode__(self):
-        return "{} {} {}".format(self.id,self.nombre,self.precio)
+        return "{} {} {} {}".format(self.id,self.nombre,self.precio,self.duracion)
     
     def __str__(self):
-        return "{} {} {}".format(self.id,self.nombre,self.precio)
+        return "{} {} {} {}".format(self.id,self.nombre,self.precio,self.duracion)
     
     class Meta:
         db_table = "Especialidad"
@@ -49,7 +51,51 @@ class Especialidad(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['nombre'],name='Uk_Especialidad_nombre'),
         ]
+
+# Tabla HorarioDeAtención
+class HorarioDeAtencion(models.Model):
+    dia_de_la_semana = models.CharField(max_length=150)
+    hora_entrada = models.TimeField(default=datetime.time(8))
+    hora_salida = models.TimeField(default=datetime.time(16))
+
+    def __unicode__(self):
+        return "{} {} {} {}".format(self.id,self.dia_de_la_semana,self.hora_entrada,self.hora_salida)
+    def __str__(self):
+        return "{} {} {} {}".format(self.id,self.dia_de_la_semana,self.hora_entrada,self.hora_salida)
     
+    class Meta:
+        db_table = "HorarioDeAtencion"
+        verbose_name = "HorarioDeAtencion"
+        verbose_name_plural = "HorarioDeAtencion"
+        constraints = [
+           	models.UniqueConstraint(fields=['dia_de_la_semana','hora_entrada','hora_salida'],name='Uk_HorarioDeAtencion'),
+        ]
+
+# Tabla Medico
+class Medico(models.Model):
+    matricula = models.CharField (max_length = 11, unique = True)
+    nombre = models.CharField (max_length = 150, blank = True)
+    apellido = models.CharField (max_length = 150, blank = True)
+    email = models.CharField (max_length = 254, blank = True)
+    clave = models.CharField (max_length = 128)
+    telefono = models.CharField (max_length = 15, blank = True)
+    id_horario = models.ForeignKey(HorarioDeAtencion,on_delete=models.CASCADE)
+    id_especialidad = models.ForeignKey(Especialidad,on_delete=models.CASCADE)
+    medicoUser = models.ForeignKey(User,on_delete = models.CASCADE, default = 1)
+
+    def __unicode__(self):    
+        return "{} {} {} {} {} {} {} {} {} {}".format(self.id,self.matricula,self.nombre,self.apellido,self.email,self.clave,self.telefono,self.id_horario,self.id_especialidad,self.medicoUser)
+    def __str__(self):    
+        return "{} {} {} {} {} {} {} {} {} {}".format(self.id,self.matricula,self.nombre,self.apellido,self.email,self.clave,self.telefono,self.id_horario,self.id_especialidad,self.medicoUser)
+    
+    class Meta:
+        db_table = "Medico"
+        verbose_name = "Medico"
+        verbose_name_plural = "Medicos"
+        constraints = [
+           	models.UniqueConstraint(fields=['matricula'],name='Uk_Medico'),
+        ]
+
 # Tabla Turno
 class Turno(models.Model):
     '''ENUM'''
@@ -65,13 +111,15 @@ class Turno(models.Model):
     horario = models.TimeField()
     pagado = models.BooleanField()
     estado = models.CharField(max_length=45,choices=ESTADO,blank=True,default=RECHAZADO)
-    id_paciente = models.ForeignKey(Paciente,on_delete=models.CASCADE)
-    id_especialidad = models.ForeignKey(Especialidad,on_delete=models.CASCADE)
+    id_paciente = models.ForeignKey(Paciente,on_delete=models.CASCADE, default= -1)
+    id_medico = models.ForeignKey(Medico,on_delete=models.CASCADE, default= -1)
+
+    def __unicode__(self):
+        return "{} {} {} {} {} {} {}".format(self.id,self.fecha,self.horario,self.pagado,self.estado,self.id_paciente,self.id_medico)
+    def __string__(self):
+        return "{} {} {} {} {} {} {}".format(self.id,self.fecha,self.horario,self.pagado,self.estado,self.id_paciente,self.id_medico)
+
     class Meta:
         db_table = "Turno"
         verbose_name = "Turno"
         verbose_name_plural = "Turnos"
-    def __unicode__(self):
-        return "{} {} {} {} {} {} {}".format(self.id,self.fecha,self.horario,self.pagado,self.estado,self.id_paciente,self.id_especialidad)
-    def __string__(self):
-        return "{} {} {} {} {} {} {}".format(self.id,self.fecha,self.horario,self.pagado,self.estado,self.id_paciente,self.id_especialidad)
