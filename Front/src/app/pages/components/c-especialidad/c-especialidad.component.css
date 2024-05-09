@@ -1,3 +1,9 @@
+.div-especialidad{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
 .card{
     box-shadow: 1px 1px 10px 1px #c4cdd2;
     border: none;
@@ -63,4 +69,18 @@
     padding: 11px;
     border-radius: 8px;
 }
+
+.precio{
+    font-weight: 600;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.424);
+}
+
+.precio span{
+    font-size: 18px;
+    border-radius: 5px;
+    color: rgba(0, 0, 0, 0.644);
+}
+
+
 
