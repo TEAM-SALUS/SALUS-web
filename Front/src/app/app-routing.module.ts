@@ -25,7 +25,7 @@ const routes: Routes = [
   {path:'home', component:HomeComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path:'servicios', component:EspecialidadComponent},
-  {path:'detalle-servicio/:id', component:DetalleEspecialidadComponent},
+  {path:'detalle-servicio/:id', component: DetalleEspecialidadComponent},
   {path:'nosotros', component:NosotrosComponent},
   {path:'contacto', component:ContactoComponent},
   {path:'registro', component:RegistroComponent},
