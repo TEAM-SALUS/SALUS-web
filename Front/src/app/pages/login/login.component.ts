@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import {Router} from '@angular/router';
 import { LoginService } from 'src/app/services/auth/login.service';
-import { HttpClient } from '@angular/common/http';
-import { User } from "../../services/auth/user";
 import { SharedServicesComponent } from 'src/app/services/auth/shared-services/shared-services.component';
 import { LoginRequest } from 'src/app/services/auth/loginRequest';
 import Swal from'sweetalert2';
@@ -15,25 +13,50 @@ import Swal from'sweetalert2';
 })
 export class LoginComponent implements OnInit{
 
-  myUsers: User[] = [];
-  loginError:string="";
-  pacienteData: any = {};
-  loginForm=this.formBuilder.group({
-    email:["", [Validators.required, Validators.minLength(4),Validators.email]],
-    password:['',Validators.required],
+  loginForm = this.formBuilder.group({
+    username: ['', Validators.required],
+    password: ['',Validators.required]
   })
-  constructor(private formBuilder:FormBuilder, private router:Router, private loginService: LoginService, private http: HttpClient, private sharedService: SharedServicesComponent){}
+
+  constructor(private formBuilder:FormBuilder, private router:Router, private loginService: LoginService, private sharedService: SharedServicesComponent){}
 
   ngOnInit(): void{}
 
-  get email(){
-    return this.loginForm.controls.email;
+  get user(){
+    return this.loginForm.controls.username;
   }
-
+  
   get password(){
     return this.loginForm.controls.password;
   }
+  
+  login(){
+    if(this.loginForm.valid){
+      this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
+        next: (userData) => {
+          console.log(userData);
+        },
+        error: (errorData) => {
+          console.error(errorData);
+        },
+        complete: () => {
+          console.info('Login completo');
+          this.router.navigateByUrl('/home');
+          this.loginForm.reset();
+        }
+      })
+    }else{
+      this.loginForm.markAllAsTouched();
+      Swal.fire({
+        icon:'warning',
+        title: `Los datos son incorrectos.`,
+        text: `Por favor verifique los datos.`
+      })
+      alert("Error al ingresar los datos")
+    }
+  }
 
+  /*
   login(){
     if(this.loginForm.valid){
       this.loginService.login().subscribe(data => {
@@ -74,6 +97,5 @@ export class LoginComponent implements OnInit{
       })
     }
   }
-
-
+  */
 }
