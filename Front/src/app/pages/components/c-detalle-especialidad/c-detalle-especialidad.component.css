@@ -1,5 +1,5 @@
 .div-especialidad{
-    background-color: rgba(215, 243, 255, 0.275);
+    margin: 50px;
 }
 
 .card-especialidad{
@@ -62,6 +62,8 @@ hr{
 ul li{
     list-style: none;
     margin-top: 5px;
+    display: flex;
+    align-items: center;
 }
 
 .buttons{
@@ -83,12 +85,17 @@ ul li{
     background-color: #83d9fea3;
 }
 
+.div-horarios-contacto img{
+    width: 16px;
+    margin-right: 5px;
+}
 
 
 @media screen and (max-width: 1000px) {
     .div-especialidad{
         display: flex;
         justify-content: center;
+        margin: 10px;
     }
 
     .card-especialidad{
