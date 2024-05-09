@@ -9,11 +9,32 @@
 }
 
 :root {
-  --primary-color: #6ea8c9;
-  --secondary-color: #2b78a2;
+  --primary-color-light: #fff;
+  --primary-color: #56ADDA;
+  --secondary-color: #83D9FE;
   --terciary-color: #b6dcb6;
   --primary-font: "Poppins", sans-serif;
   --secondary-font: "Roboto", sans-serif;
+}
+
+body {
+  background: rgb(233,248,255);
+  background: linear-gradient(180deg, rgba(233,248,255,1) 0%, rgba(255,255,255,0) 100%);
+  min-height: 100vh;
+}
+
+app-footer {
+  margin-top: auto !important;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  padding: 60px 0;
 }
 
 .btn {
