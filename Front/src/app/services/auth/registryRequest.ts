@@ -1,6 +1,7 @@
 export interface RegistryRequest{
-  Nombre_UP: string,
-  Apellido_UP: string,
-  Email_UP: string,
-  Clave_UP: string,
+  username: string,
+  password: string,
+  email: string,
+  first_name: string,
+  last_name: string
 }
