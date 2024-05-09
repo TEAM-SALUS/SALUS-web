@@ -4,6 +4,8 @@ from rest_framework import serializers
 from.models import (
     Paciente,
     Especialidad,
+	HorarioDeAtencion,
+	Medico,
     Turno,
 )
 # --- User
@@ -20,6 +22,18 @@ class PacienteSerializer(serializers.ModelSerializer):
 class EspecialidadSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Especialidad
+		fields = '__all__'
+
+# HorarioDeAtencionSerializer
+class HorarioDeAtencionSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = HorarioDeAtencion
+		fields = '__all__'
+
+# MedicoSerilizer
+class MedicoSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Medico
 		fields = '__all__'
 
 # TurnoSerializer

@@ -10,12 +10,16 @@ from .views import (
     ManagerUserView,
     PacientePorUserView,
     EspecialidadPorIdView,
+    HorarioDeAtencionPorIdView,
+    MedicoPorUserView,
 )
 ''' IMPORTAR USER KANOX TOKEN '''
 from knox import views as kanox_views
 router = routers.DefaultRouter()
 router.register(r'paciente',views.PacienteViewSet)
 router.register(r'especialidad',views.EspecialidadViewSet)
+router.register(r'horariodeatencion',views.HorarioDeAtencionViewSet)
+router.register(r'medico',views.MedicoViewSet)
 router.register(r'turno',views.TurnoViewSet)
 
 #--
@@ -27,5 +31,7 @@ urlpatterns = [
     path('logoutall',kanox_views.LogoutAllView.as_view(),name='logoutall'),
     path('paciente-user/<int:idpu>',PacientePorUserView.as_view(),name='paciente_user'),
     path('especialidad-id/<int:ide>',EspecialidadPorIdView.as_view(),name='especialidad_id'),
+    path('horariodeatencion-id/<int:idh>',HorarioDeAtencionPorIdView.as_view(),name='horariodeatencion_id'),
+    path('medico-user/<int:idmu>',MedicoPorUserView.as_view(),name='medico_user'),
     path('',include(router.urls)),
 ]

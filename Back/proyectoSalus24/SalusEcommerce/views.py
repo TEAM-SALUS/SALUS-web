@@ -5,11 +5,15 @@ from django.shortcuts import render
 from .models import (
     Paciente,
     Especialidad,
+    HorarioDeAtencion,
+    Medico,
     Turno,
 )
 from .serializers import (
     PacienteSerializer,
     EspecialidadSerializer,
+    HorarioDeAtencionSerializer,
+    MedicoSerializer,
     TurnoSerializer,
     
 )
@@ -55,6 +59,30 @@ class EspecialidadPorIdView(APIView):
     def get(self,request,ide=None):
         especialidadId = Especialidad.objects.filter(id=ide)
         serializer = EspecialidadSerializer(especialidadId,many=True)
+        return Response(serializer.data)
+
+# Tabla HorarioDeAtencion
+class HorarioDeAtencionViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAdminUser,)
+    queryset = HorarioDeAtencion.objects.all()
+    serializer_class = HorarioDeAtencionSerializer
+class HorarioDeAtencionPorIdView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    def get(self,request,idh=None):
+        horarioDeAtencionId = HorarioDeAtencion.objects.filter(id=idh)
+        serializer = HorarioDeAtencionSerializer(horarioDeAtencionId,many=True)
+        return Response(serializer.data)
+    
+# Tabla Medico
+class MedicoViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAdminUser,)
+    queryset = Medico.objects.all()
+    serializer_class = MedicoSerializer
+class MedicoPorUserView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    def get(self,request,idmu=None):
+        medicoUser = Medico.objects.filter(medicoUser=idmu)
+        serializer = MedicoSerializer(medicoUser,many=True)
         return Response(serializer.data)
 
 # Tabla Turno
