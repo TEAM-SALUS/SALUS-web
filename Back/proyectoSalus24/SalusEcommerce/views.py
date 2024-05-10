@@ -8,6 +8,7 @@ from .models import (
     HorarioDeAtencion,
     Medico,
     Turno,
+    Pago
 )
 from .serializers import (
     PacienteSerializer,
@@ -15,6 +16,7 @@ from .serializers import (
     HorarioDeAtencionSerializer,
     MedicoSerializer,
     TurnoSerializer,
+    PagoSerializer
     
 )
 ''' API REST FRAMEWORK CORS '''
@@ -22,7 +24,8 @@ from rest_framework import viewsets
 # --- User
 from rest_framework import (
     generics,
-    permissions
+    permissions,
+    status
 )
 from .serializers import (
     RegisterSerializer,
@@ -121,3 +124,18 @@ class ManagerUserView(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user
+    
+class PagoViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAdminUser,)
+    queryset = Pago.objects.all()
+    serializer_class = PagoSerializer
+
+class pagar(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    def post(self, request, format=None):
+         serializer = PagoSerializer(data=request.data)
+         if serializer.is_valid():
+             serializer.save()
+             return Response(serializer.data,
+                         status=status.HTTP_201_CREATED)
+         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
