@@ -2,6 +2,7 @@ import datetime
 from django.db import models
 
 from django.contrib.auth.models import User
+from datetime import datetime, timedelta, time
 
 # Create your models here.
 '''TABLAS'''
@@ -36,7 +37,7 @@ class Paciente(models.Model):
 class Especialidad(models.Model):
     nombre = models.CharField(max_length=150)
     precio = models.DecimalField(max_digits=10,decimal_places=2)
-    duracion = models.TimeField(default=datetime.time(1))
+    duracion = models.TimeField(default=timedelta(hours=1))
 
     def __unicode__(self):
         return "{} {} {} {}".format(self.id,self.nombre,self.precio,self.duracion)
@@ -55,8 +56,8 @@ class Especialidad(models.Model):
 # Tabla HorarioDeAtención
 class HorarioDeAtencion(models.Model):
     dia_de_la_semana = models.CharField(max_length=150)
-    hora_entrada = models.TimeField(default=datetime.time(8))
-    hora_salida = models.TimeField(default=datetime.time(16))
+    hora_entrada = models.TimeField(default=time(hour=8))
+    hora_salida = models.TimeField(default=time(hour=16))
 
     def __unicode__(self):
         return "{} {} {} {}".format(self.id,self.dia_de_la_semana,self.hora_entrada,self.hora_salida)
@@ -123,3 +124,29 @@ class Turno(models.Model):
         db_table = "Turno"
         verbose_name = "Turno"
         verbose_name_plural = "Turnos"
+
+class Pago(models.Model):
+    RECHAZADO = "Rechazado"
+    ACEPTADO = "Aceptado"
+    PENDIENTE = "Pendiento"
+    ESTADO = [
+        (RECHAZADO, "Rechazado"),
+        (ACEPTADO, "Aceptado"),
+        (PENDIENTE, "Pendiento"),
+        
+    ]
+    id_pago = models.AutoField(primary_key=True)
+    monto = models.IntegerField()
+    fecha = models.DateField(default = datetime.now)
+    hora = models.TimeField(default = datetime.now)
+    estado = models.CharField(max_length=45,choices=ESTADO,blank=True,default=RECHAZADO)
+    id_turno = models.ForeignKey(Turno,on_delete=models.CASCADE, default= -1)
+    
+    class Meta:
+        db_table = "pago"
+        verbose_name = " Pago de turns reservado por paciente"
+        verbose_name_plural = "PagosDeTurnos"
+    def __unicode__(self):
+        return "{} {} {} {} {} {}".format(self.id_pago,self.monto, self.fecha,self.hora,self.estado, self.id_turno)
+    def __str__(self):
+        return "{} {} {} {} {} {}".format(self.id_pago,self.monto, self.fecha,self.hora,self.estado, self.id_turno)

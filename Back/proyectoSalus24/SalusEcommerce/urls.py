@@ -12,6 +12,8 @@ from .views import (
     EspecialidadPorIdView,
     HorarioDeAtencionPorIdView,
     MedicoPorUserView,
+    PagoViewSet,
+    pagar
 )
 ''' IMPORTAR USER KANOX TOKEN '''
 from knox import views as kanox_views
@@ -21,6 +23,7 @@ router.register(r'especialidad',views.EspecialidadViewSet)
 router.register(r'horariodeatencion',views.HorarioDeAtencionViewSet)
 router.register(r'medico',views.MedicoViewSet)
 router.register(r'turno',views.TurnoViewSet)
+router.register(r'pago',views.PagoViewSet)
 
 #--
 urlpatterns = [
@@ -33,5 +36,7 @@ urlpatterns = [
     path('especialidad-id/<int:ide>',EspecialidadPorIdView.as_view(),name='especialidad_id'),
     path('horariodeatencion-id/<int:idh>',HorarioDeAtencionPorIdView.as_view(),name='horariodeatencion_id'),
     path('medico-user/<int:idmu>',MedicoPorUserView.as_view(),name='medico_user'),
+    path('Pagar/',
+         pagar.as_view(), name='pago'),
     path('',include(router.urls)),
 ]
