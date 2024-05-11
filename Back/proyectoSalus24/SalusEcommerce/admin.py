@@ -9,6 +9,7 @@ from .models import (
     HorarioDeAtencion,
     Medico,
     Turno,
+    Pago
 )
 ''''COLUMNAS TABLAS'''
 # Tabla Paciente
@@ -26,10 +27,12 @@ class MedicoAdmin(admin.ModelAdmin):
 # Tabla Turno
 class TurnoAdmin(admin.ModelAdmin):
     list_display = ('id','fecha','horario','pagado','estado','id_paciente','id_medico')
+class PagoAdmin(admin.ModelAdmin):
+    list_display = ('id_pago','monto', 'fecha','hora','estado','id_turno')
 '''TABLAS REGISTROS'''
 admin.site.register(Paciente,PacienteAdmin)
 admin.site.register(Especialidad,EspecialidadAdmin)
 admin.site.register(HorarioDeAtencion,HorarioDeAtencionAdmin)
 admin.site.register(Medico,MedicoAdmin)
 admin.site.register(Turno,TurnoAdmin)
-
+admin.site.register(Pago,PagoAdmin)

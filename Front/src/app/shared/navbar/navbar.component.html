@@ -18,6 +18,10 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/nosotros">Nosotros</a>
         </li>
+        
+        <li class="nav-item" *ngIf="!sharedService.isAdmin">
+          <a class="nav-link" routerLink="/contacto">Contacto</a>
+        </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -31,9 +35,6 @@
             <li *ngIf="sharedService.isLoggedIn || sharedService.isRegistered"><a class="dropdown-item" href="/">Cerrar
                 sesión</a></li>
           </ul>
-        </li>
-        <li class="nav-item" *ngIf="!sharedService.isAdmin">
-          <a class="nav-link" routerLink="/contacto">Contacto</a>
         </li>
         <!-- CRUD Suscripciones (admin) -->
         <li class="nav-item" *ngIf="sharedService.isAdmin">
