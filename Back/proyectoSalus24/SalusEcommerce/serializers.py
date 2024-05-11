@@ -7,6 +7,7 @@ from.models import (
 	HorarioDeAtencion,
 	Medico,
     Turno,
+	Pago
 )
 # --- User
 from django.contrib.auth.models import User
@@ -58,3 +59,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 		user = User.objects.create_user(validated_data['username'],validated_data['email'],validated_data['password'])
 		return user
 
+class PagoSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Pago
+		fields = '__all__'

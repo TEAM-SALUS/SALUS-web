@@ -1,7 +1,14 @@
+<<<<<<< HEAD
+.pie-pagina {
+  width: 100%;
+  background-color: var(--primary-color);
+  margin-top: 10px;
+=======
 
 .container-footer{
   width: 100%;  
   background:#2b78a2;
+>>>>>>> ad82fe38d619a132b0e099e3b060279bfb6fce35
 }
 .footer{
   max-width: 1200px;
@@ -15,16 +22,49 @@
   color: #C7C7C7;
 }
 
+<<<<<<< HEAD
+.pie-pagina .grupo-1 .box figure img {
+  width: auto;
+}
+.pie-pagina .grupo-1 .box {
+  color: #fff;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+.pie-pagina .grupo-1 .box p {
+  color: #efefef;
+  margin-bottom: 10px;
+}
+.pie-pagina .grupo-1 .red-social a {
+  display: inline-block;
+  text-decoration: none;
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  color: #fff;
+  margin-right: 10px;
+  background-color: #195C86;
+  text-align: center;
+  transition: all 300ms ease;
+=======
 .copyright a{
   text-decoration: none;
   color: white;
   font-weight: bold;
+>>>>>>> ad82fe38d619a132b0e099e3b060279bfb6fce35
 }
 
 .information a{
   text-decoration: none;
   color: #C7C7C7;
 }
+<<<<<<< HEAD
+.pie-pagina .grupo-2 {
+  background-color: #195C86;
+  padding: 15px 10px;
+  text-align: center;
+  color: #fff;
+=======
 .container-footer-all{
     width: 100%;
     /* max-width: 1200px; */
@@ -33,6 +73,7 @@
   
   
 
+>>>>>>> ad82fe38d619a132b0e099e3b060279bfb6fce35
 }
 
 .container-body{
@@ -44,6 +85,12 @@
   align-items:start;
   
 }
+<<<<<<< HEAD
+
+footer h2 {
+    font-size: 18px;
+}
+=======
 .box-redes{
   margin-right: 10%;
   max-width: 400px;
@@ -65,3 +112,4 @@
  .box img{
   padding: 60px;
  }
+>>>>>>> ad82fe38d619a132b0e099e3b060279bfb6fce35
