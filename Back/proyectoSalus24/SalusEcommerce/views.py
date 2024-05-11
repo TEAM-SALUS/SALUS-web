@@ -75,8 +75,8 @@ class HorarioDeAtencionPorIdView(APIView):
     
 # Tabla Medico
 class MedicoViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAdminUser,)
-    # permission_classes = (permissions.AllowAny,)
+    # permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.AllowAny,)
     queryset = Medico.objects.all()
     serializer_class = MedicoSerializer
 class MedicoPorUserView(APIView):
