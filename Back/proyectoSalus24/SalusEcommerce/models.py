@@ -69,7 +69,7 @@ class HorarioDeAtencion(models.Model):
         verbose_name = "HorarioDeAtencion"
         verbose_name_plural = "HorarioDeAtencion"
         constraints = [
-           	models.UniqueConstraint(fields=['dia_de_la_semana','hora_entrada','hora_salida'],name='Uk_HorarioDeAtencion'),
+            models.UniqueConstraint(fields=['dia_de_la_semana','hora_entrada','hora_salida'],name='Uk_HorarioDeAtencion'),
         ]
 
 # Tabla Medico
@@ -94,7 +94,7 @@ class Medico(models.Model):
         verbose_name = "Medico"
         verbose_name_plural = "Medicos"
         constraints = [
-           	models.UniqueConstraint(fields=['matricula'],name='Uk_Medico'),
+        models.UniqueConstraint(fields=['matricula'],name='Uk_Medico'),
         ]
 
 # Tabla Turno

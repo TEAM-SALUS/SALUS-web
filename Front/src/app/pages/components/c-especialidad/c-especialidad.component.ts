@@ -31,11 +31,6 @@ export class CEspecialidadComponent {
     this.especialidadesService.getEspecialidad().subscribe((respuesta) => {
       this.especialidadLista = respuesta;
       console.log(respuesta);
-
-      // this.especialidadLista.forEach(especialidad =>{
-      //   this.getProfesionalPorEspecialidad(especialidad.id)
-      //   console.log(especialidad.id)
-      // })
     });
   }
 
@@ -57,6 +52,11 @@ export class CEspecialidadComponent {
     return this.profesionalLista.filter(
       (profesional) => profesional.id_especialidad === idEspecialidad
     );
+  };
+
+
+  redirectToPay(){
+    this.router.navigate(['pago']);
   };
 
 
