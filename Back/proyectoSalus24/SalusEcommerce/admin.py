@@ -17,7 +17,7 @@ class PacienteAdmin(admin.ModelAdmin):
     list_display = ('id','dni_paciente','nombre','apellido','email','clave','telefono','foto','pacienteUser')
 # Tabla Especialidad
 class EspecialidadAdmin(admin.ModelAdmin):
-    list_display = ('id','nombre','precio','duracion')
+    list_display = ('id','nombre','precio','duracion','foto','descripcion')
 # Tabla HorarioDeAtencion
 class HorarioDeAtencionAdmin(admin.ModelAdmin):
     list_display = ('id','dia_de_la_semana','hora_entrada','hora_salida')

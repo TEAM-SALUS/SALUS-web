@@ -17,6 +17,7 @@ class Paciente(models.Model):
     foto = models.ImageField(upload_to='paciente/perfil',default='paciente/perfil/no-img.png',verbose_name='foto perfil paciente')
     #id_pacienteauthuser = models.ForeignKey(User,on_delete=models.CASCADE)
     pacienteUser = models.ForeignKey(User, on_delete=models.CASCADE,default=1)
+    
 
     def __unicode__(self):
         #return "{} {} {} {} {} {} {}".format(self.id,self.dni_paciente,self.nombre,self.apellido,self.email,self.clave,self.telefono)
@@ -39,12 +40,14 @@ class Especialidad(models.Model):
     nombre = models.CharField(max_length=150)
     precio = models.DecimalField(max_digits=10,decimal_places=2)
     duracion = models.TimeField(default=timedelta(hours=1))
+    foto = models.ImageField(upload_to='especialidades',default='especialidades/no-especialidad.jpg',verbose_name='foto especialidad')
+    descripcion = models.CharField(max_length=254, blank=True, default="lorem")
 
     def __unicode__(self):
-        return "{} {} {} {}".format(self.id,self.nombre,self.precio,self.duracion)
+        return "{} {} {} {} {} {}".format(self.id,self.nombre,self.precio,self.duracion,self.foto,self.descripcion)
     
     def __str__(self):
-        return "{} {} {} {}".format(self.id,self.nombre,self.precio,self.duracion)
+        return "{} {} {} {} {} {}".format(self.id,self.nombre,self.precio,self.duracion,self.foto,self.descripcion)
     
     class Meta:
         db_table = "Especialidad"
