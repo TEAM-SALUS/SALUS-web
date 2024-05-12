@@ -54,7 +54,7 @@ class PacientePorUserView(APIView):
 # Tabla Especialidad
 class EspecialidadViewSet(viewsets.ModelViewSet):
     # permission_classes = (permissions.IsAdminUser,)
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAdminUser,)
     queryset = Especialidad.objects.all()
     serializer_class = EspecialidadSerializer
 class EspecialidadPorIdView(APIView):
