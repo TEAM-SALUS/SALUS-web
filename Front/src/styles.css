@@ -42,13 +42,10 @@ main {
   color: white;
 }
 
+h1,
+h2,
 p {
   font-family: var(--primary-font);
-}
-
-h1,
-h2 {
-  font-family: var(--secondary-font);
 }
 
 .ng-valid:not(form).ng-touched {

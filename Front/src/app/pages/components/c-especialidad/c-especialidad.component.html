@@ -5,12 +5,14 @@
       src="../../../../assets/img-especialidad.jpg"
       alt="imagen-especialidad"
     />
+    <!-- src="{{e.imagen}}" -->
     <div class="card-body">
       <h5 class="card-title">{{ e.nombre }}</h5>
 
       <p class="card-p-nombre-dr" *ngFor="let p of profesionalLista"> Dr. {{ p.nombre }}</p>
 
       <p class="card-descripcion">
+        {{e.descripcion}}
         Dedicado a la salud infantil con atención integral y especializada para
         niños y adolescentes.
       </p>
@@ -20,7 +22,7 @@
       </p>
 
       <div class="buttons">
-        <a href="#" class="btn btn-reservar-turno">Reservar turno</a>
+        <a class="btn btn-reservar-turno" (click)="redirectToPay()">Reservar turno</a>
         <div class="div-link">
           <a
             [routerLink]="['/detalle-servicio', e.id]"
