@@ -1,14 +1,12 @@
-<<<<<<< HEAD
 .pie-pagina {
   width: 100%;
   background-color: var(--primary-color);
   margin-top: 10px;
-=======
+}
 
 .container-footer{
   width: 100%;  
   background:#2b78a2;
->>>>>>> ad82fe38d619a132b0e099e3b060279bfb6fce35
 }
 .footer{
   max-width: 1200px;
@@ -22,7 +20,70 @@
   color: #C7C7C7;
 }
 
-<<<<<<< HEAD
+.copyright a{
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.information a{
+  text-decoration: none;
+  color: #C7C7C7;
+}
+.container-footer-all{
+    width: 100%;
+    /* max-width: 1200px; */
+    /* margin:5px; */
+    /* padding: 40px; */
+}
+
+.container-body{
+  display: flex;
+  justify-content: space-between;
+  background: #9ecbe4;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  align-items:start;
+  
+}
+.grupo-1 {
+  display: flex;
+  justify-content: space-around;
+}
+footer h2 {
+    font-size: 18px;
+}
+.box-redes{
+  margin-right: 10%;
+  max-width: 400px;
+}
+.red-social{
+  margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+.red-social img{
+    width: 50px;
+    height: auto;
+    margin: 10px;
+  }
+  .box{
+    max-width: 400px; 
+  }
+ .box img{
+  padding: 60px;
+ }
+
+.box {
+  flex: 2;
+}
+.box-redes {
+  flex: 1;
+  color: #fff;
+  font-size: 20px;
+}
+
 .pie-pagina .grupo-1 .box figure img {
   width: auto;
 }
@@ -36,80 +97,35 @@
   margin-bottom: 10px;
 }
 .pie-pagina .grupo-1 .red-social a {
+  color:#fff;
+  text-decoration: none;
+  font-size: 16px;
+}
+.pie-pagina .grupo-1 .red-social a.fa {
   display: inline-block;
   text-decoration: none;
-  width: 45px;
-  height: 45px;
-  line-height: 45px;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
   color: #fff;
   margin-right: 10px;
   background-color: #195C86;
   text-align: center;
   transition: all 300ms ease;
-=======
-.copyright a{
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
->>>>>>> ad82fe38d619a132b0e099e3b060279bfb6fce35
 }
-
-.information a{
-  text-decoration: none;
-  color: #C7C7C7;
+.pie-pagina .grupo-1 .red-social a:hover {
+  color: aqua;
 }
-<<<<<<< HEAD
 .pie-pagina .grupo-2 {
   background-color: #195C86;
   padding: 15px 10px;
   text-align: center;
   color: #fff;
-=======
-.container-footer-all{
-    width: 100%;
-    /* max-width: 1200px; */
-    /* margin:5px; */
-    /* padding: 40px; */
-  
-  
-
->>>>>>> ad82fe38d619a132b0e099e3b060279bfb6fce35
 }
-
-.container-body{
-  display: flex;
-  justify-content: space-between;
-  background: #9ecbe4;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  align-items:start;
-  
+.pie-pagina .grupo-2 small {
+  font-size: 15px;
 }
-<<<<<<< HEAD
 
 footer h2 {
     font-size: 18px;
 }
-=======
-.box-redes{
-  margin-right: 10%;
-  max-width: 400px;
-};
-.red-social{
-  margin-top: 20px;
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-}
-.red-social img{
-    width: 50px;
-    height: auto;
-    margin: 10px;
-  };
-  .box{
-    max-width: 400px; 
-  }
- .box img{
-  padding: 60px;
- }
->>>>>>> ad82fe38d619a132b0e099e3b060279bfb6fce35
