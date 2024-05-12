@@ -34,8 +34,10 @@ class HorarioDeAtencionAdmin(admin.ModelAdmin):
 
 
 class MedicoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'matricula', 'nombre', 'apellido', 'email',
-                    'clave', 'telefono', 'id_horario', 'id_especialidad', 'medicoUser')
+
+    list_display = ('id', 'matricula', 'nombre', 'apellido', 'email', 'clave',
+                    'telefono', 'foto', 'id_horario', 'id_especialidad', 'medicoUser')
+
 # Tabla Turno
 
 
