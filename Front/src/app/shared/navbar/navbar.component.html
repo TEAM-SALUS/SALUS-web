@@ -18,22 +18,23 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/nosotros">Nosotros</a>
         </li>
+        
+        <li class="nav-item" *ngIf="!sharedService.isAdmin">
+          <a class="nav-link" routerLink="/contacto">Contacto</a>
+        </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Usuario
           </a>
           <ul class="dropdown-menu ms-3">
-            <li *ngIf="!sharedService.isLoggedIn && !sharedService.isRegistered"><a class="dropdown-item"
+            <li *ngIf="!userLoginOn"><a class="dropdown-item"
                 href="/login">Iniciar sesión</a></li>
             <li *ngIf="!sharedService.isRegistered && !sharedService.isLoggedIn"><a class="dropdown-item"
                 href="/registro">Registrarse</a></li>
-            <li *ngIf="sharedService.isLoggedIn || sharedService.isRegistered"><a class="dropdown-item" href="/">Cerrar
+            <li *ngIf="userLoginOn"><a class="dropdown-item" (click)="logout()">Cerrar
                 sesión</a></li>
           </ul>
-        </li>
-        <li class="nav-item" *ngIf="!sharedService.isAdmin">
-          <a class="nav-link" routerLink="/contacto">Contacto</a>
         </li>
         <!-- CRUD Suscripciones (admin) -->
         <li class="nav-item" *ngIf="sharedService.isAdmin">

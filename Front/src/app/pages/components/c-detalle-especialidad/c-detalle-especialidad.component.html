@@ -1,0 +1,41 @@
+<div class="div-especialidad">
+  <div class="card-especialidad">
+    <div>
+      <img
+        class="card-img-top"
+        src="../../../../assets/img-especialidad.jpg"
+        alt="imagen-especialidad"
+      />
+    </div>
+    <div class="card-body">
+      <h5 class="card-title" *ngFor="let e of especialidadLista">{{e.nombre}}</h5>
+      <hr>
+
+      <p class="card-p-nombre-dr" *ngFor="let p of profesionalLista">Dr. {{p.apellido}} {{p.nombre}} </p>
+
+      <p class="card-descripcion">
+        Dedicado a la salud infantil con atención integral y especializada para
+        niños y adolescentes.
+      </p>
+
+      <div class="div-horarios-contacto" *ngFor="let p of profesionalLista">
+        <p class="horarios">
+          Días y horarios de atención
+        </p>
+        <span>
+            <ul>
+              <li><img src="../../../../assets/flecha.png" alt=""> {{p.horario}} </li> <!-- Lunes 8:00 - 13:00-->
+              <!-- <li><img src="../../../../assets/flecha.png" alt=""> Miércoles 14:00 - 18:00 </li>
+              <li><img src="../../../../assets/flecha.png" alt=""> Jueves 17:00 - 20:30</li> -->
+            </ul>
+          </span>
+        <p class="contacto">Teléfono: <span>{{p.telefono}}</span></p>
+      </div>
+
+      <div class="buttons">
+        <a class="btn btn-reservar-turno" (click)="redirectToPay()">Reservar turno</a>
+      </div>
+    </div>
+  </div>
+</div>
+

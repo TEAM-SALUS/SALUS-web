@@ -1,0 +1,86 @@
+.div-especialidad{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.card{
+    box-shadow: 1px 1px 10px 1px #c4cdd2;
+    border: none;
+    margin: 50px 10px 10px;
+}
+
+.card-img-top{
+    box-shadow: 0px 0px 8px 1px #c4cdd2;
+}
+
+.card-title{
+    font-size: 26px;
+    text-align: center;
+    font-family: poppins, sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.card-p-nombre-dr{
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.card-descripcion{
+    font-size: 14px;
+}
+
+.buttons{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-family: poppins, sans-serif;
+    letter-spacing: 0.2px;
+    margin-top: 25px;
+}
+
+.btn-reservar-turno{
+    background-color: #83D9FE;
+    color: rgba(0, 0, 0, 0.837);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px;
+}
+
+.btn-reservar-turno:hover{
+    background-color: #83d9fea3;
+}
+
+.div-link{
+    width: 45%;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.link-ver-mas{
+    color: rgba(0, 0, 0, 0.837);
+}
+
+.link-ver-mas:hover{
+    background-color: #83d9fe55;
+    padding: 11px;
+    border-radius: 8px;
+}
+
+.precio{
+    font-weight: 600;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.424);
+}
+
+.precio span{
+    font-size: 18px;
+    border-radius: 5px;
+    color: rgba(0, 0, 0, 0.644);
+}
+
+
+

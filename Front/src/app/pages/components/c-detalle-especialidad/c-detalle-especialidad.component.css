@@ -1,0 +1,127 @@
+.div-especialidad{
+    margin: 50px;
+}
+
+.card-especialidad{
+    margin-top: 20px;
+    max-width: 1500px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.card-img-top{
+    box-shadow: 0px 0px 8px 1px #c4cdd2;
+    width: 100%;
+    max-width: 700px;
+}
+
+.card-body{
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-title{
+    font-size: 30px;
+    font-family: poppins, sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+hr{
+    width: 80%;
+    color: #0682b7;
+}
+
+.card-p-nombre-dr{
+    font-weight: 600;
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+.card-descripcion{
+    font-size: 14px;
+    width: 80%;
+}
+
+.horarios, .contacto{
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+.contacto span{
+    font-weight: 400;
+}
+
+ul li{
+    list-style: none;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.buttons{
+    font-family: poppins, sans-serif;
+    letter-spacing: 0.2px;
+    margin-top: 25px;
+}
+
+.btn-reservar-turno{
+    background-color: #83D9FE;
+    color: rgba(0, 0, 0, 0.837);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px;
+    width: 80%;
+}
+
+.btn-reservar-turno:hover{
+    background-color: #83d9fea3;
+}
+
+.div-horarios-contacto img{
+    width: 16px;
+    margin-right: 5px;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .div-especialidad{
+        display: flex;
+        justify-content: center;
+        margin: 10px;
+    }
+
+    .card-especialidad{
+        display: flex;
+        flex-direction: column;
+        width: 70vw;
+    }
+
+    .btn-reservar-turno{
+        width: 100%;
+    }
+
+    .card-body{
+        margin-left: 0px;
+    }
+
+    .card-title{
+        margin-top: 20px;
+        font-size: 22px;
+    }
+
+    hr{
+        width: 100%;
+    }
+
+    .card-p-nombre-dr{
+        margin-top: 6px;
+    }
+}
