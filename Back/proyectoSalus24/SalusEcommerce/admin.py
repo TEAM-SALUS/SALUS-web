@@ -23,7 +23,7 @@ class HorarioDeAtencionAdmin(admin.ModelAdmin):
     list_display = ('id','dia_de_la_semana','hora_entrada','hora_salida')
 # Tabla Medico
 class MedicoAdmin(admin.ModelAdmin):
-    list_display = ('id','matricula','nombre','apellido','email','clave','telefono','id_horario','id_especialidad','medicoUser')
+    list_display = ('id','matricula','nombre','apellido','email','clave','telefono','foto','id_horario','id_especialidad','medicoUser')
 # Tabla Turno
 class TurnoAdmin(admin.ModelAdmin):
     list_display = ('id','fecha','horario','pagado','estado','id_paciente','id_medico')
