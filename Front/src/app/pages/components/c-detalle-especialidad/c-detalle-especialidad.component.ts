@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Route, Router} from '@angular/router';
-import { filter } from 'rxjs';
+import { ActivatedRoute, Router} from '@angular/router';
 import { EspecialidadInterface } from 'src/app/model/especialidad';
+import { HorarioAtencionInterface } from 'src/app/model/horarios-atencion';
 import { ProfesionalInterface } from 'src/app/model/profesional';
 import { EspecialidadesService } from 'src/app/services/especialidades.service';
+import { HorariosAtencionService } from 'src/app/services/horarios-atencion.service';
 import { ProfesionalesService } from 'src/app/services/profesionales.service';
 
 @Component({
@@ -13,22 +14,25 @@ import { ProfesionalesService } from 'src/app/services/profesionales.service';
 })
 export class CDetalleEspecialidadComponent {
   especialidadId!: number;
+  profesionalId!: number;
+  profesionalXHorario: any[] = [];
   profesionalXEspecialidad: any[] = [];
   public especialidadLista: EspecialidadInterface[] = [];
   public profesionalLista: ProfesionalInterface[] = [];
+  public horarioAtencionLista: HorarioAtencionInterface[] = [];
 
   constructor(
     private router: ActivatedRoute,
     private route: Router,
     private especialidadService: EspecialidadesService,
     private profesionalService: ProfesionalesService,
+    private horarioService: HorariosAtencionService,
   ){
-  }
+  };
 
   ngOnInit(): void{
     this.especialidadId = this.router.snapshot.params['id'];
-    this.verMasEspecialidad(this.especialidadId);
-
+    this.getHorario();
 
     // Filtrar el profesional por el campo id_especialidad del id de la tabla especialidad
     this.especialidadService.getEspecialidadId(this.especialidadId).subscribe((especialidad) => {
@@ -39,32 +43,25 @@ export class CDetalleEspecialidadComponent {
       });
     });
 
+    this.profesionalService.getProfesionalId(this.profesionalId).subscribe((profesional)=>{
+      this.profesionalLista = [profesional];
+      if(profesional.id_horario !== undefined){
+        this.horarioService.getProfesionalXHorario(profesional.id_horario).subscribe((horarios)=>{
+          this.horarioAtencionLista = horarios.filter(horario => horario.id == profesional.id_horario);
+          this.profesionalXHorario = this.horarioAtencionLista;
+        });
+      };
+    });
   };
 
-  
-  verMasEspecialidad(id:number){
-    this.especialidadService.getEspecialidadId(id)
-    .subscribe((respuesta) =>{
-      this.especialidadLista.push(respuesta);
-      console.log(respuesta);
+  public getHorario(){
+    this.horarioService.getHorarioAtencion().subscribe((horario) =>{
+      this.horarioAtencionLista = horario;
+      console.log(horario);
     });
   };
 
   redirectToPay(){
     this.route.navigate(['pago']);
   };
-
-
-  getProfesionalesXEspecialidad(){
-    let p = this.profesionalLista.filter(p => 
-      this.especialidadLista.some(e => e.id == p.id_especialidad));
-      console.log('PROFESIONALES: ', p)  
-    }
-
-
-  // getProfesionalPorEspecialidad(idEspecialidad: number){
-  //   return this.profesionalLista.filter(
-  //     (profesional) => profesional.id_especialidad === idEspecialidad
-  //   );
-  // };
 };

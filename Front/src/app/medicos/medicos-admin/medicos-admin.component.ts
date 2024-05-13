@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Doctors } from 'src/app/model/doctor.model';
 import { DoctorsService } from 'src/app/services/doctors.service';
-import { Router } from '@angular/router';
 import Swal from'sweetalert2';
 
 @Component({
