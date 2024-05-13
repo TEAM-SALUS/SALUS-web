@@ -1,4 +1,5 @@
 # venv
 /Back/venv/
-__pycache__/
+Back/proyectoSalus24/SalusEcommerce/__pycache__/
+Back/proyectoSalus24/proyectoSalus24/__pycache__/
 *.pyc
