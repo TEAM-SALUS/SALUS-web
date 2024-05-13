@@ -2,13 +2,16 @@
   <h1>Contactanos!</h1>
   <p>Para dudas o consultas no dudes en escribirnos!</p>
   <section class="form-register">
-    <form action="">
-      <input class="controls" type="text" name="nombres" placeholder="Ingrese su nombre">
-      <input class="controls" type="text" name="apellidos" placeholder="Ingrese su apellido">
-      <input class="controls" type="email" name="email" placeholder="Ingrese su email">
-      <textarea name="" class="controls" cols="30" rows="5" placeholder="Ingrese su comentario"></textarea>
-      <a href="#"><input class="botons" type="submit" value="ENVIAR"></a>
-
-    </form>
+    <div class="formulario-wrapper">
+      <div class="formulario">
+        <form [formGroup]="form" action="javascript:void(0)" (submit)="send()">
+          <input formControlName="from_name" class="controls" type="text" name="nombres" placeholder="Ingrese su nombre">
+          <input formControlName="from_apellido" class="controls" type="text" name="apellidos" placeholder="Ingrese su apellido">
+          <input formControlName="from_email" class="controls" type="email" name="email" placeholder="Ingrese su email">
+          <textarea formControlName="message" name="mensaje" class="controls" cols="30" rows="5" placeholder="Ingrese su comentario"></textarea>
+          <button href="#" class="botons" type="submit" value="ENVIAR">ENVIAR</button>
+        </form>
+      </div>
+  </div>
   </section>
 </main>
