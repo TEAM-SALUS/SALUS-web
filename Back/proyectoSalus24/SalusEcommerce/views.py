@@ -54,7 +54,7 @@ class PacientePorUserView(APIView):
 # Tabla Especialidad
 class EspecialidadViewSet(viewsets.ModelViewSet):
     # permission_classes = (permissions.IsAdminUser,)
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.AllowAny,)
     queryset = Especialidad.objects.all()
     serializer_class = EspecialidadSerializer
 class EspecialidadPorIdView(APIView):
@@ -66,7 +66,8 @@ class EspecialidadPorIdView(APIView):
 
 # Tabla HorarioDeAtencion
 class HorarioDeAtencionViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAdminUser,)
+    # permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.AllowAny,)
     queryset = HorarioDeAtencion.objects.all()
     serializer_class = HorarioDeAtencionSerializer
 class HorarioDeAtencionPorIdView(APIView):

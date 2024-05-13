@@ -2,6 +2,6 @@ export interface EspecialidadInterface{
     id: number,
     nombre?: string,
     precio?: number,
-    imagen?: string,
+    foto?: string,
     descripcion?: string;
 }
