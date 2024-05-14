@@ -15,11 +15,12 @@
 }
 
 .card-title{
-    font-size: 26px;
+    font-size: 20px;
     text-align: center;
     font-family: poppins, sans-serif;
-    font-weight: 600;
     letter-spacing: 1px;
+    margin-bottom: 20px;
+    color: var(--primary-color);
 }
 
 .card-p-nombre-dr{
@@ -80,6 +81,10 @@
     font-size: 18px;
     border-radius: 5px;
     color: rgba(0, 0, 0, 0.644);
+}
+
+.div-horarios-contacto li{
+    color: rgba(0, 0, 0, 0.547);
 }
 
 
