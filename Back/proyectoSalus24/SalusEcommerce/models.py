@@ -23,11 +23,11 @@ class Paciente(models.Model):
 
     def __unicode__(self):
         # return "{} {} {} {} {} {} {}".format(self.id,self.dni_paciente,self.nombre,self.apellido,self.email,self.clave,self.telefono)
-        return "{} {} {} {} {} {} {} {}".format(self.id, self.dni_paciente, self.nombre, self.apellido, self.email, self.clave, self.telefono, self.pacienteUser)
+        return "{} {} {} {} {} {} {} {} {}".format(self.id, self.dni_paciente, self.nombre, self.apellido, self.email, self.clave, self.telefono, self.foto, self.pacienteUser)
 
     def __str__(self):
         # return "{} {} {} {} {} {} {}".format(self.id,self.dni_paciente,self.nombre,self.apellido,self.email,self.clave,self.telefono)
-        return "{} {} {} {} {} {} {} {}".format(self.id, self.dni_paciente, self.nombre, self.apellido, self.email, self.clave, self.telefono, self.pacienteUser)
+        return "{} {} {} {} {} {} {} {} {}".format(self.id, self.dni_paciente, self.nombre, self.apellido, self.email, self.clave, self.telefono, self.foto, self.pacienteUser)
 
     class Meta:
         db_table = "Paciente"

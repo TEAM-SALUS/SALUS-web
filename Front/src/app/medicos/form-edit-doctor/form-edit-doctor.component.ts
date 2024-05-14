@@ -84,10 +84,10 @@ export class FormEditDoctorComponent implements OnInit {
         Matricula_UM: JSON.stringify(data.Matricula_UM).replace(/"/g, '')
       }
 
-      this.doctorsService.updateDoctor(doctor.id, doctor)
-        .subscribe(data => {
-          console.log(data)
-        })
+      // this.doctorsService.updateDoctor(doctor.id, doctor)
+      //   .subscribe(data => {
+      //     console.log(data)
+      //   })
 
       this.router.navigateByUrl('/adminMedico');
       this.doctorFormEdit.reset();

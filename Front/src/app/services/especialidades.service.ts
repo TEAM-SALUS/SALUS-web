@@ -17,16 +17,11 @@ export class EspecialidadesService {
     return this.http.get(this.url);
   };
 
-  // public getEspecialidadId(id:number): Observable<any>{
-  //   return this.http.get(`${this.url}${id}/`);
-  // };
-
-  getEspecialidadId(id: number): Observable<EspecialidadInterface> {
+  public getEspecialidadId(id: number): Observable<EspecialidadInterface> {
     return this.http.get<EspecialidadInterface>(`${this.url}${id}`);
-  }
+  };
 
   public getProfesionalesByEspecialidad(idEspecialidad: number): Observable<ProfesionalInterface[]> {
     return this.http.get<ProfesionalInterface[]>(`${this.url}?id_especialidad=${idEspecialidad}`);
-  }
-
-}
+  };
+};
