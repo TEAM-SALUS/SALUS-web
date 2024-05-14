@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, map, throwError} from 'rxjs'
 import { RegistryRequest } from './registryRequest';
-import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -16,17 +15,6 @@ export class RegistryService {
     return this.http.post<any>(url, data).pipe(
       map(userData => {
         sessionStorage.setItem('userData', JSON.stringify(userData));
-        sessionStorage.setItem('userId', userData.user.id)
-      }),
-      catchError(this.handleError)
-    )
-  }
-
-  createPacient(data:User): Observable<any>{
-    const url = "http://localhost:8000/api/v1/paciente"
-    return this.http.post<User>(url, data).pipe(
-      map(userData => {
-        sessionStorage.setItem('paciente', JSON.stringify(userData));
       }),
       catchError(this.handleError)
     )

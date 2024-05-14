@@ -4,7 +4,6 @@ import {Router} from '@angular/router';
 import { RegistryService } from 'src/app/services/auth/registry.service';
 import { RegistryRequest } from "../../services/auth/registryRequest";
 import Swal from'sweetalert2';
-import { User } from 'src/app/services/auth/user';
 
 @Component({
   selector: 'app-registro',
@@ -12,7 +11,7 @@ import { User } from 'src/app/services/auth/user';
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit{
-  idUser!:any
+  info:any;
   
   loginError:string="";
   registryForm=this.formBuilder.group({
@@ -26,7 +25,7 @@ export class RegistroComponent implements OnInit{
     number:['', [Validators.required, Validators.minLength(10), Validators.maxLength(15)]]
   })
 
-  first_name = this.registryForm.get('first_name').value;
+
   
 
   constructor(private formBuilder:FormBuilder, private registryService: RegistryService, private router:Router){}
@@ -37,7 +36,7 @@ export class RegistroComponent implements OnInit{
     if(this.registryForm.valid){
       this.registryService.createUser(this.registryForm.value as RegistryRequest).subscribe({
         next: (userData) => {
-          console.log(userData);
+          
         },
         error: (errorData) => {
           console.error(errorData);
@@ -56,6 +55,8 @@ export class RegistroComponent implements OnInit{
       this.registryForm.markAllAsTouched();
       alert("Error al ingresar los datos")
     }
+    this.info = sessionStorage.getItem('userData');
+    console.log(JSON.parse(this.info));
   }
 
 /*
