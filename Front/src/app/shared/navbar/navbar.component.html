@@ -30,7 +30,7 @@
           <ul class="dropdown-menu ms-3">
             <li *ngIf="!userLoginOn"><a class="dropdown-item"
                 href="/login">Iniciar sesión</a></li>
-            <li *ngIf="!sharedService.isRegistered && !sharedService.isLoggedIn"><a class="dropdown-item"
+            <li *ngIf="!userLoginOn"><a class="dropdown-item"
                 href="/registro">Registrarse</a></li>
             <li *ngIf="userLoginOn"><a class="dropdown-item" (click)="logout()">Cerrar
                 sesión</a></li>

@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import { RegistryService } from 'src/app/services/auth/registry.service';
 import { RegistryRequest } from "../../services/auth/registryRequest";
 import Swal from'sweetalert2';
+import { User } from 'src/app/services/auth/user';
 
 @Component({
   selector: 'app-registro',
@@ -11,9 +12,9 @@ import Swal from'sweetalert2';
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit{
+  idUser!:any
   
   loginError:string="";
-  pacienteData: any = {};
   registryForm=this.formBuilder.group({
     first_name:["", [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z\sñÑáéíóúÁÉÍÓÚ]+$/)]],
     last_name:["", [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z\sñÑáéíóúÁÉÍÓÚ]+$/)]],
@@ -21,8 +22,12 @@ export class RegistroComponent implements OnInit{
     email:["", [Validators.required, Validators.minLength(4),Validators.email]],
     password:['',Validators.required],
     password2: [Validators.required],
-    username:['', Validators.required]
+    username:['', Validators.required],
+    number:['', [Validators.required, Validators.minLength(10), Validators.maxLength(15)]]
   })
+
+  first_name = this.registryForm.get('first_name').value;
+  
 
   constructor(private formBuilder:FormBuilder, private registryService: RegistryService, private router:Router){}
   

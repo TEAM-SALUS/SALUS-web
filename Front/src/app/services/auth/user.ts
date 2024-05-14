@@ -1,8 +1,9 @@
 export interface User{
-  id: number;
-  Nombre_UP?: string;
-  Apellido_UP?: string;
-  Email_UP: string;
-  message?: string;
-  Clave_UP: string;
+  pacienteUser_id: string,
+  dni_paciente: string,
+  nombre: string,
+  apellido: string,
+  email: string,
+  clave: string,
+  telefono: string,
 }
