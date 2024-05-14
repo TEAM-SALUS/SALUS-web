@@ -7,14 +7,18 @@ import { RegistryRequest } from './registryRequest';
   providedIn: 'root'
 })
 export class RegistryService {
+  info: any;
 
   constructor(private http: HttpClient) { }
   
   createUser(data:RegistryRequest): Observable<any>{
-    const url = "http://localhost:8000/api/v1/registro"
-    return this.http.post<RegistryRequest>(url, data).pipe(
+    const url = "http://localhost:8000/api/v1/registro";
+    return this.http.post<any>(url, data).pipe(
       map(userData => {
         sessionStorage.setItem('userData', JSON.stringify(userData));
+        this.info = sessionStorage.getItem("userData")
+        this.info = this.info = JSON.parse(this.info);
+        sessionStorage.setItem('token', this.info.token);
       }),
       catchError(this.handleError)
     )
