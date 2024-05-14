@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { forkJoin, map, Observable } from 'rxjs';
 import { ProfesionalInterface } from '../model/profesional';
+import { HorarioAtencionInterface } from '../model/horarios-atencion';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,8 @@ export class ProfesionalesService {
   public getProfesionalesByEspecialidad(idEspecialidad: number): Observable<ProfesionalInterface[]> {
     return this.http.get<ProfesionalInterface[]>(`${this.url}?id_especialidad=${idEspecialidad}`);
   };
+
+
+
 };
 

@@ -14,12 +14,12 @@ import { ProfesionalesService } from 'src/app/services/profesionales.service';
 })
 export class CDetalleEspecialidadComponent {
   especialidadId!: number;
-  profesionalId!: number;
   profesionalXHorario: any[] = [];
   profesionalXEspecialidad: any[] = [];
   public especialidadLista: EspecialidadInterface[] = [];
   public profesionalLista: ProfesionalInterface[] = [];
   public horarioAtencionLista: HorarioAtencionInterface[] = [];
+
 
   constructor(
     private router: ActivatedRoute,
@@ -32,34 +32,44 @@ export class CDetalleEspecialidadComponent {
 
   ngOnInit(): void{
     this.especialidadId = this.router.snapshot.params['id'];
-    this.getHorario();
 
     // Filtrar el profesional por el campo id_especialidad del id de la tabla especialidad
-    this.especialidadService.getEspecialidadId(this.especialidadId).subscribe((especialidad) => {
+    this.especialidadService.getEspecialidadId(this.especialidadId)
+    .subscribe((especialidad) => {
       this.especialidadLista = [especialidad];
-      this.profesionalService.getProfesionalesByEspecialidad(especialidad.id).subscribe((profesionales) => {
+      this.profesionalService.getProfesionalesByEspecialidad(especialidad.id)
+      .subscribe((profesionales) => {
         this.profesionalLista = profesionales.filter(profesional => profesional.id_especialidad == especialidad.id);
         this.profesionalXEspecialidad = this.profesionalLista;
       });
     });
 
-    this.profesionalService.getProfesionalId(this.profesionalId).subscribe((profesional)=>{
-      this.profesionalLista = [profesional];
-      if(profesional.id_horario !== undefined){
-        this.horarioService.getProfesionalXHorario(profesional.id_horario).subscribe((horarios)=>{
-          this.horarioAtencionLista = horarios.filter(horario => horario.id == profesional.id_horario);
-          this.profesionalXHorario = this.horarioAtencionLista;
+        // Obtener la especialidad
+        this.especialidadService.getEspecialidadId(this.especialidadId).subscribe((especialidad) => {
+          // Filtrar los profesionales por la especialidad
+          this.profesionalService.getProfesionalesByEspecialidad(especialidad.id).subscribe((profesionales) => {
+            this.profesionalXEspecialidad = profesionales.filter(profesional => profesional.id_especialidad == especialidad.id);
+            // Iterar sobre los profesionales para obtener sus horarios de atención
+            this.profesionalXEspecialidad.forEach(profesional => {
+              if (profesional.id_horario !== undefined) {
+                // Obtener los horarios de atención para cada profesional
+                this.horarioService.getProfesionalXHorario(profesional.id_horario).subscribe((horarios) => {
+                  // Filtrar el horario de atención del profesional actual
+                  const horarioProfesional = horarios.find(horario => horario.id == profesional.id_horario);
+                  if (horarioProfesional) {
+                    this.profesionalXHorario.push(horarioProfesional);
+                  };
+                });
+              }
+            });
+          });
         });
-      };
-    });
-  };
-
-  public getHorario(){
-    this.horarioService.getHorarioAtencion().subscribe((horario) =>{
-      this.horarioAtencionLista = horario;
-      console.log(horario);
-    });
-  };
+    
+        // Obtener todos los horarios de atención
+        this.horarioService.getHorarioAtencion().subscribe((horario) => {
+          this.horarioAtencionLista = horario;
+        });
+    };
 
   redirectToPay(){
     this.route.navigate(['pago']);

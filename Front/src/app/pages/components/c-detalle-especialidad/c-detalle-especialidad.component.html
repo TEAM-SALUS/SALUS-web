@@ -17,12 +17,12 @@
         {{e.descripcion}}
       </p>
 
-      <div class="div-horarios-contacto" *ngFor="let p of profesionalLista">
+      <div class="div-horarios-contacto" *ngFor="let p of profesionalXEspecialidad">
         <p class="horarios">
           Días y horarios de atención
         </p>
         <span>
-            <ul *ngFor="let h of horarioAtencionLista">
+            <ul *ngFor="let h of profesionalXHorario">
               <li><img src="../../../../assets/flecha.png" alt=""> {{h.dia_de_la_semana}} - {{h.hora_entrada}} a {{h.hora_salida}} </li>
             </ul>
           </span>
