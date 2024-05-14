@@ -1,5 +1,5 @@
 .div-especialidad{
-    background-color: rgba(215, 243, 255, 0.275);
+    margin: 50px;
 }
 
 .card-especialidad{
@@ -31,7 +31,7 @@
     font-family: poppins, sans-serif;
     font-weight: 600;
     letter-spacing: 1px;
-    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.638);
 }
 
 hr{
@@ -40,9 +40,9 @@ hr{
 }
 
 .card-p-nombre-dr{
-    font-weight: 600;
     font-size: 18px;
     margin-top: 15px;
+    color: var(--primary-color);
 }
 
 .card-descripcion{
@@ -52,16 +52,19 @@ hr{
 
 .horarios, .contacto{
     margin-top: 8px;
-    font-weight: 600;
+    color: var(--primary-color);
 }
 
 .contacto span{
     font-weight: 400;
+    color: rgba(0, 0, 0, 0.766);
 }
 
 ul li{
     list-style: none;
     margin-top: 5px;
+    display: flex;
+    align-items: center;
 }
 
 .buttons{
@@ -83,12 +86,17 @@ ul li{
     background-color: #83d9fea3;
 }
 
+.div-horarios-contacto img{
+    width: 16px;
+    margin-right: 5px;
+}
 
 
 @media screen and (max-width: 1000px) {
     .div-especialidad{
         display: flex;
         justify-content: center;
+        margin: 10px;
     }
 
     .card-especialidad{
@@ -106,8 +114,9 @@ ul li{
     }
 
     .card-title{
-        margin-top: 20px;
+        margin-top: 24px;
         font-size: 22px;
+        text-align: center;
     }
 
     hr{

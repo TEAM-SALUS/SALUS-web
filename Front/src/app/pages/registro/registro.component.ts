@@ -11,9 +11,9 @@ import Swal from'sweetalert2';
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit{
+  info:any;
   
   loginError:string="";
-  pacienteData: any = {};
   registryForm=this.formBuilder.group({
     first_name:["", [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z\sñÑáéíóúÁÉÍÓÚ]+$/)]],
     last_name:["", [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z\sñÑáéíóúÁÉÍÓÚ]+$/)]],
@@ -21,8 +21,12 @@ export class RegistroComponent implements OnInit{
     email:["", [Validators.required, Validators.minLength(4),Validators.email]],
     password:['',Validators.required],
     password2: [Validators.required],
-    username:['', Validators.required]
+    username:['', Validators.required],
+    number:['', [Validators.required, Validators.minLength(10), Validators.maxLength(15)]]
   })
+
+
+  
 
   constructor(private formBuilder:FormBuilder, private registryService: RegistryService, private router:Router){}
   
@@ -32,7 +36,7 @@ export class RegistroComponent implements OnInit{
     if(this.registryForm.valid){
       this.registryService.createUser(this.registryForm.value as RegistryRequest).subscribe({
         next: (userData) => {
-          console.log(userData);
+          
         },
         error: (errorData) => {
           console.error(errorData);
@@ -51,6 +55,8 @@ export class RegistroComponent implements OnInit{
       this.registryForm.markAllAsTouched();
       alert("Error al ingresar los datos")
     }
+    this.info = sessionStorage.getItem('userData');
+    console.log(JSON.parse(this.info));
   }
 
 /*

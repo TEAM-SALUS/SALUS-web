@@ -12,7 +12,7 @@ export class RegistryService {
   
   createUser(data:RegistryRequest): Observable<any>{
     const url = "http://localhost:8000/api/v1/registro"
-    return this.http.post<RegistryRequest>(url, data).pipe(
+    return this.http.post<any>(url, data).pipe(
       map(userData => {
         sessionStorage.setItem('userData', JSON.stringify(userData));
       }),

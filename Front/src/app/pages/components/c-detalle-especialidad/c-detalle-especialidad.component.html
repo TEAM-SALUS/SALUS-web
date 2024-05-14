@@ -1,40 +1,38 @@
 <div class="div-especialidad">
-  <div class="card-especialidad">
+  <div class="card-especialidad" *ngFor="let e of especialidadLista">
     <div>
       <img
         class="card-img-top"
-        src="../../../../assets/img-especialidad.jpg"
+        src="{{e.foto}}"
         alt="imagen-especialidad"
       />
     </div>
     <div class="card-body">
-      <h5 class="card-title">Pediatría</h5>
+      <h5 class="card-title">{{e.nombre}}</h5>
       <hr>
 
-      <p class="card-p-nombre-dr">Dr. Federico Gutierrez</p>
+      <p class="card-p-nombre-dr" *ngFor="let p of profesionalLista">Dr. {{p.apellido}} {{p.nombre}} </p>
 
       <p class="card-descripcion">
-        Dedicado a la salud infantil con atención integral y especializada para
-        niños y adolescentes.
+        {{e.descripcion}}
       </p>
 
-      <div class="div-horarios-contacto">
+      <div class="div-horarios-contacto" *ngFor="let p of profesionalLista">
         <p class="horarios">
           Días y horarios de atención
         </p>
         <span>
-            <ul>
-              <li>Lunes <span>8:00 - 13:00</span></li>
-              <li>Miércoles <span>14:00 - 18:00</span></li>
-              <li>Jueves <span>17:00 - 20:30</span></li>
+            <ul *ngFor="let h of horarioAtencionLista">
+              <li><img src="../../../../assets/flecha.png" alt=""> {{h.dia_de_la_semana}} - {{h.hora_entrada}} a {{h.hora_salida}} </li>
             </ul>
           </span>
-        <p class="contacto">Teléfono: <span>1111111111</span></p>
+        <p class="contacto">Teléfono: <span>{{p.telefono}}</span></p>
       </div>
 
       <div class="buttons">
-        <a href="#" class="btn btn-reservar-turno">Reservar turno</a>
+        <a class="btn btn-reservar-turno" (click)="redirectToPay()">Reservar turno</a>
       </div>
     </div>
   </div>
 </div>
+
