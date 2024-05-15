@@ -19,7 +19,7 @@ import { PagoAdminComponent } from './ecommerce/pago-admin/pago-admin.component'
 import { PagoClienteComponent } from './ecommerce/pago-cliente/pago-cliente.component';
 import { EspecialidadComponent } from './pages/especialidad/especialidad.component';
 import { DetalleEspecialidadComponent } from './pages/detalle-especialidad/detalle-especialidad.component';
-
+import {CProfesionalComponent} from './pages/components/c-profesional/c-profesional.component';
 
 const routes: Routes = [
   {path:'home', component:HomeComponent},
@@ -42,6 +42,7 @@ const routes: Routes = [
   {path:'pago', component:PagoComponent},
   {path:'adminPago', component:PagoAdminComponent},
   {path:'clientePago', component:PagoClienteComponent},
+  {path:'profesionales', component:CProfesionalComponent}
 ];
 
 @NgModule({
