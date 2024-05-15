@@ -57,13 +57,24 @@ class PacientePorUserView(APIView):
         pacienteUser = Paciente.objects.filter(pacienteUser=idpu)
         serializer = PacienteSerializer(pacienteUser, many=True)
         return Response(serializer.data)
+    
+class PacienteRegistroView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, format=None):
+        serializer = PacienteSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,
+                            status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # Tabla Especialidad
 
 
 class EspecialidadViewSet(viewsets.ModelViewSet):
     # permission_classes = (permissions.IsAdminUser,)
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.AllowAny,)
     queryset = Especialidad.objects.all()
     serializer_class = EspecialidadSerializer
 
@@ -80,7 +91,8 @@ class EspecialidadPorIdView(APIView):
 
 
 class HorarioDeAtencionViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAdminUser,)
+    # permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.AllowAny,)
     queryset = HorarioDeAtencion.objects.all()
     serializer_class = HorarioDeAtencionSerializer
 

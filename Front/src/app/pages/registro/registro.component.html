@@ -37,6 +37,22 @@
           el dni es requerido
         </div>
       </div>
+       <!-- telefono -->
+       <input class="controls" type="text" name="telefono" placeholder="Ingrese su número de teléfono"
+       formControlName="number">
+     <div
+       *ngIf="registryForm.controls.number.invalid && (registryForm.controls.number.dirty || registryForm.controls.number.touched)"
+       class="alert-danger">
+       <div *ngIf="registryForm.controls.number.errors?.['required']">
+         el número de teléfono es requerido
+       </div>
+       <div *ngIf="registryForm.controls.number.errors?.['minLength']">
+        el teléfono debe tener un mínimo 10 números
+      </div>
+      <div *ngIf="registryForm.controls.number.errors?.['maxLength']">
+        el teléfono debe tener un máximo de 15 números
+      </div>
+     </div>
       <!-- email -->
       <input class="controls" type="email" name="usuario" placeholder="Ingrese su email" formControlName="email">
       <div

@@ -5,7 +5,6 @@ export interface ProfesionalInterface{
     email?: string;
     clave?: string;
     telefono?: string;
-    horario?: string;
     id_especialidad?: number;
     id_horario?: number;
 }
