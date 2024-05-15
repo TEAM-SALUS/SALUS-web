@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit{
         },
         complete: () => {
           console.info('Login completo');
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/user-profile/${data.id}');
           this.loginForm.reset();
         }
       })

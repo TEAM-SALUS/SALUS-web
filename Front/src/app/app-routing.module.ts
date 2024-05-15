@@ -16,8 +16,9 @@ import { PagoAdminComponent } from './ecommerce/pago-admin/pago-admin.component'
 import { PagoClienteComponent } from './ecommerce/pago-cliente/pago-cliente.component';
 import { EspecialidadComponent } from './pages/especialidad/especialidad.component';
 import { DetalleEspecialidadComponent } from './pages/detalle-especialidad/detalle-especialidad.component';
-
-
+import { ProtegidosModule } from './protegidos/protegidos.module';
+import { UserProfileComponent } from './protegidos/pages/user-profile/user-profile.component';
+import { AuthGuard } from './pages/login/auth.guard';
 const routes: Routes = [
   {path:'home', component:HomeComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path:'pago', component:PagoComponent},
   {path:'login', component:LoginComponent},
   {path:'paciente', component:PacienteComponent},
+  { path: 'user-profile/:id', component: UserProfileComponent, canActivate: [AuthGuard] },
 
   // {path:'suscripcion', component:SuscripcionComponent},
   // {path:'formSuscripcion', component:FormComponent},
@@ -41,7 +43,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule,ProtegidosModule]
 })
 
 export class AppRoutingModule { }
