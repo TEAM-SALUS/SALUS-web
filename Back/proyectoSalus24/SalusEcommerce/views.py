@@ -68,6 +68,20 @@ class PacienteRegistroView(APIView):
             return Response(serializer.data,
                             status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class ProfileView(generics.RetrieveUpdateAPIView):
+    permission_classes = [permissions.IsAuthenticated] #Solo usuarios logueados pueden ver.
+    serializer_class = PacienteSerializer
+    http_method_names = ['get', 'patch']
+    def get_object(self):
+        if self.request.user.is_authenticated:
+            return self.request.user
+    def patch_object(self,request):
+        serializer = PacienteSerializer(data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # Tabla Especialidad
 
