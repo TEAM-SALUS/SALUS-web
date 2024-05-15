@@ -86,6 +86,14 @@ class EspecialidadPorIdView(APIView):
         especialidadId = Especialidad.objects.filter(id=ide)
         serializer = EspecialidadSerializer(especialidadId, many=True)
         return Response(serializer.data)
+    
+class EspecialidadListView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, format=None):
+        especialidadList = Especialidad.objects.all()
+        serializer = EspecialidadSerializer(especialidadList, many=True)
+        return Response(serializer.data)
 
 # Tabla HorarioDeAtencion
 
@@ -121,6 +129,14 @@ class MedicoPorUserView(APIView):
 
     def get(self, request, idmu=None):
         medicoUser = Medico.objects.filter(medicoUser=idmu)
+        serializer = MedicoSerializer(medicoUser, many=True)
+        return Response(serializer.data)
+    
+class MedicoListView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, format=None):
+        medicoUser = Medico.objects.all()
         serializer = MedicoSerializer(medicoUser, many=True)
         return Response(serializer.data)
 
