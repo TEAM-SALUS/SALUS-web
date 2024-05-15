@@ -9,7 +9,8 @@ from .views import (
     HorarioDeAtencionPorIdView,
     MedicoPorUserView,
     pagar,
-    registrarConsulta
+    registrarConsulta,
+    ProfileView
 )
 from django.urls import path, include
 from rest_framework import routers
@@ -46,5 +47,7 @@ urlpatterns = [
          pagar.as_view(), name='pago'),
     path('RegistrarConsulta/',
          registrarConsulta.as_view(), name='registroConsulta'),
+    path('user/profile/',
+         ProfileView.as_view(), name='user_profile'),
     path('', include(router.urls)),
 ]
