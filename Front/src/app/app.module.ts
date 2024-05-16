@@ -29,7 +29,7 @@ import { DetalleEspecialidadComponent } from './pages/detalle-especialidad/detal
 import { JwtInterceptorService } from './services/auth/jwt-interceptor.service';
 import { ErrorInterceptorService } from './services/auth/error-interceptor.service';
 import { CProfesionalComponent } from './pages/components/c-profesional/c-profesional.component';
-import { ProfesionalComponent } from './pages/profesional/profesional.component';
+
 
 @NgModule({
   declarations: [
@@ -55,7 +55,6 @@ import { ProfesionalComponent } from './pages/profesional/profesional.component'
     EspecialidadComponent,
     DetalleEspecialidadComponent,
     CProfesionalComponent,
-    ProfesionalComponent,
   ],
   imports: [
     BrowserModule,
