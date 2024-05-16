@@ -8,7 +8,11 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
+<<<<<<< HEAD
 set VIRTUAL_ENV=C:\Users\marqu\OneDrive\Escritorio\SALUS_3\SALUS-web\Back\venv
+=======
+set VIRTUAL_ENV=C:\Users\Esteban\Desktop\Escritorio\Git\SALUS-web\Back\venv
+>>>>>>> 7bc7d124dac030f800e46b33634c96b734490e87
 
 if not defined PROMPT set PROMPT=$P$G
 

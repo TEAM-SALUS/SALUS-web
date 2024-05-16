@@ -1,8 +1,26 @@
+.navbar {
+  background-color: var(--primary-color);
+}
+
 .navbar a {
-  color: var(--primary-color);
+  color: var(--primary-color-light);
   font-family: var(--primary-font);
 }
 
 .navbar-nav .nav-link.active {
   color: var(--terciary-color);
+}
+
+ul.dropdown-menu li a {
+  color: var(--primary-color);
+}
+
+.dropdown-menu[data-bs-popper] {
+  left: auto;
+  right: 0;
+}
+
+.navbar-toggler {
+  color: var(--primary-color-light);
+  border-color: var(--primary-color-light);
 }
