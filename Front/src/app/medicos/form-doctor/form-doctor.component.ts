@@ -71,7 +71,7 @@ export class FormDoctorComponent {
       }
 
       this.doctorsService.createDoctor(doctor)
-      .subscribe(data => {
+      .subscribe((data: any) => {
         console.log(data)
       })
 

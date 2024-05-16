@@ -21,3 +21,20 @@ Por otra parte, los profesionales de la salud podrán acceder al historial médi
 > * SQL
 > * MySQL
 > * Django
+
+***
+
+## Scrum Master
+* Ian Camilo Vázquez
+  
+## Development team
+* Alejandro Benítez
+* Ángel Pablo Sebastián Sánchez Tejeda
+* Esteban Joselo Orellano
+* Félix Sebastián Olima Quinteros
+* Gonzalo Ezequiel Alvarado
+* Isaias Rubén Ramos
+* Melani Elizabeth Quiroga López
+* Rosana Quispe
+* Verónica Elena Nievas Guardia
+

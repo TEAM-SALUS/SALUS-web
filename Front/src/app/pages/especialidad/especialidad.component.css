@@ -1,0 +1,19 @@
+.div-especialidad {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(215, 243, 255, 0.275);
+}
+
+h1 {
+    padding: 50px 30px 0 30px;
+    color: var(--secondary-color);
+    font-size: 40px;
+}
+
+@media screen and (max-width: 1250px) {
+    .div-especialidad {
+    justify-content: space-evenly;
+    }
+}
