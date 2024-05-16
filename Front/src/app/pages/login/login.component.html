@@ -1,16 +1,13 @@
 <main class="form-background">
   <section class="form-register">
     <form [formGroup]="loginForm">
-      <span class="text-danger">{{loginError}}</span>
+      <!-- <span class="text-danger">{{loginError}}</span> -->
       <h1>Iniciar Sesión</h1>
-      <!-- EMAIL -->
-      <input class="controls" type="email" name="usuario" placeholder="Ingrese su usuario" formControlName="email">
-      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert-danger">
-        <div *ngIf="email.errors?.['required']">
-          el email es requerido.
-        </div>
-        <div *ngIf="email.errors?.['minlength']">
-          el email debe tener al menos 4 caracteres.
+      <!-- USUARIO -->
+      <input class="controls" type="text" name="usuario" placeholder="Ingrese su usuario" formControlName="username">
+      <div *ngIf="user.invalid && (user.dirty || user.touched)" class="alert-danger">
+        <div *ngIf="user.errors?.['required']">
+          el usuario es requerido.
         </div>
       </div>
       <!-- CONTRASEÑA -->
