@@ -1,13 +1,13 @@
-<div *ngIf="userProfile">
-    <h1 class="profile-heading">Perfil de Usuario</h1>
-    <ul>
-        <li>{{ userProfile.nombre }}</li>
-        <li>{{ userProfile.apellido }}</li>
-        <li>{{ userProfile.email }}</li>
-        <li>{{ userProfile.dni_paciente }}</li>
-        <li>{{ userProfile.telefono }}</li>
-        <li>{{ userProfile.foto }}</li>
-    </ul>
-    
+<div *ngIf="isLoading">Cargando...</div>
+<div *ngIf="!isLoading && userProfile">
+  <h1>Perfil de Usuario</h1>
+  <p>Nombre: {{ userProfile.nombre }}</p>
+  <p>Apellido: {{ userProfile.apellido }}</p>
+  <p>Email: {{ userProfile.email }}</p>
+  <p>DNI: {{ userProfile.dni_paciente }}</p>
+  <p>Teléfono: {{ userProfile.telefono }}</p>
+  <p>Foto: <img [src]="userProfile.foto" alt="Foto de perfil"></p>
 </div>
-    
+<div *ngIf="!isLoading && !userProfile && errorMessage">
+  <p>{{ errorMessage }}</p>
+</div>
