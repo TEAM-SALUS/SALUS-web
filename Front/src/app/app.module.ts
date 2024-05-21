@@ -28,7 +28,9 @@ import { EspecialidadComponent } from './pages/especialidad/especialidad.compone
 import { DetalleEspecialidadComponent } from './pages/detalle-especialidad/detalle-especialidad.component';
 import { JwtInterceptorService } from './services/auth/jwt-interceptor.service';
 import { ErrorInterceptorService } from './services/auth/error-interceptor.service';
+
 import { ProtegidosModule } from './protegidos/protegidos.module';
+
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { ProtegidosModule } from './protegidos/protegidos.module';
     CDetalleEspecialidadComponent,
     EspecialidadComponent,
     DetalleEspecialidadComponent,
-    
+
+
   ],
   imports: [
     BrowserModule,
