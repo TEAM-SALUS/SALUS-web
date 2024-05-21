@@ -39,6 +39,7 @@ from knox.views import LoginView as KnoxLoginView
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from django.contrib.auth import login
 from rest_framework.views import APIView
+from rest_framework.generics import UpdateAPIView
 # Create your views here.
 '''CRUD - ABML'''
 # Tabla Paciente
@@ -50,14 +51,61 @@ class PacienteViewSet(viewsets.ModelViewSet):
     serializer_class = PacienteSerializer
 
 
-class PacientePorUserView(APIView):
+class PacientePorUserView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, idpu=None):
         pacienteUser = Paciente.objects.filter(pacienteUser=idpu)
         serializer = PacienteSerializer(pacienteUser, many=True)
         return Response(serializer.data)
-    
+
+    def put(self, request, idpu=None):
+        try:
+            pacienteUser = Paciente.objects.get(pacienteUser=idpu)
+        except Paciente.DoesNotExist:
+            return Response({'error': 'Paciente no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = PacienteSerializer(pacienteUser, data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, idpu=None):
+        try:
+            pacienteUser = Paciente.objects.get(pacienteUser=idpu)
+        except Paciente.DoesNotExist:
+            return Response({'error': 'Paciente no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+
+        pacienteUser.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class EditarPerfilPaciente(UpdateAPIView):
+    serializer_class = PacienteSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def update(self, request, *args, **kwargs):
+        paciente_user_id = request.data.get('pacienteUser')
+
+        if not paciente_user_id:
+            return Response({'error': 'El ID del paciente no fue proporcionado en los datos.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            paciente = Paciente.objects.get(id=paciente_user_id)
+        except Paciente.DoesNotExist:
+            return Response({'error': 'No se encontró ningún paciente con el ID proporcionado.'}, status=status.HTTP_404_NOT_FOUND)
+
+        if paciente.pacienteUser != request.user:
+            return Response({'error': 'No tienes permiso para actualizar este perfil de paciente.'}, status=status.HTTP_403_FORBIDDEN)
+
+        serializer = self.get_serializer(paciente, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
+
+
 class PacienteRegistroView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
@@ -68,19 +116,24 @@ class PacienteRegistroView(APIView):
             return Response(serializer.data,
                             status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
+
 class ProfileView(generics.RetrieveUpdateAPIView):
-    permission_classes = [permissions.IsAuthenticated] #Solo usuarios logueados pueden ver.
+    # Solo usuarios logueados pueden ver.
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = PacienteSerializer
-    http_method_names = ['get', 'patch']
+    http_method_names = ['get', 'put']
+
     def get_object(self):
         if self.request.user.is_authenticated:
             return self.request.user
-    def patch_object(self,request):
-        serializer = PacienteSerializer(data=request.data, partial=True)
+
+    def put(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = PacienteSerializer(instance, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # Tabla Especialidad
@@ -173,12 +226,25 @@ class LoginAPI(KnoxLoginView):
         return super(LoginAPI, self).post(request, format=None)
 
 
-class ManagerUserView(generics.RetrieveUpdateAPIView):
+class ManagerUserView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = UserSerializer
 
     def get_object(self):
         return self.request.user
+
+    def delete(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def put(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(
+            instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
 
 
 class PagoViewSet(viewsets.ModelViewSet):

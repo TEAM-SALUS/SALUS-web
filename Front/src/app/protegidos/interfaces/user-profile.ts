@@ -6,5 +6,6 @@ export interface UserProfile {
   email?: string;
   clave?: string;
   telefono?: string;
-  foto?: string;
+  //foto?: string;
+  pacienteUser?: number; 
 }

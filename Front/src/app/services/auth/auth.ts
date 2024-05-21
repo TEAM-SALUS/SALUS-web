@@ -5,8 +5,20 @@ export interface UserCredentials {
  
   export interface LoggedInUser {
     id: number,
-    // token: string,
+    //token: string,
     username: string
     pacienteUser: number
     idpu: number
   }
+
+export interface Update {
+  apellido: string;
+  clave: string;
+  dni_paciente: string;
+  email: string;
+  foto: string;
+  nombre: string;
+  telefono: string;
+  idpu: number
+  id: number,
+}

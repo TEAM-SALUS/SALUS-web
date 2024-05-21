@@ -6,7 +6,9 @@
   <p>Email: {{ userProfile.email }}</p>
   <p>DNI: {{ userProfile.dni_paciente }}</p>
   <p>Teléfono: {{ userProfile.telefono }}</p>
-  <p>Foto: <img [src]="userProfile.foto" alt="Foto de perfil"></p>
+  
+  <button (click)="editarPerfil()">Editar Perfil</button>
+  <button (click)="eliminarPerfil()">Eliminar Perfil</button>
 </div>
 <div *ngIf="!isLoading && !userProfile && errorMessage">
   <p>{{ errorMessage }}</p>

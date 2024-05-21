@@ -19,6 +19,7 @@ import { DetalleEspecialidadComponent } from './pages/detalle-especialidad/detal
 import { ProtegidosModule } from './protegidos/protegidos.module';
 import { UserProfileComponent } from './protegidos/pages/user-profile/user-profile.component';
 import { AuthGuard } from './pages/login/auth.guard';
+import { EditarPerfilComponent } from './protegidos/pages/editar-perfil/editar-perfil.component';
 const routes: Routes = [
   {path:'home', component:HomeComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path:'login', component:LoginComponent},
   {path:'paciente', component:PacienteComponent},
   { path: 'user-profile/:id', component: UserProfileComponent, canActivate: [AuthGuard] },
+  { path: 'editar-perfil/:id', component: EditarPerfilComponent, canActivate: [AuthGuard] },
 
   // {path:'suscripcion', component:SuscripcionComponent},
   // {path:'formSuscripcion', component:FormComponent},
