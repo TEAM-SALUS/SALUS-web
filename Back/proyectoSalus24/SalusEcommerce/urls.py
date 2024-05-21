@@ -10,7 +10,8 @@ from .views import (
     MedicoPorUserView,
     pagar,
     registrarConsulta,
-    ProfileView
+    ProfileView,
+    EditarPerfilPaciente
 )
 from django.urls import path, include
 from rest_framework import routers
@@ -37,7 +38,8 @@ urlpatterns = [
     path('logoutall', kanox_views.LogoutAllView.as_view(), name='logoutall'),
     path('paciente-user/<int:idpu>',
          PacientePorUserView.as_view(), name='paciente_user'),
-     path('paciente-registro', PacienteRegistroView.as_view(), name='paciente_registro'),
+    path('paciente-registro', PacienteRegistroView.as_view(),
+         name='paciente_registro'),
     path('especialidad-id/<int:ide>',
          EspecialidadPorIdView.as_view(), name='especialidad_id'),
     path('horariodeatencion-id/<int:idh>',
@@ -49,5 +51,7 @@ urlpatterns = [
          registrarConsulta.as_view(), name='registroConsulta'),
     path('user/profile/',
          ProfileView.as_view(), name='user_profile'),
+    path('editar-perfil-paciente/',
+         EditarPerfilPaciente.as_view(), name='editar_perfil_paciente'),
     path('', include(router.urls)),
 ]

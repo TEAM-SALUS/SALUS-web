@@ -18,7 +18,7 @@ from .models import (
 
 class PacienteAdmin(admin.ModelAdmin):
     list_display = ('id', 'dni_paciente', 'nombre', 'apellido',
-                    'email', 'clave', 'telefono', 'foto', 'pacienteUser')
+                    'email', 'clave', 'telefono', 'pacienteUser')
 # Tabla Especialidad
 
 

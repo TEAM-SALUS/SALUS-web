@@ -1,0 +1,21 @@
+<div *ngIf="isLoading">Cargando...</div>
+<div *ngIf="!isLoading && userProfile">
+  <h1>Editar Perfil</h1>
+  <form (submit)="guardarCambios()">
+    <label>Nombre:</label>
+    <input type="text" [(ngModel)]="userProfile.nombre" name="nombre" required>
+    <label>Apellido:</label>
+    <input type="text" [(ngModel)]="userProfile.apellido" name="apellido" required>
+    <label>Email:</label>
+    <input type="text" [(ngModel)]="userProfile.email" name="email" required>
+    <label>DNI:</label>
+    <input type="text" [(ngModel)]="userProfile.dni_paciente" name="dni" required>
+    <label>Teléfono:</label>
+    <input type="text" [(ngModel)]="userProfile.telefono" name="telefono">
+    <button type="submit">Guardar Cambios</button>
+  </form>
+</div>
+<div *ngIf="!isLoading && !userProfile && errorMessage">
+  <p>{{ errorMessage }}</p>
+</div>
+
