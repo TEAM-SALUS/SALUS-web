@@ -21,7 +21,17 @@ item: any;
   ngOnInit(): void {
     this.httpClient.get("http://127.0.0.1:8000/api/v1/medico/").subscribe((x:any) => {
       console.log("🚀 ~ CProfesionalComponent ~ this.httpClient.get ~ x:", x);
-      this.medicos=x ;
+      x.forEach((element:any) => {
+        console.log(element.id_especialidad)
+        this.httpClient.get("http://127.0.0.1:8000/api/v1/especialidad-id/"+element.id_especialidad).subscribe((y:any) => {
+        element.nombreespecialidad=y[0].nombre;
+        console.log(y)
+
+        this.medicos=x ;
+        console.log(this.medicos)
+        });
+      });
+    
     })
 }
 }
