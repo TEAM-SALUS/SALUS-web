@@ -16,8 +16,8 @@ import { PagoAdminComponent } from './ecommerce/pago-admin/pago-admin.component'
 import { PagoClienteComponent } from './ecommerce/pago-cliente/pago-cliente.component';
 import { EspecialidadComponent } from './pages/especialidad/especialidad.component';
 import { DetalleEspecialidadComponent } from './pages/detalle-especialidad/detalle-especialidad.component';
-
-
+import { ProfesionalesComponent } from './pages/profesionales/profesionales.component';
+import { CProfesionalComponent } from './pages/components/c-profesionales/c-profesionales.component';
 const routes: Routes = [
   {path:'home', component:HomeComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -29,7 +29,8 @@ const routes: Routes = [
   {path:'pago', component:PagoComponent},
   {path:'login', component:LoginComponent},
   {path:'paciente', component:PacienteComponent},
-
+  {path:'profesionales',component:ProfesionalesComponent},
+  {path:'cprofesionales',component:CProfesionalComponent}
   // {path:'suscripcion', component:SuscripcionComponent},
   // {path:'formSuscripcion', component:FormComponent},
   // {path:'formSuscripcionEdit', component:FormEditComponent},
