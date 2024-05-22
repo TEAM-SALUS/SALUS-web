@@ -21,7 +21,7 @@ item: any;
   ngOnInit(): void {
     this.httpClient.get("http://127.0.0.1:8000/api/v1/medico/").subscribe((x:any) => {
       console.log("🚀 ~ CProfesionalComponent ~ this.httpClient.get ~ x:", x);
-      this.medicos=x;
+      this.medicos=x ;
     })
 }
 }
