@@ -7,4 +7,5 @@ export interface ProfesionalInterface{
     telefono?: string;
     id_especialidad?: number;
     id_horario?: number;
+    foto?:string
 }

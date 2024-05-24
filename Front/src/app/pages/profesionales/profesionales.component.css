@@ -1,0 +1,9 @@
+.container{
+    display: flex;
+    width: 500 px;
+}
+.titulo{
+    text-align: center;
+    font-size: 350%;
+    color: #157579;
+}
