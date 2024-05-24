@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/auth/login.service';
 import { SharedServicesComponent } from 'src/app/services/auth/shared-services/shared-services.component';
-
+import { UserProfile } from 'src/app/protegidos/interfaces/user-profile';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -11,7 +11,7 @@ import { SharedServicesComponent } from 'src/app/services/auth/shared-services/s
 export class NavbarComponent implements OnInit, OnDestroy{
 
   userLoginOn:boolean = false;
-
+  
   constructor(public sharedService: SharedServicesComponent, private loginService: LoginService, private router: Router){}
   
   ngOnInit(): void {

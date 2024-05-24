@@ -16,8 +16,15 @@ import { PagoAdminComponent } from './ecommerce/pago-admin/pago-admin.component'
 import { PagoClienteComponent } from './ecommerce/pago-cliente/pago-cliente.component';
 import { EspecialidadComponent } from './pages/especialidad/especialidad.component';
 import { DetalleEspecialidadComponent } from './pages/detalle-especialidad/detalle-especialidad.component';
+<<<<<<< HEAD
 import { ProfesionalesComponent } from './pages/profesionales/profesionales.component';
 import { CProfesionalComponent } from './pages/components/c-profesionales/c-profesionales.component';
+=======
+import { ProtegidosModule } from './protegidos/protegidos.module';
+import { UserProfileComponent } from './protegidos/pages/user-profile/user-profile.component';
+import { AuthGuard } from './pages/login/auth.guard';
+import { EditarPerfilComponent } from './protegidos/pages/editar-perfil/editar-perfil.component';
+>>>>>>> a95aded2ac569ad11b01f9f9be9898951600c962
 const routes: Routes = [
   {path:'home', component:HomeComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -29,8 +36,14 @@ const routes: Routes = [
   {path:'pago', component:PagoComponent},
   {path:'login', component:LoginComponent},
   {path:'paciente', component:PacienteComponent},
+<<<<<<< HEAD
   {path:'profesionales',component:ProfesionalesComponent},
   {path:'cprofesionales',component:CProfesionalComponent}
+=======
+  { path: 'user-profile/:id', component: UserProfileComponent, canActivate: [AuthGuard] },
+  { path: 'editar-perfil/:id', component: EditarPerfilComponent, canActivate: [AuthGuard] },
+
+>>>>>>> a95aded2ac569ad11b01f9f9be9898951600c962
   // {path:'suscripcion', component:SuscripcionComponent},
   // {path:'formSuscripcion', component:FormComponent},
   // {path:'formSuscripcionEdit', component:FormEditComponent},
@@ -42,7 +55,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule,ProtegidosModule]
 })
 
 export class AppRoutingModule { }

@@ -1,0 +1,15 @@
+<div *ngIf="isLoading">Cargando...</div>
+<div *ngIf="!isLoading && userProfile">
+  <h1>Perfil de Usuario (Paciente)</h1>
+  <p>Nombre: {{ userProfile.nombre }}</p>
+  <p>Apellido: {{ userProfile.apellido }}</p>
+  <p>Email: {{ userProfile.email }}</p>
+  <p>DNI: {{ userProfile.dni_paciente }}</p>
+  <p>Teléfono: {{ userProfile.telefono }}</p>
+  
+  <button (click)="editarPerfil()">Editar Perfil</button>
+  <button (click)="eliminarPerfil()">Eliminar Perfil</button>
+</div>
+<div *ngIf="!isLoading && !userProfile && errorMessage">
+  <p>{{ errorMessage }}</p>
+</div>
