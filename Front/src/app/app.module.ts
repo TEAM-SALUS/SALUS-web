@@ -32,10 +32,6 @@ import { ProfesionalesComponent } from './pages/profesionales/profesionales.comp
 import { CProfesionalComponent } from './pages/components/c-profesionales/c-profesionales.component';
 import { ProtegidosModule } from './protegidos/protegidos.module';
 
-<<<<<<< HEAD
-=======
-
->>>>>>> faf70cd8d6e0828166fb75aad7c52dce70167ecc
 
 @NgModule({
   declarations: [
