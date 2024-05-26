@@ -80,7 +80,7 @@ registerLocaleData(localeEsAr, 'es-AR'); // Registra los datos para "es-AR"
     EditEspecialidadComponent,
     CEditEspecialidadComponent,
     Pagina404Component,
-    CPagina404Component,
+    CPagina404Component
   ],
   imports: [
     BrowserModule,
