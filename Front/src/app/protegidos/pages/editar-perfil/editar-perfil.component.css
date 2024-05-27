@@ -1,0 +1,169 @@
+<<<<<<< HEAD
+body {
+    background-color: #E3F2FD;
+    font-family: Arial, sans-serif;
+    color: #000000;
+  }
+  
+  div {
+    overflow-y: auto;
+    background-color: #B3E5FC;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    color: #0277BD;
+  }
+  
+  label {
+    display: block;
+    margin: 15px 0 5px;
+  }
+  
+  input[type="text"],
+  input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+  }
+  
+  button {
+    background-color: #64B5F6;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  button:hover {
+    background-color: #42A5F5;
+  }
+  
+  p {
+    text-align: center;
+    color: #D32F2F;
+=======
+<<<<<<< HEAD
+body {
+    background-color: #E3F2FD;
+    font-family: Arial, sans-serif;
+    color: #000000;
+  }
+  
+  div {
+    overflow-y: auto;
+    background-color: #B3E5FC;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    color: #0277BD;
+  }
+  
+  label {
+    display: block;
+    margin: 15px 0 5px;
+  }
+  
+  input[type="text"],
+  input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+  }
+  
+  button {
+    background-color: #64B5F6;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  button:hover {
+    background-color: #42A5F5;
+  }
+  
+  p {
+    text-align: center;
+    color: #D32F2F;
+=======
+body {
+    background-color: #E3F2FD;
+    font-family: Arial, sans-serif;
+    color: #000000;
+  }
+  
+  div {
+    overflow-y: auto;
+    background-color: #B3E5FC;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    color: #0277BD;
+  }
+  
+  label {
+    display: block;
+    margin: 15px 0 5px;
+  }
+  
+  input[type="text"],
+  input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+  }
+  
+  button {
+    background-color: #64B5F6;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  button:hover {
+    background-color: #42A5F5;
+  }
+  
+  p {
+    text-align: center;
+    color: #D32F2F;
+>>>>>>> a95aded2ac569ad11b01f9f9be9898951600c962
+>>>>>>> isaiasruben
+  }
