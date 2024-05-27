@@ -1,0 +1,19 @@
+<div class="card" *ngFor="let item of profesionalLista"> 
+    <div class="head">
+        <div class="circle"></div>
+        <div class="img">
+            <img src={{item.foto}} alt="">
+        </div>
+    </div>
+
+    <div class="description">
+        <h3 class="descripcion__card" *ngFor="let item of especialidadLista"></h3>
+        <h4>{{item.nombre}} {{item.apellido}}</h4>
+
+        <p>Matricula: {{item.matricula}}</p>
+        <p>telefono: {{item.telefono}}</p>
+    </div>
+    <div class="contacto">
+        <a href="#">Contacto</a>
+    </div>
+</div>
