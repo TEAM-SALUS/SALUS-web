@@ -12,11 +12,19 @@ from .views import (
     MedicoListView,
     pagar,
     registrarConsulta,
+<<<<<<< HEAD
 
     ProfileView,
     EditarPerfilPaciente
 
 
+=======
+    RegistroDeConsultaPorIdView,
+    RegistroDeConsultaPorTurnoView,
+    RegistroDeConsultaListView,
+    ProfileView,
+    EditarPerfilPaciente,
+>>>>>>> desarrolladorJEOrellano
 )
 from django.urls import path, include
 from rest_framework import routers
@@ -57,6 +65,12 @@ urlpatterns = [
          pagar.as_view(), name='pago'),
     path('RegistrarConsulta/',
          registrarConsulta.as_view(), name='registroConsulta'),
+<<<<<<< HEAD
+=======
+    path('registrodeconsulta-id/<int:id>',RegistroDeConsultaPorIdView.as_view(), name='registrodeconsulta_id'),
+    path('registrodeconsulta-turno/<int:idt>',RegistroDeConsultaPorTurnoView.as_view(), name='registrodeconsulta_turno'),
+    path('registrodeconsulta-lista',RegistroDeConsultaListView.as_view(), name='registrodeconsulta_lista'),
+>>>>>>> desarrolladorJEOrellano
     path('user/profile/',
          ProfileView.as_view(), name='user_profile'),
     path('editar-perfil-paciente/',
