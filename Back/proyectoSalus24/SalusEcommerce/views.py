@@ -202,7 +202,7 @@ class pagar(APIView):
 
 
 class RegistroDeConsultaViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.AllowAny,)
     queryset = RegistroDeConsulta.objects.all()
     serializer_class = RegistroDeConsultaSerializer
 
@@ -217,3 +217,27 @@ class registrarConsulta(APIView):
             return Response(serializer.data,
                             status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class RegistroDeConsultaPorIdView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, id=None):
+        registroDeConsultaId = RegistroDeConsulta.objects.filter(id=id)
+        serializer = RegistroDeConsultaSerializer(registroDeConsultaId, many=True)
+        return Response(serializer.data)
+    
+class RegistroDeConsultaPorTurnoView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, idt=None):
+        registroDeConsultaTurno = RegistroDeConsulta.objects.filter(id_turno=idt)
+        serializer = RegistroDeConsultaSerializer(registroDeConsultaTurno, many=True)
+        return Response(serializer.data)
+    
+class RegistroDeConsultaListView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, format=None):
+        registroDeConsultaList = RegistroDeConsulta.objects.all()
+        serializer = RegistroDeConsultaSerializer(registroDeConsultaList, many=True)
+        return Response(serializer.data)
