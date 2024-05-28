@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\Asus\Desktop\Salus_b\SALUS-web\Back\venv
+set VIRTUAL_ENV=C:\Users\Esteban\Desktop\Escritorio\Git\SALUS-web\Back\venv
 
 if not defined PROMPT set PROMPT=$P$G
 
