@@ -54,3 +54,16 @@ body {
     color: #D32F2F;
 
   }
+  
+  .conteiner-figure {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    width: cover;
+  }
+
+  .img {
+    width: 100%;
+  }

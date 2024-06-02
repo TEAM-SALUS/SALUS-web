@@ -29,7 +29,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost',
                 '172.20.10.4',
-                '127.0.0.1']
+                '127.0.0.1',
+                '192.168.0.44']
 
 
 # Application definition
@@ -97,7 +98,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'BD_Salus',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {

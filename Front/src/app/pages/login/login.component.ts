@@ -50,7 +50,8 @@ export class LoginComponent implements OnInit{
               //console.log(userProfile);
                //this.profile = userProfile;
                
-              this.router.navigateByUrl(`user-profile/${userProfile.id}`); //
+              //this.router.navigateByUrl(`user-profile/${userProfile.id}`); //
+              this.router.navigateByUrl(`home`);
             
             },
             error: (errorData) => {

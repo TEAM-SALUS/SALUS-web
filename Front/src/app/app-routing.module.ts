@@ -23,7 +23,9 @@ import { UserProfileComponent } from './protegidos/pages/user-profile/user-profi
 import { AuthGuard } from './pages/login/auth.guard';
 import { EditarPerfilComponent } from './protegidos/pages/editar-perfil/editar-perfil.component';
 const routes: Routes = [
-  {path:'home', component:HomeComponent},
+  {path:'home', component:HomeComponent,
+    children:[{path:'home',component: UserProfileComponent}]
+  },
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path:'servicios', component:EspecialidadComponent},
   {path:'detalle-servicio/:id', component: DetalleEspecialidadComponent},

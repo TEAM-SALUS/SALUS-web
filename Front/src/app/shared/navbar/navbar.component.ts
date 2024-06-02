@@ -11,6 +11,7 @@ import { UserProfile } from 'src/app/protegidos/interfaces/user-profile';
 export class NavbarComponent implements OnInit, OnDestroy{
 
   userLoginOn:boolean = false;
+  userRol:String = "invitado";
   
   constructor(public sharedService: SharedServicesComponent, private loginService: LoginService, private router: Router){}
   
@@ -19,16 +20,23 @@ export class NavbarComponent implements OnInit, OnDestroy{
       next:(loginOn) => {
         this.userLoginOn=loginOn;
       }
-    })
-  }
+    });
+    this.loginService.currentUserRol.subscribe({
+      next:(userRol) => {
+        this.userRol = userRol;
+      }
+    });
+  };
   
   logout(){
     console.log('Cerrando sesión');
     this.loginService.logout();
     this.router.navigate(['/home']);
+    window.location.reload();
   }
   
   ngOnDestroy(): void {
     this.loginService.currentUserLoginOn.unsubscribe();
+    this.loginService.currentUserRol.unsubscribe();
   }
 }

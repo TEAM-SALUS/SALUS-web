@@ -1,33 +1,56 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { LoginRequest } from './loginRequest';
 import { LoggedInUser } from './auth';
+import { UsuarioDTO } from 'src/app/model/auth/usuarioDTO';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-
-  currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(sessionStorage.getItem('token') != null);
-  currentUserData: BehaviorSubject<String> = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
+  urlApi:String = "http://localhost:8000/api/v1/";
+  currentUserLoginOn: BehaviorSubject<boolean>;
+  currentUserData: BehaviorSubject<any>;
+  currentUserRol: BehaviorSubject<string>;
+  currentUserId: BehaviorSubject<string>;
 
   constructor(private http: HttpClient) {
     this.currentUserLoginOn = new BehaviorSubject<boolean>(sessionStorage.getItem('token') != null);
-    this.currentUserData = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
+    this.currentUserData = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser') || "{}"));
+    this.currentUserRol = new BehaviorSubject<string>(JSON.parse(localStorage.getItem('rol') || "{}"));
+    this.currentUserId = new BehaviorSubject<string>(JSON.parse(localStorage.getItem('id') || "{}"))
   }
 
-  login(credentials: LoginRequest): Observable<any> {  
+  login(credentials: LoginRequest): Observable<any> {
     return this.http.post<any>('http://localhost:8000/api/v1/login', credentials).pipe(
       map(userData => {
         sessionStorage.setItem('token', userData.token);
         this.currentUserData.next(userData);
         this.currentUserLoginOn.next(true);
+
+        console.info("userData.Token",userData.token);
+        this.getUserProfile().subscribe({
+          next:(usuarioDTO) => {
+            console.info("usuarioDTO",usuarioDTO);
+            sessionStorage.setItem('rol', onbeterRol(usuarioDTO));
+            this.currentUserRol.next(onbeterRol(usuarioDTO));
+            sessionStorage.setItem('id', obtenerId(usuarioDTO));
+            this.currentUserId.next(obtenerId(usuarioDTO));
+          }
+        });
+
+        //sessionStorage.setItem('rol', "paciente");
+        //this.currentUserRol.next("paciente");
         return userData;
       }),
       catchError(this.handleError)
     );
+  };
+
+  getUserProfile(): Observable<UsuarioDTO> {
+    return this.http.get<UsuarioDTO>(`${this.urlApi}profile`);
   }
   
   getProfile(): Observable<LoggedInUser> {
@@ -39,6 +62,10 @@ export class LoginService {
   logout(): void {
     sessionStorage.removeItem('token');
     this.currentUserLoginOn.next(false);
+    sessionStorage.removeItem('rol');
+    this.currentUserRol.next("invitado");
+    sessionStorage.removeItem('id');
+    this.currentUserId.next("0")
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -50,7 +77,7 @@ export class LoginService {
     return throwError(() => new Error('Algo falló; por favor intente nuevamente.'));
   }
   
-  get userData(): Observable<String> {
+  get userData(): Observable<string> {
     return this.currentUserData.asObservable();
   }
 
@@ -58,7 +85,30 @@ export class LoginService {
     return this.currentUserLoginOn.asObservable();
   }
 
-  get userToken(): String {
-    return this.currentUserData.value;
+  get userRol(): Observable<string> {
+    return this.currentUserRol.asObservable();
+  }
+
+  get userId(): Observable<string> {
+    return this.currentUserId.asObservable();
   }
 }
+
+function onbeterRol(usuarioDTO: UsuarioDTO): string {
+  if(usuarioDTO?.is_superuser){
+    return "administrador";
+  }
+  else if(usuarioDTO?.is_staff){
+    return "profesional";
+  } else if(usuarioDTO?.is_active){
+    return "paciente";
+  }
+  return "invitado";
+}
+function obtenerId(usuarioDTO: UsuarioDTO): string {
+  if(usuarioDTO.id){
+    return usuarioDTO.id;
+  }
+  return "";
+}
+

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { UserProfileService } from '../../user-profile.service';
-import { UserProfile } from '../../interfaces/user-profile';
+import { UserProfile, UserProfileConFoto } from '../../interfaces/user-profile';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ChangeDetectorRef } from '@angular/core';
@@ -25,8 +25,10 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    //const id = this.activatedRoute.snapshot.paramMap.get('id');
+    const id = sessionStorage.getItem('id');
     if (id) {
+      //this.userProfileService.getUserProfile(id).subscribe({
       this.userProfileService.getUserProfile(id).subscribe({
         next: (data) => {
           console.log(data);

@@ -13,6 +13,10 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule
+  ],
+  exports:[
+    UserProfileComponent,
+    EditarPerfilComponent
   ]
 })
 export class ProtegidosModule { }
