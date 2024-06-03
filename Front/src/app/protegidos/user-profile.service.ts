@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from "rxjs";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { UserProfile } from './interfaces/user-profile';
+import { UserProfile, UserProfileConFoto } from './interfaces/user-profile';
 import { LoggedInUser } from '../services/auth/auth';
 import { Update } from '../services/auth/auth';
 
@@ -9,7 +9,7 @@ import { Update } from '../services/auth/auth';
   providedIn: 'root'
 })
 export class UserProfileService {
-  url: string = 'http://127.0.0.1:8000/api/v1';
+  url: string = 'http://localhost:8000/api/v1';
 
   constructor(private http: HttpClient) { }
 
@@ -35,11 +35,16 @@ export class UserProfileService {
     return this.http.get(`${this.url}/paciente-user/${id}`);
   }
 
+  getUserProfileFoto(id: string | null): Observable<any> {
+    return this.http.get<any>(`${this.url}/paciente-user/${id}`);
+  }
+
   eliminarPerfil(id: string | null): Observable<any> {
     return this.http.delete(`${this.url}/paciente-user/${id}`);
   }
 
   actualizarPerfil(pacienteUser: string | null,  UserProfile:UserProfile): Observable<UserProfile> {
+    console.info("datos paciente a actualizar",UserProfile);
     return this.http.put<UserProfile>(`http://localhost:8000/api/v1/paciente-user/${pacienteUser}`,UserProfile).pipe(
       catchError(this.handleError)
     );

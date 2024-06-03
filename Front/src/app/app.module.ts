@@ -28,6 +28,8 @@ import { EspecialidadComponent } from './pages/especialidad/especialidad.compone
 import { DetalleEspecialidadComponent } from './pages/detalle-especialidad/detalle-especialidad.component';
 import { JwtInterceptorService } from './services/auth/jwt-interceptor.service';
 import { ErrorInterceptorService } from './services/auth/error-interceptor.service';
+import { ProfesionalesComponent } from './pages/profesionales/profesionales.component';
+import { CProfesionalComponent } from './pages/components/c-profesionales/c-profesionales.component';
 import { ProtegidosModule } from './protegidos/protegidos.module';
 
 @NgModule({
@@ -53,7 +55,8 @@ import { ProtegidosModule } from './protegidos/protegidos.module';
     CDetalleEspecialidadComponent,
     EspecialidadComponent,
     DetalleEspecialidadComponent,
-    
+    ProfesionalesComponent,
+    CProfesionalComponent,
   ],
   imports: [
     BrowserModule,
