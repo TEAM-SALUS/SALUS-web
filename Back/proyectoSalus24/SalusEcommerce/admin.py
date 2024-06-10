@@ -10,7 +10,8 @@ from .models import (
     Medico,
     Turno,
     Pago,
-    RegistroDeConsulta
+    RegistroDeConsulta,
+    TurnosDisponibles
 )
 ''''COLUMNAS TABLAS'''
 # Tabla Paciente
@@ -47,9 +48,16 @@ class MedicoAdmin(admin.ModelAdmin):
 # Tabla Turno
 
 
+# Tabla Turno
 class TurnoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'fecha', 'horario', 'pagado',
-                    'estado', 'id_paciente', 'id_medico')
+    list_display = ('id', 'pagado', 'estado','turno_disponible', 'id_paciente', 'id_medico', 'obra_social')
+class TurnosDisponiblesAdmin(admin.ModelAdmin):
+    list_display = ('id', 'dia', 'hora', 'medico')
+  #  search_fields = ('dia', 'medico__nombre', 'medico__apellido')
+  #  list_filter = ('dia', 'medico')
+  #  ordering = ('id',)
+
+# Tabla Pago
 
 
 class PagoAdmin(admin.ModelAdmin):
@@ -69,3 +77,4 @@ admin.site.register(Medico, MedicoAdmin)
 admin.site.register(Turno, TurnoAdmin)
 admin.site.register(Pago, PagoAdmin)
 admin.site.register(RegistroDeConsulta, RegistroDeConsultaAdmin)
+admin.site.register(TurnosDisponibles, TurnosDisponiblesAdmin)
