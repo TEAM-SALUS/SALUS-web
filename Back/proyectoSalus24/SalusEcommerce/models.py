@@ -30,6 +30,8 @@ class Paciente(models.Model):
         constraints = [
             models.UniqueConstraint(
                 fields=['dni_paciente'], name='Uk_Paciente_dni'),
+            models.UniqueConstraint(
+                fields=['pacienteUser'], name='Uk_Paciente_user'),
         ]
 
 # Tabla Especialidad
@@ -91,14 +93,10 @@ class Medico(models.Model):
     email = models.CharField(max_length=254, blank=True)
     clave = models.CharField(max_length=128)
     telefono = models.CharField(max_length=15, blank=True)
-    foto = models.ImageField(upload_to='medico/perfil',
-                             default='medico/perfil/no-medic-img.jpg', verbose_name='foto perfil medico')
+    foto = models.ImageField(upload_to='medico/perfil', default='medico/perfil/no-medic-img.jpg', verbose_name='foto perfil medico')
     id_horario = models.ForeignKey(HorarioDeAtencion, on_delete=models.CASCADE)
     id_especialidad = models.ForeignKey(Especialidad, on_delete=models.CASCADE)
     medicoUser = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-
-    def __unicode__(self):
-        return "{} {} {} {} {} {} {} {} {} {} {}".format(self.id, self.matricula, self.nombre, self.apellido, self.email, self.clave, self.telefono, self.foto, self.id_horario, self.id_especialidad, self.medicoUser)
 
     def __str__(self):
         return "{} {} {} {} {} {} {} {} {} {} {}".format(self.id, self.matricula, self.nombre, self.apellido, self.email, self.clave, self.telefono, self.foto, self.id_horario, self.id_especialidad, self.medicoUser)

@@ -9,7 +9,7 @@ import { ProfesionalInterface } from '../model/profesional';
 })
 export class EspecialidadesService {
 
-  url: string = 'http://127.0.0.1:8000/api/v1/especialidad/'
+  url: string = 'http://localhost:8000/api/v1/especialidad/'
 
   constructor(private http: HttpClient) {}
 

@@ -1,11 +1,13 @@
 export interface ProfesionalInterface{
+    id?: number;
     matricula?: number;
     nombre?: string;
     apellido?: string;
     email?: string;
     clave?: string;
     telefono?: string;
-    id_especialidad?: number;
+    foto?: string
     id_horario?: number;
-    foto?:string
+    id_especialidad?: number;
+    medicoUser?: number;
 }

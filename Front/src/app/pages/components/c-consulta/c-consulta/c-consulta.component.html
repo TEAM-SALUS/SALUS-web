@@ -1,0 +1,54 @@
+<div class="container mb-5 mt-2 ">
+    <div class="row">
+        <div class="col-lg-12" *ngFor="let consulta of consultasList">
+            <div class="mb-5 mb-lg-0">
+              <div class="card-body">
+                <h3 class="text-uppercase text-center">
+                    <span> id Consulta - </span>{{consulta.id}}
+                </h3>
+                <hr />
+                <h5 class="text-center">
+                    <span> Fecha - </span>{{consulta.fecha|date:'dd/MM/yyy'}}
+                  </h5>
+                <hr />
+                <h5 class="text-center">
+                    <span> Hora - </span>{{consulta.hora}}
+                </h5>
+                <hr />
+                <h5 class="text-center">
+                    <span> Sintoma - </span>{{consulta.sintomas}}
+                </h5>
+                <hr />
+                <h5 class="text-center">
+                    {{consulta.diagnostico}}<span> - Diagnostico</span>
+                </h5>
+                <hr />
+                <h5 class="text-center">
+                    {{consulta.diagnostico}}<span> - Tratamiento</span>
+                </h5>
+                <hr />
+                <h5 class="text-center">
+                    {{consulta.id_turno}}<span> - id Turno</span>
+                </h5>
+                <hr />
+                <div *ngIf=true class="d-grid">
+                  <div class="row justify-content-center">
+                  <div class="col-sm-12 mt-2">
+                    <button type="btn" class="botons text-uppercase" >Ver</button>
+                  </div>
+                  <div class="col-sm-12 mt-2">
+                    <button type="btn" class="botons text-uppercase" *ngIf="rol == 'paciente' || rol == 'admin'" [hidden]="!(rol == 'paciente' || rol == 'admin')">Editarr</button>
+                  </div>
+                  <div class="col-sm-12 mt-2">
+                    <button type="btn" class="botons text-uppercase" *ngIf="rol == 'paciente' || rol == 'admin'" [hidden]="!(rol == 'paciente' || rol == 'admin')">Agregar</button>
+                  </div>
+                  <div class="col-sm-12 mt-2">
+                    <button type="btn" class="botons text-uppercase" *ngIf="rol == 'paciente' || rol == 'admin'" [style.visibility]="(rol == 'paciente' || rol == 'admin')?'visible':'hidden'">Eliminar</button>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>

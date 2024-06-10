@@ -190,6 +190,13 @@ class MedicoViewSet(viewsets.ModelViewSet):
     queryset = Medico.objects.all()
     serializer_class = MedicoSerializer
 
+class MedicoPorIdView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, id=None):
+        medicoId = Medico.objects.get(id=id)
+        serializer = MedicoSerializer(medicoId, many=True)
+        return Response(serializer.data)
 
 class MedicoPorUserView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
@@ -197,6 +204,14 @@ class MedicoPorUserView(APIView):
     def get(self, request, idmu=None):
         medicoUser = Medico.objects.filter(medicoUser=idmu)
         serializer = MedicoSerializer(medicoUser, many=True)
+        return Response(serializer.data)
+    
+class MedicoPorEspecialidadView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, ide=None):
+        medicoEspecialidad = Medico.objects.filter(id_especialidad=ide)
+        serializer = MedicoSerializer(medicoEspecialidad, many=True)
         return Response(serializer.data)
     
 class MedicoListView(APIView):
@@ -209,11 +224,52 @@ class MedicoListView(APIView):
 
 # Tabla Turno
 
-
 class TurnoViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAdminUser,)
     queryset = Turno.objects.all()
     serializer_class = TurnoSerializer
+
+class registrarTurno(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def post(self, request, format=None):
+        serializer = TurnoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class TurnoPorIdView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, id=None):
+        turnoId = Turno.objects.get(id=id)
+        serializer = RegistroDeConsultaSerializer(turnoId, many=True)
+        return Response(serializer.data)
+    
+class TurnoPorPacienteView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, idt=None):
+        turnoPorPaciente = Turno.objects.filter(id_paciente=idp)
+        serializer = TurnoSerializer(turnoPorPaciente, many=True)
+        return Response(serializer.data)
+
+class TurnoPorMedicoView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, idt=None):
+        turnoPorMedico = Turno.objects.filter(id_medico=idm)
+        serializer = TurnoSerializer(turnoPorMedico, many=True)
+        return Response(serializer.data)
+    
+class TurnoListView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, format=None):
+        turnoList = Turno.objects.all()
+        serializer = TurnoSerializer(turnoList, many=True)
+        return Response(serializer.data)
 
 # ------------ API usuario token
 

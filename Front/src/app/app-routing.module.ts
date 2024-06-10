@@ -22,9 +22,13 @@ import { ProtegidosModule } from './protegidos/protegidos.module';
 import { UserProfileComponent } from './protegidos/pages/user-profile/user-profile.component';
 import { AuthGuard } from './pages/login/auth.guard';
 import { EditarPerfilComponent } from './protegidos/pages/editar-perfil/editar-perfil.component';
+
 const routes: Routes = [
   {path:'home', component:HomeComponent,
-    children:[{path:'home',component: UserProfileComponent}]
+    /* children:[
+      {path:'home',component: UserProfileComponent},
+      {path:'home',component: ConsultaComponent},
+    ] */
   },
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path:'servicios', component:EspecialidadComponent},

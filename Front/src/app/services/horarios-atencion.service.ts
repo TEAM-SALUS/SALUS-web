@@ -7,7 +7,7 @@ import { HorarioAtencionInterface } from '../model/horarios-atencion';
   providedIn: 'root'
 })
 export class HorariosAtencionService {
-  url: string = 'http://127.0.0.1:8000/api/v1/horariodeatencion/'
+  url: string = 'http://localhost:8000/api/v1/horariodeatencion/'
 
   constructor(private http: HttpClient) { };
 
@@ -15,7 +15,7 @@ export class HorariosAtencionService {
     return this.http.get<HorarioAtencionInterface[]>(this.url);
   };
 
-  public getHorarioAtencionId(id:number) : Observable<HorarioAtencionInterface> {
+  public getHorarioAtencionId(id:number|undefined) : Observable<HorarioAtencionInterface> {
     return this.http.get<HorarioAtencionInterface>(`${this.url}${id}`);
   };
 

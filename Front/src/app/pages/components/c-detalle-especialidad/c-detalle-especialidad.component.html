@@ -1,38 +1,70 @@
-<div class="div-especialidad">
-  <div class="card-especialidad" *ngFor="let e of especialidadLista">
+<div class="div-especialidad text-center">
+  <div class="card-especialidad">
     <div>
       <img
         class="card-img-top"
-        src="{{e.foto}}"
+        src="{{ especialidad.foto }}"
         alt="imagen-especialidad"
       />
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{e.nombre}}</h5>
-      <hr>
-
-      <p class="card-p-nombre-dr" *ngFor="let p of profesionalLista">Dr. {{p.apellido}} {{p.nombre}} </p>
-
-      <p class="card-descripcion">
-        {{e.descripcion}}
-      </p>
-
-      <div class="div-horarios-contacto" *ngFor="let p of profesionalLista">
-        <p class="horarios">
-          Días y horarios de atención
+      <div>
+        <h5 class="card-title">{{ especialidad.nombre }}</h5>
+        <p class="card-descripcion">
+          Descripcion: {{ especialidad.descripcion }}
         </p>
-        <span>
-            <ul *ngFor="let h of horarioAtencionLista">
-              <li><img src="../../../../assets/flecha.png" alt=""> {{h.dia_de_la_semana}} - {{h.hora_entrada}} a {{h.hora_salida}} </li>
-            </ul>
-          </span>
-        <p class="contacto">Teléfono: <span>{{p.telefono}}</span></p>
+        <p class="card-descripcion">
+          Precio - {{ especialidad.precio | currency : "$" }}
+        </p>
+        <p class="card-descripcion">Duracion - {{ especialidad.duracion }}</p>
+        <hr />
       </div>
+      <div>
+        <h5 class="text-center">Profesionales {{ especialidad.nombre }}</h5>
+        <hr />
+      </div>
+      <div *ngFor="let jesus of listaGuiaIndice; let i = index">
+        <img
+          class="card-img-top"
+          src="http://localhost:8000{{ jesus[0].foto }}"
+          alt="imagen-profesional"
+        />
+        <p>Dr. {{ jesus[0].apellido }} {{ jesus[0].nombre }}</p>
+        <p class="contacto">
+          Matricula: <span>{{ jesus[0].matricula }}</span>
+        </p>
+        <p class="contacto">
+          Email: <span>{{ jesus[0].email }}</span>
+        </p>
+        <p class="contacto">
+          Teléfono: <span>{{ jesus[0].telefono }}</span>
+        </p>
 
-      <div class="buttons">
-        <a class="btn btn-reservar-turno" (click)="redirectToPay()">Reservar turno</a>
+        <p class="horarios">Días y horarios de atención</p>
+        <span>
+          <ul>
+            <li
+              *ngFor="
+                let d of jesus[1].dia_de_la_semana?.split(';')
+              "
+            >
+              <img src="../../../../assets/flecha.png" alt="" />
+              {{ diaSemana[+d] }} - {{ jesus[1].hora_entrada }} a
+              {{ jesus[1].hora_salida }}
+            </li>
+          </ul>
+        </span>
+        <div class="card-seleccion-fecha-hora">
+          <label for="fecha-hora">Seleccione fecha y hora</label>
+          <input type="datetime-local" required [(ngModel)] = fechaHora id="fecha-hora">
+        </div>
+        <div class="buttons pb-3">
+          <a class="btn btn-reservar-turno" (click)="redirectToPay(jesus[1].dia_de_la_semana,jesus[0].id)"
+            >Reservar turno con {{ jesus[0].apellido }}</a
+          >
+        </div>
+        <hr>
       </div>
     </div>
   </div>
 </div>
-

@@ -7,6 +7,7 @@
     max-width: 1500px;
     padding: 20px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     background-color: white;
@@ -40,55 +41,53 @@ hr{
 }
 
 .card-p-nombre-dr{
-    font-size: 18px;
-    margin-top: 15px;
     color: var(--primary-color);
 }
 
 .card-descripcion{
-    font-size: 14px;
-    width: 80%;
+    word-break: break-word;
 }
 
 .horarios, .contacto{
-    margin-top: 8px;
     color: var(--primary-color);
 }
 
 .contacto span{
-    font-weight: 400;
     color: rgba(0, 0, 0, 0.766);
 }
 
 ul li{
     list-style: none;
-    margin-top: 5px;
+    margin-top: 1rem;
     display: flex;
     align-items: center;
 }
 
 .buttons{
     font-family: poppins, sans-serif;
-    letter-spacing: 0.2px;
-    margin-top: 25px;
+    letter-spacing: 0.075rem;
+    margin-top: 1rem; 
 }
 
 .btn-reservar-turno{
-    background-color: #83D9FE;
-    color: rgba(0, 0, 0, 0.837);
-    font-weight: 600;
-    font-size: 14px;
-    padding: 10px;
-    width: 80%;
+    background-color: var(--primary-color);
+    color: var(--black-color);
 }
 
 .btn-reservar-turno:hover{
-    background-color: #83d9fea3;
+    background-color: var(--secondary-color);
+    scale: 1.1;
 }
 
 .div-horarios-contacto img{
     width: 16px;
     margin-right: 5px;
+}
+
+.card-seleccion-fecha-hora {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--terciary-color);
 }
 
 
@@ -124,6 +123,6 @@ ul li{
     }
 
     .card-p-nombre-dr{
-        margin-top: 6px;
+        margin-top: 1rem;
     }
 }

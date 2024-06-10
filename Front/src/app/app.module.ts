@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 
@@ -31,6 +31,12 @@ import { ErrorInterceptorService } from './services/auth/error-interceptor.servi
 import { ProfesionalesComponent } from './pages/profesionales/profesionales.component';
 import { CProfesionalComponent } from './pages/components/c-profesionales/c-profesionales.component';
 import { ProtegidosModule } from './protegidos/protegidos.module';
+import { CConsultaComponent } from './pages/components/c-consulta/c-consulta/c-consulta.component';
+import { CTurnoComponent } from './pages/components/c-turno/c-turno/c-turno.component';
+import { registerLocaleData } from '@angular/common';
+import localeEsAr from '@angular/common/locales/es-AR'; // Importa los datos de localización
+
+registerLocaleData(localeEsAr, 'es-AR'); // Registra los datos para "es-AR"
 
 @NgModule({
   declarations: [
@@ -57,6 +63,8 @@ import { ProtegidosModule } from './protegidos/protegidos.module';
     DetalleEspecialidadComponent,
     ProfesionalesComponent,
     CProfesionalComponent,
+    CConsultaComponent,
+    CTurnoComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +77,8 @@ import { ProtegidosModule } from './protegidos/protegidos.module';
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptorService,multi:true},
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptorService,multi:true},
-    SharedServicesComponent
+    SharedServicesComponent,
+    { provide: LOCALE_ID, useValue: 'es-AR' } // Establece el idioma
   ],
   bootstrap: [AppComponent]
 })

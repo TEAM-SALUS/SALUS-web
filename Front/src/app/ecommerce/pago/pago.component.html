@@ -1,4 +1,11 @@
+
 <main class="form-background">
+  <div class="text-center">
+    <p>FECHA - {{fecha}}</p>
+    <p>HORA - {{horario}}</p>
+    <p>ID MEDICO - {{id_medico}}</p>
+    <p>ID PACIENTE - {{id_paciente}}</p>
+  </div>
   <div class="container form-pago">
     <form [formGroup]="pagoForm" (ngSubmit)="nuevoPago()">
       <div class="row">
@@ -120,7 +127,7 @@
       </div>
       <div class="row mt-3">
         <div class="col">
-          <input class="botons" type="submit" value="PAGAR SUSCRIPCION">
+          <input class="botons" type="submit" value="PAGAR {{tipo_pago|uppercase}}">
         </div>
       </div>
     </form>
