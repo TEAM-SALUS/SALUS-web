@@ -9,7 +9,8 @@ from .models import (
     Medico,
     Turno,
     Pago,
-    RegistroDeConsulta
+    RegistroDeConsulta,
+    TurnosDisponibles
 )
 from .serializers import (
     PacienteSerializer,
@@ -18,7 +19,8 @@ from .serializers import (
     MedicoSerializer,
     TurnoSerializer,
     PagoSerializer,
-    RegistroDeConsultaSerializer
+    RegistroDeConsultaSerializer,
+    TurnosDisponiblesSerializer
 
 )
 ''' API REST FRAMEWORK CORS '''
@@ -330,3 +332,30 @@ class RegistroDeConsultaListView(APIView):
         serializer = RegistroDeConsultaSerializer(
             registroDeConsultaList, many=True)
         return Response(serializer.data)
+#nuevo turnero
+class TurnosDisponiblesList(generics.ListAPIView):
+    queryset = TurnosDisponibles.objects.all()
+    serializer_class = TurnosDisponiblesSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class CreateTurnoView(generics.CreateAPIView):
+    serializer_class = TurnoSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        try:
+            turno = Turno.objects.create(
+                fecha=data['fecha'],
+                horario=data['horario'],
+                pagado=data['pagado'],
+                estado=data['estado'],
+                id_paciente_id=data['id_paciente'],
+                id_medico_id=data['id_medico'],
+                obra_social=data['obra_social']
+            )
+            turno.save()
+            serializer = TurnoSerializer(turno)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_400_BAD_REQUEST)

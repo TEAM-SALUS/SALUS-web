@@ -110,7 +110,26 @@ class Medico(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['matricula'], name='Uk_Medico'),
         ]
+# Nueva Tabla TurnosDisponibles
+class TurnosDisponibles(models.Model):
+    dia = models.DateField()
+    hora = models.TimeField()
+    medico = models.ForeignKey(Medico, on_delete=models.CASCADE)
 
+    def __unicode__(self):
+        return "{} {} {} {}".format(self.id, self.dia, self.hora, self.medico)
+
+    def __str__(self):
+        return "{} {} {} {}".format(self.id, self.dia, self.hora, self.medico)
+
+    class Meta:
+        db_table = "TurnosDisponibles"
+        verbose_name = "TurnosDisponible"
+        verbose_name_plural = "TurnosDisponibles"
+        constraints = [
+            models.UniqueConstraint(
+                fields=['dia', 'hora', 'medico'], name='Uk_TurnosDisponibles'),
+        ]
 # Tabla Turno
 
 
@@ -124,14 +143,16 @@ class Turno(models.Model):
         (RECHAZADO, "Rechazado"),
         (PENDIENTE, "Pendiento"),
     ]
-    fecha = models.DateField()
-    horario = models.TimeField()
+    #fecha = models.DateField()
+    #horario = models.TimeField()
     pagado = models.BooleanField()
     estado = models.CharField(
         max_length=45, choices=ESTADO, blank=True, default=RECHAZADO)
+    turno_disponible = models.ForeignKey(TurnosDisponibles, on_delete=models.CASCADE)
     id_paciente = models.ForeignKey(
         Paciente, on_delete=models.CASCADE, default=-1)
     id_medico = models.ForeignKey(Medico, on_delete=models.CASCADE, default=-1)
+    obra_social = models.CharField(max_length=150, blank=True)  # Nuevo campo
 
     def __unicode__(self):
         return "{} {} {} {} {} {} {}".format(self.id, self.fecha, self.horario, self.pagado, self.estado, self.id_paciente, self.id_medico)
