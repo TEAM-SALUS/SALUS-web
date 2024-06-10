@@ -20,6 +20,7 @@ from .views import (
 )
 from django.urls import path, include
 from rest_framework import routers
+from .views import TurnosDisponiblesList, CreateTurnoView
 
 ''' IMPORTAR VISTAS DE appSalus '''
 from SalusEcommerce import views
@@ -57,12 +58,18 @@ urlpatterns = [
          pagar.as_view(), name='pago'),
     path('RegistrarConsulta/',
          registrarConsulta.as_view(), name='registroConsulta'),
-    path('registrodeconsulta-id/<int:id>',RegistroDeConsultaPorIdView.as_view(), name='registrodeconsulta_id'),
-    path('registrodeconsulta-turno/<int:idt>',RegistroDeConsultaPorTurnoView.as_view(), name='registrodeconsulta_turno'),
-    path('registrodeconsulta-lista',RegistroDeConsultaListView.as_view(), name='registrodeconsulta_lista'),
+    path('registrodeconsulta-id/<int:id>',
+         RegistroDeConsultaPorIdView.as_view(), name='registrodeconsulta_id'),
+    path('registrodeconsulta-turno/<int:idt>',
+         RegistroDeConsultaPorTurnoView.as_view(), name='registrodeconsulta_turno'),
+    path('registrodeconsulta-lista', RegistroDeConsultaListView.as_view(),
+         name='registrodeconsulta_lista'),
     path('user/profile/',
          ProfileView.as_view(), name='user_profile'),
     path('editar-perfil-paciente/',
          EditarPerfilPaciente.as_view(), name='editar_perfil_paciente'),
     path('', include(router.urls)),
+    path('turnos-disponibles/', TurnosDisponiblesList.as_view(),
+         name='turnos-disponibles'),
+    path('crear-turno/', CreateTurnoView.as_view(), name='crear-turno'),
 ]
