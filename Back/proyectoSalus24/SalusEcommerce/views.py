@@ -153,7 +153,8 @@ class EspecialidadPorIdView(APIView):
         especialidadId = Especialidad.objects.filter(id=ide)
         serializer = EspecialidadSerializer(especialidadId, many=True)
         return Response(serializer.data)
-    
+
+
 class EspecialidadListView(APIView):
     permission_classes = (permissions.AllowAny,)
 
@@ -198,7 +199,8 @@ class MedicoPorUserView(APIView):
         medicoUser = Medico.objects.filter(medicoUser=idmu)
         serializer = MedicoSerializer(medicoUser, many=True)
         return Response(serializer.data)
-    
+
+
 class MedicoListView(APIView):
     permission_classes = (permissions.AllowAny,)
 
@@ -211,7 +213,7 @@ class MedicoListView(APIView):
 
 
 class TurnoViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.AllowAny,)
     queryset = Turno.objects.all()
     serializer_class = TurnoSerializer
 
@@ -298,26 +300,33 @@ class registrarConsulta(APIView):
                             status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class RegistroDeConsultaPorIdView(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def get(self, request, id=None):
         registroDeConsultaId = RegistroDeConsulta.objects.filter(id=id)
-        serializer = RegistroDeConsultaSerializer(registroDeConsultaId, many=True)
+        serializer = RegistroDeConsultaSerializer(
+            registroDeConsultaId, many=True)
         return Response(serializer.data)
-    
+
+
 class RegistroDeConsultaPorTurnoView(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def get(self, request, idt=None):
-        registroDeConsultaTurno = RegistroDeConsulta.objects.filter(id_turno=idt)
-        serializer = RegistroDeConsultaSerializer(registroDeConsultaTurno, many=True)
+        registroDeConsultaTurno = RegistroDeConsulta.objects.filter(
+            id_turno=idt)
+        serializer = RegistroDeConsultaSerializer(
+            registroDeConsultaTurno, many=True)
         return Response(serializer.data)
-    
+
+
 class RegistroDeConsultaListView(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def get(self, request, format=None):
         registroDeConsultaList = RegistroDeConsulta.objects.all()
-        serializer = RegistroDeConsultaSerializer(registroDeConsultaList, many=True)
+        serializer = RegistroDeConsultaSerializer(
+            registroDeConsultaList, many=True)
         return Response(serializer.data)
