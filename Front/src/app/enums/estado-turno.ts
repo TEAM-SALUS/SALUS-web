@@ -1,5 +1,5 @@
 export enum EstadoTurno {
-    CONCLUIDO,
-    RECHAZADO,
-    PENDIENTE,
+    CONCLUIDO = "Concluido",
+    RECHAZADO = "Rechazado",
+    PENDIENTE = "Pendiento",
 }

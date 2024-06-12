@@ -250,7 +250,7 @@ class TurnoPorIdView(APIView):
 class TurnoPorPacienteView(APIView):
     permission_classes = (permissions.AllowAny,)
 
-    def get(self, request, idt=None):
+    def get(self, request, idp=None):
         turnoPorPaciente = Turno.objects.filter(id_paciente=idp)
         serializer = TurnoSerializer(turnoPorPaciente, many=True)
         return Response(serializer.data)

@@ -39,7 +39,7 @@ export class PagoComponent implements OnInit {
   public horario?: string;
   public id_medico?: number;
   public id_paciente?: number|string|null;
-  public nuevoTurno!: ITurno;
+  public nuevoTurno: ITurno = {};
 
   constructor(
     private formBuilder: FormBuilder,
@@ -134,13 +134,6 @@ export class PagoComponent implements OnInit {
           this.nuevoTurno.estado = EstadoTurno.PENDIENTE;
           this.nuevoTurno.id_medico = this.id_medico;
           this.nuevoTurno.id_paciente = this.id_paciente;
-
-          /* this.nuevoTurno.fecha = "2024-06-10";
-          this.nuevoTurno.horario = "7:50";
-          this.nuevoTurno.pagado = true;
-          this.nuevoTurno.estado = EstadoTurno.PENDIENTE;
-          this.nuevoTurno.id_medico = this.id_medico;
-          this.nuevoTurno.id_paciente = this.id_paciente; */
 
           this.turnosService.registrarTurno(this.nuevoTurno).subscribe({
             next: (turnoData) => {
