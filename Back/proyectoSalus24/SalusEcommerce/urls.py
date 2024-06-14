@@ -32,7 +32,7 @@ from SalusEcommerce import views
 
 from django.urls import path, include
 from rest_framework import routers
-from .views import TurnosDisponiblesList, CreateTurnoView
+from .views import TurnosDisponiblesList, CreateTurnoView, TurnosPorPacienteListView, TurnoReservadoDetailView
 
 router = routers.DefaultRouter()
 router.register(r'paciente', views.PacienteViewSet)
@@ -75,4 +75,8 @@ urlpatterns = [
     path('turnos-disponibles/', TurnosDisponiblesList.as_view(),
          name='turnos-disponibles'),
     path('crear-turno/', CreateTurnoView.as_view(), name='crear-turno'),
+    path('turnos-por-paciente/', TurnosPorPacienteListView.as_view(),
+         name='turnos-por-paciente'),
+    path('turno-reservado/<int:pk>/', TurnoReservadoDetailView.as_view(),
+         name='turno-reservado-detail'),
 ]
