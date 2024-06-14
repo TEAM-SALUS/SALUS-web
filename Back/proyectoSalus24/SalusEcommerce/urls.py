@@ -1,4 +1,6 @@
+''' IMPORTAR USER KANOX TOKEN '''
 from knox import views as kanox_views
+''' IMPORTAR VISTAS DE VIEWS '''
 from .views import (
     RegisterAPI,
     LoginAPI,
@@ -25,13 +27,12 @@ from .views import (
     ProfileView,
     EditarPerfilPaciente,
 )
+''' IMPORTAR VISTAS DE SalusEcommerce '''
+from SalusEcommerce import views
+
 from django.urls import path, include
 from rest_framework import routers
 
-''' IMPORTAR VISTAS DE appSalus '''
-from SalusEcommerce import views
-''' IMPORTAR VISTAS DE VIEWS '''
-''' IMPORTAR USER KANOX TOKEN '''
 router = routers.DefaultRouter()
 router.register(r'paciente', views.PacienteViewSet)
 router.register(r'especialidad', views.EspecialidadViewSet)

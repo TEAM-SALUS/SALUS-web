@@ -41,15 +41,12 @@ class Especialidad(models.Model):
     nombre = models.CharField(max_length=150)
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     duracion = models.TimeField(default=timedelta(hours=1))
-    foto = models.ImageField(upload_to='especialidades',
-                             default='especialidades/no-especialidad.jpg', verbose_name='foto especialidad')
+    foto = models.ImageField(upload_to='especialidades', default='especialidades/no-especialidad.jpg', verbose_name='foto especialidad')
     descripcion = models.CharField(max_length=254, blank=True, default="lorem")
-
-    def __unicode__(self):
-        return "{} {} {} {} {} {}".format(self.id, self.nombre, self.precio, self.duracion, self.foto, self.descripcion)
 
     def __str__(self):
         return "{} {} {} {} {} {}".format(self.id, self.nombre, self.precio, self.duracion, self.foto, self.descripcion)
+        #return "{} {} {} {} {} {}".format(self.id, self.nombre, self.precio, self.duracion, self.descripcion)
 
     class Meta:
         db_table = "Especialidad"

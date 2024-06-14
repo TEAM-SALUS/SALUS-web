@@ -65,7 +65,7 @@ export class LoginService {
     sessionStorage.removeItem('rol');
     this.currentUserRol.next("invitado");
     sessionStorage.removeItem('id');
-    this.currentUserId.next("0")
+    this.currentUserId.next("0");
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -96,7 +96,7 @@ export class LoginService {
 
 function onbeterRol(usuarioDTO: UsuarioDTO): string {
   if(usuarioDTO?.is_superuser){
-    return "administrador";
+    return "admin";
   }
   else if(usuarioDTO?.is_staff){
     return "profesional";

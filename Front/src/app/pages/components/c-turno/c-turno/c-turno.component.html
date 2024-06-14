@@ -34,10 +34,10 @@
                 <div *ngIf=true class="d-grid">
                   <div class="row justify-content-center">
                   <div class="col-sm-12 mt-2">
-                    <button type="btn" class="botons text-uppercase" >Ver</button>
+                    <button type="btn" class="botons text-uppercase" (click)="irTurno(turno.id)">Ver</button>
                   </div>
                   <div class="col-sm-12 mt-2">
-                    <button type="btn" class="botons text-uppercase" *ngIf="rol == 'paciente' || rol == 'admin'" [hidden]="!(rol == 'paciente' || rol == 'admin')">Editarr</button>
+                    <button type="btn" class="botons text-uppercase" *ngIf="rol == 'paciente' || rol == 'admin'" [hidden]="!(rol == 'paciente' || rol == 'admin')">Editar</button>
                   </div>
                   <div class="col-sm-12 mt-2">
                     <button type="btn" class="botons text-uppercase" *ngIf="rol == 'paciente' || rol == 'admin'" [hidden]="!(rol == 'paciente' || rol == 'admin')">Agregar</button>

@@ -16,6 +16,11 @@ export class TurnosService {
     return this.http.get<ITurno[]>(`${this.url}turno-lista`);
   }
 
+  /** Obtiene turno por id */
+  public obtenerTurnoId(id:number):Observable<ITurno>{
+    return this.http.get<ITurno>(`${this.url}turno-id/${id}`);
+  }
+
   /** Registra nuevo turno */
   public registrarTurno(nuevoTurno:ITurno):Observable<ITurno>{
     return this.http.post<ITurno>(`${this.url}registrarturno`,nuevoTurno);

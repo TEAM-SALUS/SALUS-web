@@ -62,12 +62,12 @@ export class CDetalleEspecialidadComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Sweet!",
-          text: "Inicie sesion porfavor.",
-          imageUrl: "https://unsplash.it/400/200",
+          title: 'Sweet!',
+          text: 'Inicie sesion porfavor.',
+          imageUrl: 'https://unsplash.it/400/200',
           imageWidth: 400,
           imageHeight: 200,
-          imageAlt: "Custom image"
+          imageAlt: 'Custom image',
         });
         this.router.navigate(['login']);
       }
@@ -89,7 +89,7 @@ export class CDetalleEspecialidadComponent implements OnInit {
       });
     }
     this.fechaHora = '';
-  }
+  };
 
   private obtenerEspecialidad() {
     this.especialidadService.getEspecialidadId(this.especialidadId).subscribe({
@@ -103,7 +103,7 @@ export class CDetalleEspecialidadComponent implements OnInit {
         this.obtenerProfesionalesPorEspecialidad();
       },
     });
-  }
+  };
 
   private obtenerProfesionalesPorEspecialidad() {
     this.profesionalService
@@ -119,7 +119,7 @@ export class CDetalleEspecialidadComponent implements OnInit {
           this.obtenerHorarioPorProfesionales();
         },
       });
-  }
+  };
 
   public obtenerHorarioPorProfesionales() {
     for (let profesional of this.profesionalLista) {
@@ -135,5 +135,5 @@ export class CDetalleEspecialidadComponent implements OnInit {
           complete: () => {},
         });
     }
-  }
+  };
 }

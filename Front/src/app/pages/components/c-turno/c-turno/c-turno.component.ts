@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ITurno } from 'src/app/model/iturno';
 import { TurnosService } from 'src/app/services/turnos.service';
 
@@ -11,7 +12,7 @@ export class CTurnoComponent implements OnInit {
   rol: string | null = 'invitado';
   turnosList: ITurno[] = [];
 
-  constructor(private turnosService: TurnosService) {}
+  constructor(private turnosService: TurnosService,private router:Router) {}
 
   ngOnInit(): void {
     sessionStorage.getItem('rol') != null
@@ -32,5 +33,9 @@ export class CTurnoComponent implements OnInit {
         console.log('Turnos recuperados');
       },
     });
+  }
+  /** Ir a detalle de turno */
+  irTurno(id: number|undefined) {
+    this.router.navigate(["detalle-turno",id]);
   }
 }
