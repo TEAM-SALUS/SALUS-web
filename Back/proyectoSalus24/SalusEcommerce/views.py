@@ -1,3 +1,4 @@
+from rest_framework.decorators import action
 from django.shortcuts import render
 
 # Create your views here.
@@ -176,12 +177,11 @@ class HorarioDeAtencionViewSet(viewsets.ModelViewSet):
 
 
 class HorarioDeAtencionPorIdView(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
 
-    def get(self, request, idh=None):
-        horarioDeAtencionId = HorarioDeAtencion.objects.filter(id=idh)
-        serializer = HorarioDeAtencionSerializer(
-            horarioDeAtencionId, many=True)
+    def get(self, request, medico_id=None):
+        horarios = HorarioDeAtencion.objects.filter(medico_id=medico_id)
+        serializer = HorarioDeAtencionSerializer(horarios, many=True)
         return Response(serializer.data)
 
 # Tabla Medico
@@ -192,6 +192,12 @@ class MedicoViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.AllowAny,)
     queryset = Medico.objects.all()
     serializer_class = MedicoSerializer
+
+    @action(detail=False, methods=['get'], url_path='especialidad/(?P<especialidad_id>[^/.]+)')
+    def get_medicos_por_especialidad(self, request, especialidad_id=None):
+        medicos = Medico.objects.filter(id_especialidad=especialidad_id)
+        serializer = self.get_serializer(medicos, many=True)
+        return Response(serializer.data)
 
 
 class MedicoPorUserView(APIView):
@@ -332,30 +338,55 @@ class RegistroDeConsultaListView(APIView):
         serializer = RegistroDeConsultaSerializer(
             registroDeConsultaList, many=True)
         return Response(serializer.data)
-#nuevo turnero
+# nuevo turnero
+
+
 class TurnosDisponiblesList(generics.ListAPIView):
-    queryset = TurnosDisponibles.objects.all()
     serializer_class = TurnosDisponiblesSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
+
+    def get_queryset(self):
+        medico_id = self.request.query_params.get('medico', None)
+        if medico_id is not None:
+            return TurnosDisponibles.objects.filter(medico_id=medico_id)
+        return TurnosDisponibles.objects.all()
+
 
 class CreateTurnoView(generics.CreateAPIView):
     serializer_class = TurnoSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     def create(self, request, *args, **kwargs):
         data = request.data
         try:
             turno = Turno.objects.create(
-                fecha=data['fecha'],
-                horario=data['horario'],
-                pagado=data['pagado'],
-                estado=data['estado'],
-                id_paciente_id=data['id_paciente'],
-                id_medico_id=data['id_medico'],
-                obra_social=data['obra_social']
+                pagado=data.get('pagado', False),
+                estado=data.get('estado', 'Pendiente'),
+                turno_disponible_id=data.get('turno_disponible'),
+                id_paciente_id=data.get('id_paciente'),
+                id_medico_id=data.get('id_medico'),
+                obra_social=data.get('obra_social', '')
             )
             turno.save()
             serializer = TurnoSerializer(turno)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except Exception as e:
-            return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': str(e), 'data_received': data}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class TurnosPorPacienteListView(generics.ListAPIView):
+    serializer_class = TurnoSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        id_paciente = self.request.query_params.get('id_paciente')
+        return Turno.objects.filter(id_paciente_id=id_paciente)
+
+
+class TurnoReservadoDetailView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = TurnoSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        id_paciente = self.request.user.id  # Obtener el id del paciente desde la sesión
+        return Turno.objects.filter(id_paciente_id=id_paciente)
