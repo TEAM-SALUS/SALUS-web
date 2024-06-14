@@ -1,5 +1,6 @@
 
 from django.http import Http404
+import logging
 from rest_framework.decorators import action
 from django.shortcuts import render
 
@@ -543,11 +544,27 @@ class TurnosPorPacienteListView(generics.ListAPIView):
         return Turno.objects.filter(id_paciente_id=id_paciente)
 
 
+logger = logging.getLogger(__name__)
+
+
 class TurnoReservadoDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Turno.objects.all()
     serializer_class = TurnoSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        id_paciente = self.request.user.id  # Obtener el id del paciente desde la sesión
-        return Turno.objects.filter(id_paciente_id=id_paciente)
+        id = self.kwargs.get('pk', None)
+        return Turno.objects.filter(id=id)
+
+    def put(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def delete(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
