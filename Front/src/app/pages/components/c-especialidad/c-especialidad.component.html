@@ -20,26 +20,14 @@
       </p>
 
       <div class="buttons">
-        <div class="row">
-          <div class="col-6">
-            <a class="btn btn-reservar-turno" (click)="getEspecialidadId(e.id)">Reservar turno</a>
-          </div>
-          <div class="div-link col-6" *ngIf="rol == 'admin'" [hidden]="!(rol == 'admin')">
-            <a
+        <a class="btn btn-reservar-turno" (click)="redirectToPay()">Reservar turno</a>
+        <div class="div-link">
+          <a
             [routerLink]="['/detalle-servicio', e.id]"
             class="link-ver-mas"
-            (click)="redirectToEdit(e.id)"
-            >Editar</a
-            >
-          </div>
-        </div>
-        <div class="row py-3" *ngIf="rol == 'admin'" [hidden]="!(rol == 'admin')">
-          <div class="col-6">
-            <a class="btn btn-reservar-turno" (click)="irAgreagrEspecialidad()">Agregar especialidad</a>
-          </div>
-          <div class="col-6">
-            <a class="btn btn-reservar-turno" (click)="eliminarEspecialidad(e.id)">Eliminar especialidad</a>
-          </div>
+            (click)="getEspecialidadId(e.id)"
+            >Ver más</a
+          >
         </div>
       </div>
     </div>

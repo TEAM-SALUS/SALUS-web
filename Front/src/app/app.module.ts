@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 
@@ -31,20 +31,6 @@ import { ErrorInterceptorService } from './services/auth/error-interceptor.servi
 import { ProfesionalesComponent } from './pages/profesionales/profesionales.component';
 import { CProfesionalComponent } from './pages/components/c-profesionales/c-profesionales.component';
 import { ProtegidosModule } from './protegidos/protegidos.module';
-import { CConsultaComponent } from './pages/components/c-consulta/c-consulta/c-consulta.component';
-import { CTurnoComponent } from './pages/components/c-turno/c-turno/c-turno.component';
-import { registerLocaleData } from '@angular/common';
-import localeEsAr from '@angular/common/locales/es-AR';
-import { TurnoComponent } from './pages/turno/turno.component';
-import { TurnoDetailComponent } from './pages/turno/turno-detail/turno-detail.component';
-import { FormEspecialidadComponent } from './pages/especialidad/form-especialidad/form-especialidad.component';
-import { CFormEspecialidadComponent } from './pages/components/c-especialidad/c-form-especialidad/c-form-especialidad.component';
-import { EditEspecialidadComponent } from './pages/especialidad/edit-especialidad/edit-especialidad.component';
-import { CEditEspecialidadComponent } from './pages/components/c-especialidad/c-edit-especialidad/c-edit-especialidad.component';
-import { Pagina404Component } from './pages/pagina404/pagina404.component';
-import { CPagina404Component } from './pages/components/c-pagina404/c-pagina404.component'; // Importa los datos de localización
-
-registerLocaleData(localeEsAr, 'es-AR'); // Registra los datos para "es-AR"
 
 @NgModule({
   declarations: [
@@ -71,16 +57,6 @@ registerLocaleData(localeEsAr, 'es-AR'); // Registra los datos para "es-AR"
     DetalleEspecialidadComponent,
     ProfesionalesComponent,
     CProfesionalComponent,
-    CConsultaComponent,
-    CTurnoComponent,
-    TurnoComponent,
-    TurnoDetailComponent,
-    FormEspecialidadComponent,
-    CFormEspecialidadComponent,
-    EditEspecialidadComponent,
-    CEditEspecialidadComponent,
-    Pagina404Component,
-    CPagina404Component,
   ],
   imports: [
     BrowserModule,
@@ -93,8 +69,7 @@ registerLocaleData(localeEsAr, 'es-AR'); // Registra los datos para "es-AR"
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptorService,multi:true},
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptorService,multi:true},
-    SharedServicesComponent,
-    { provide: LOCALE_ID, useValue: 'es-AR' } // Establece el idioma
+    SharedServicesComponent
   ],
   bootstrap: [AppComponent]
 })

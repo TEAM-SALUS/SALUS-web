@@ -1,13 +1,13 @@
 .form-register {
   width: 400px;
-  background: var(--secondary-color);
+  background: #004d40;
   padding: 30px;
   margin: auto;
   margin-bottom: 30px;
   border-radius: 5px;
   font-family: "calibri";
-  color: var(--black-color);
-  box-shadow: 7px 13px 37px var(--black-color);
+  color: white;
+  box-shadow: 7px 13px 37px #000;
 }
 .form-register h1 {
   font-size: 22px;
@@ -15,13 +15,13 @@
 }
 .controls {
   width: 100%;
-  background: var(--white-color);
+  background: #004d40;
   padding: 10px;
   border-radius: 4px;
   margin-bottom: 16px;
-  border: 1px solid var(--terciary-color);
+  border: 1px solid #93ffa1;
   font-size: 18px;
-  color: var(--black-color);
+  color: white;
   outline: none;
 }
 .form-register p {
@@ -31,11 +31,11 @@
   line-height: 40px;
 }
 .form-register a {
-  color: var(--white-color);
+  color: white;
   text-decoration: none;
 }
 .form-register a:hover {
-  color: var(--white-color);
+  color: white;
   text-decoration: underline;
 }
 .form-register .botons {
@@ -43,18 +43,13 @@
   width: 100%;
   padding: 12px;
   justify-content: center;
-  background: var(--primary-color);
+  background: #00796b;
   margin: 8px 0;
   border: none;
-  color: var(--black-color);
+  color: white;
   border-radius: 10px;
-  box-shadow: 1px 2px var(--terciary-color);
+  box-shadow: 1px 2px #6ea8c9;
   cursor: pointer;
   letter-spacing: 3px;
   text-decoration: none;
-}
-
-.form-register .botons:hover {
-  background: var(--secondary-color);
-    scale: 1.1;
 }

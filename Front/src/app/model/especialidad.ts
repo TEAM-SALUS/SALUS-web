@@ -1,8 +1,7 @@
 export interface EspecialidadInterface{
-    id?: number,
+    id: number,
     nombre?: string,
-    precio?: number|string,
-    duracion?: string,
-    foto?: string|any,
+    precio?: number,
+    foto?: string,
     descripcion?: string;
 }

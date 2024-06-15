@@ -1,13 +1,13 @@
 .form-pago {
   width: 50%;
-  background: var(--primary-color-light);
+  background: #004d40;
   padding: 30px;
   margin: auto;
   margin-bottom: 30px;
   border-radius: 5px;
   font-family: "calibri";
-  color: var(--black-color);
-  box-shadow: 7px 13px 37px var(--black-color);
+  color: white;
+  box-shadow: 7px 13px 37px #000;
 }
 
 .form-pago h1 {
@@ -21,19 +21,13 @@
   padding: 12px;
   align-items: center;
   justify-content: center;
-  background: var(--secondary-color);
+  background: #027668;
   margin: 8px 0;
   border: none;
-  color: var(--black-color);
+  color: white;
   border-radius: 10px;
   box-shadow: 1px 2px #6ea8c9;
   cursor: pointer;
   letter-spacing: 3px;
   text-decoration: none;
-}
-
-.form-pago .botons:hover {
-  background: var(--primary-color);
-  color: var(--black-color);
-  scale: 1.1;
 }
