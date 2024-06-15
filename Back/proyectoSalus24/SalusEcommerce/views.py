@@ -1,3 +1,5 @@
+import logging
+from rest_framework.decorators import action
 from django.shortcuts import render
 
 # Create your views here.
@@ -9,7 +11,8 @@ from .models import (
     Medico,
     Turno,
     Pago,
-    RegistroDeConsulta
+    RegistroDeConsulta,
+    TurnosDisponibles
 )
 from .serializers import (
     PacienteSerializer,
@@ -18,7 +21,8 @@ from .serializers import (
     MedicoSerializer,
     TurnoSerializer,
     PagoSerializer,
-    RegistroDeConsultaSerializer
+    RegistroDeConsultaSerializer,
+    TurnosDisponiblesSerializer
 
 )
 ''' API REST FRAMEWORK CORS '''
@@ -39,6 +43,7 @@ from knox.views import LoginView as KnoxLoginView
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from django.contrib.auth import login
 from rest_framework.views import APIView
+from rest_framework.generics import UpdateAPIView
 # Create your views here.
 '''CRUD - ABML'''
 # Tabla Paciente
@@ -50,14 +55,61 @@ class PacienteViewSet(viewsets.ModelViewSet):
     serializer_class = PacienteSerializer
 
 
-class PacientePorUserView(APIView):
+class PacientePorUserView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, idpu=None):
         pacienteUser = Paciente.objects.filter(pacienteUser=idpu)
         serializer = PacienteSerializer(pacienteUser, many=True)
         return Response(serializer.data)
-    
+
+    def put(self, request, idpu=None):
+        try:
+            pacienteUser = Paciente.objects.get(pacienteUser=idpu)
+        except Paciente.DoesNotExist:
+            return Response({'error': 'Paciente no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = PacienteSerializer(pacienteUser, data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, idpu=None):
+        try:
+            pacienteUser = Paciente.objects.get(pacienteUser=idpu)
+        except Paciente.DoesNotExist:
+            return Response({'error': 'Paciente no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+
+        pacienteUser.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class EditarPerfilPaciente(UpdateAPIView):
+    serializer_class = PacienteSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def update(self, request, *args, **kwargs):
+        paciente_user_id = request.data.get('pacienteUser')
+
+        if not paciente_user_id:
+            return Response({'error': 'El ID del paciente no fue proporcionado en los datos.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            paciente = Paciente.objects.get(id=paciente_user_id)
+        except Paciente.DoesNotExist:
+            return Response({'error': 'No se encontró ningún paciente con el ID proporcionado.'}, status=status.HTTP_404_NOT_FOUND)
+
+        if paciente.pacienteUser != request.user:
+            return Response({'error': 'No tienes permiso para actualizar este perfil de paciente.'}, status=status.HTTP_403_FORBIDDEN)
+
+        serializer = self.get_serializer(paciente, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
+
+
 class PacienteRegistroView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
@@ -67,6 +119,25 @@ class PacienteRegistroView(APIView):
             serializer.save()
             return Response(serializer.data,
                             status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ProfileView(generics.RetrieveUpdateAPIView):
+    # Solo usuarios logueados pueden ver.
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = PacienteSerializer
+    http_method_names = ['get', 'put']
+
+    def get_object(self):
+        if self.request.user.is_authenticated:
+            return self.request.user
+
+    def put(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = PacienteSerializer(instance, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # Tabla Especialidad
@@ -86,7 +157,8 @@ class EspecialidadPorIdView(APIView):
         especialidadId = Especialidad.objects.filter(id=ide)
         serializer = EspecialidadSerializer(especialidadId, many=True)
         return Response(serializer.data)
-    
+
+
 class EspecialidadListView(APIView):
     permission_classes = (permissions.AllowAny,)
 
@@ -106,12 +178,11 @@ class HorarioDeAtencionViewSet(viewsets.ModelViewSet):
 
 
 class HorarioDeAtencionPorIdView(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
 
-    def get(self, request, idh=None):
-        horarioDeAtencionId = HorarioDeAtencion.objects.filter(id=idh)
-        serializer = HorarioDeAtencionSerializer(
-            horarioDeAtencionId, many=True)
+    def get(self, request, medico_id=None):
+        horarios = HorarioDeAtencion.objects.filter(medico_id=medico_id)
+        serializer = HorarioDeAtencionSerializer(horarios, many=True)
         return Response(serializer.data)
 
 # Tabla Medico
@@ -123,6 +194,12 @@ class MedicoViewSet(viewsets.ModelViewSet):
     queryset = Medico.objects.all()
     serializer_class = MedicoSerializer
 
+    @action(detail=False, methods=['get'], url_path='especialidad/(?P<especialidad_id>[^/.]+)')
+    def get_medicos_por_especialidad(self, request, especialidad_id=None):
+        medicos = Medico.objects.filter(id_especialidad=especialidad_id)
+        serializer = self.get_serializer(medicos, many=True)
+        return Response(serializer.data)
+
 
 class MedicoPorUserView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
@@ -131,7 +208,8 @@ class MedicoPorUserView(APIView):
         medicoUser = Medico.objects.filter(medicoUser=idmu)
         serializer = MedicoSerializer(medicoUser, many=True)
         return Response(serializer.data)
-    
+
+
 class MedicoListView(APIView):
     permission_classes = (permissions.AllowAny,)
 
@@ -144,7 +222,7 @@ class MedicoListView(APIView):
 
 
 class TurnoViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.AllowAny,)
     queryset = Turno.objects.all()
     serializer_class = TurnoSerializer
 
@@ -175,12 +253,25 @@ class LoginAPI(KnoxLoginView):
         return super(LoginAPI, self).post(request, format=None)
 
 
-class ManagerUserView(generics.RetrieveUpdateAPIView):
+class ManagerUserView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = UserSerializer
 
     def get_object(self):
         return self.request.user
+
+    def delete(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def put(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(
+            instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
 
 
 class PagoViewSet(viewsets.ModelViewSet):
@@ -202,7 +293,7 @@ class pagar(APIView):
 
 
 class RegistroDeConsultaViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.AllowAny,)
     queryset = RegistroDeConsulta.objects.all()
     serializer_class = RegistroDeConsultaSerializer
 
@@ -217,3 +308,102 @@ class registrarConsulta(APIView):
             return Response(serializer.data,
                             status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class RegistroDeConsultaPorIdView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, id=None):
+        registroDeConsultaId = RegistroDeConsulta.objects.filter(id=id)
+        serializer = RegistroDeConsultaSerializer(
+            registroDeConsultaId, many=True)
+        return Response(serializer.data)
+
+
+class RegistroDeConsultaPorTurnoView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, idt=None):
+        registroDeConsultaTurno = RegistroDeConsulta.objects.filter(
+            id_turno=idt)
+        serializer = RegistroDeConsultaSerializer(
+            registroDeConsultaTurno, many=True)
+        return Response(serializer.data)
+
+
+class RegistroDeConsultaListView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, format=None):
+        registroDeConsultaList = RegistroDeConsulta.objects.all()
+        serializer = RegistroDeConsultaSerializer(
+            registroDeConsultaList, many=True)
+        return Response(serializer.data)
+# nuevo turnero
+
+
+class TurnosDisponiblesList(generics.ListAPIView):
+    serializer_class = TurnosDisponiblesSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def get_queryset(self):
+        medico_id = self.request.query_params.get('medico', None)
+        if medico_id is not None:
+            return TurnosDisponibles.objects.filter(medico_id=medico_id)
+        return TurnosDisponibles.objects.all()
+
+
+class CreateTurnoView(generics.CreateAPIView):
+    serializer_class = TurnoSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        try:
+            turno = Turno.objects.create(
+                pagado=data.get('pagado', False),
+                estado=data.get('estado', 'Pendiente'),
+                turno_disponible_id=data.get('turno_disponible'),
+                id_paciente_id=data.get('id_paciente'),
+                id_medico_id=data.get('id_medico'),
+                obra_social=data.get('obra_social', '')
+            )
+            turno.save()
+            serializer = TurnoSerializer(turno)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response({'error': str(e), 'data_received': data}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class TurnosPorPacienteListView(generics.ListAPIView):
+    serializer_class = TurnoSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        id_paciente = self.request.query_params.get('id_paciente')
+        return Turno.objects.filter(id_paciente_id=id_paciente)
+
+
+logger = logging.getLogger(__name__)
+
+
+class TurnoReservadoDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Turno.objects.all()
+    serializer_class = TurnoSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        id = self.kwargs.get('pk', None)
+        return Turno.objects.filter(id=id)
+
+    def put(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def delete(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

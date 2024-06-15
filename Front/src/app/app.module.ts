@@ -28,11 +28,9 @@ import { EspecialidadComponent } from './pages/especialidad/especialidad.compone
 import { DetalleEspecialidadComponent } from './pages/detalle-especialidad/detalle-especialidad.component';
 import { JwtInterceptorService } from './services/auth/jwt-interceptor.service';
 import { ErrorInterceptorService } from './services/auth/error-interceptor.service';
-<<<<<<< HEAD
-import { CProfesionalComponent } from './pages/components/c-profesional/c-profesional.component';
-
-=======
->>>>>>> main
+import { ProfesionalesComponent } from './pages/profesionales/profesionales.component';
+import { CProfesionalComponent } from './pages/components/c-profesionales/c-profesionales.component';
+import { ProtegidosModule } from './protegidos/protegidos.module';
 
 @NgModule({
   declarations: [
@@ -57,10 +55,8 @@ import { CProfesionalComponent } from './pages/components/c-profesional/c-profes
     CDetalleEspecialidadComponent,
     EspecialidadComponent,
     DetalleEspecialidadComponent,
-<<<<<<< HEAD
+    ProfesionalesComponent,
     CProfesionalComponent,
-=======
->>>>>>> main
   ],
   imports: [
     BrowserModule,
@@ -68,6 +64,7 @@ import { CProfesionalComponent } from './pages/components/c-profesional/c-profes
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    ProtegidosModule
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptorService,multi:true},
