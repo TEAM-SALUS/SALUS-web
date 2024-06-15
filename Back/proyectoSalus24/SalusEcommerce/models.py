@@ -17,11 +17,13 @@ class Paciente(models.Model):
     clave = models.CharField(max_length=128)
     telefono = models.CharField(max_length=15, blank=True)
     #foto = models.ImageField(upload_to='paciente/perfil', default='paciente/perfil/no-img.png', verbose_name='foto perfil paciente')
+    # foto = models.ImageField(upload_to='paciente/perfil', default='paciente/perfil/no-img.png', verbose_name='foto perfil paciente')
     pacienteUser = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return "{} {} {} {} {} {} {} {}".format(self.id, self.dni_paciente, self.nombre, self.apellido, self.email, self.clave, self.telefono, self.pacienteUser)
         #return "{} {} {} {} {} {} {} {} {}".format(self.id, self.dni_paciente, self.nombre, self.apellido, self.email, self.clave, self.telefono, self.foto, self.pacienteUser)
+        # return "{} {} {} {} {} {} {} {} {}".format(self.id, self.dni_paciente, self.nombre, self.apellido, self.email, self.clave, self.telefono, self.foto, self.pacienteUser)
 
     class Meta:
         db_table = "Paciente"
@@ -61,29 +63,60 @@ class Especialidad(models.Model):
 # Tabla HorarioDeAtención
 
 
-class HorarioDeAtencion(models.Model):
-    dia_de_la_semana = models.CharField(max_length=150)
-    hora_entrada = models.TimeField(default=time(hour=8))
-    hora_salida = models.TimeField(default=time(hour=16))
+# class HorarioDeAtencion(models.Model):
+   # dia_de_la_semana = models.CharField(max_length=150)
+   # hora_entrada = models.TimeField(default=time(hour=8))
+   # hora_salida = models.TimeField(default=time(hour=16))
 
-    def __unicode__(self):
-        return "{} {} {} {}".format(self.id, self.dia_de_la_semana, self.hora_entrada, self.hora_salida)
+   # def __unicode__(self):
+   #     return "{} {} {} {}".format(self.id, self.dia_de_la_semana, self.hora_entrada, self.hora_salida)
 
-    def __str__(self):
-        return "{} {} {} {}".format(self.id, self.dia_de_la_semana, self.hora_entrada, self.hora_salida)
+   # def __str__(self):
+   #     return "{} {} {} {}".format(self.id, self.dia_de_la_semana, self.hora_entrada, self.hora_salida)
 
-    class Meta:
-        db_table = "HorarioDeAtencion"
-        verbose_name = "HorarioDeAtencion"
-        verbose_name_plural = "HorarioDeAtencion"
-        constraints = [
-            models.UniqueConstraint(fields=[
-                                    'dia_de_la_semana', 'hora_entrada', 'hora_salida'], name='Uk_HorarioDeAtencion'),
-        ]
+    # class Meta:
+   #     db_table = "HorarioDeAtencion"
+   #     verbose_name = "HorarioDeAtencion"
+   #     verbose_name_plural = "HorarioDeAtencion"
+   #     constraints = [
+   #         models.UniqueConstraint(fields=[
+   #                                 'dia_de_la_semana', 'hora_entrada', 'hora_salida'], name='Uk_HorarioDeAtencion'),
+   #
+   #  ]
+
 
 # Tabla Medico
 
 
+# class Medico(models.Model):
+ #   matricula = models.CharField(max_length=11, unique=True)
+  #  nombre = models.CharField(max_length=150, blank=True)
+   # apellido = models.CharField(max_length=150, blank=True)
+    # email = models.CharField(max_length=254, blank=True)
+    # clave = models.CharField(max_length=128)
+    # telefono = models.CharField(max_length=15, blank=True)
+    # foto = models.ImageField(upload_to='medico/perfil',
+     #                        default='medico/perfil/no-medic-img.jpg', verbose_name='foto perfil medico')
+    # id_horario = models.ForeignKey(HorarioDeAtencion, on_delete=models.CASCADE)
+    # id_especialidad = models.ForeignKey(Especialidad, on_delete=models.CASCADE)
+    # medicoUser = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+
+    # def __unicode__(self):
+     #   return "{} {} {} {} {} {} {} {} {} {} {}".format(self.id, self.matricula, self.nombre, self.apellido, self.email, self.clave, self.telefono, self.foto, self.id_horario, self.id_especialidad, self.medicoUser)
+
+    # def __str__(self):
+     #   return "{} {} {} {} {} {} {} {} {} {} {}".format(self.id, self.matricula, self.nombre, self.apellido, self.email, self.clave, self.telefono, self.foto, self.id_horario, self.id_especialidad, self.medicoUser)
+
+    # class Meta:
+     #   db_table = "Medico"
+      #  verbose_name = "Medico"
+       # verbose_name_plural = "Medicos"
+        # constraints = [
+        #   models.UniqueConstraint(fields=['matricula'], name='Uk_Medico'),
+        # ]
+
+
+# Tabla Medico
 class Medico(models.Model):
     matricula = models.CharField(max_length=11, unique=True)
     nombre = models.CharField(max_length=150, blank=True)
@@ -93,15 +126,14 @@ class Medico(models.Model):
     telefono = models.CharField(max_length=15, blank=True)
     foto = models.ImageField(upload_to='medico/perfil',
                              default='medico/perfil/no-medic-img.jpg', verbose_name='foto perfil medico')
-    id_horario = models.ForeignKey(HorarioDeAtencion, on_delete=models.CASCADE)
     id_especialidad = models.ForeignKey(Especialidad, on_delete=models.CASCADE)
     medicoUser = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     def __unicode__(self):
-        return "{} {} {} {} {} {} {} {} {} {} {}".format(self.id, self.matricula, self.nombre, self.apellido, self.email, self.clave, self.telefono, self.foto, self.id_horario, self.id_especialidad, self.medicoUser)
+        return "{} {} {} {} {} {} {} {} {}".format(self.id, self.matricula, self.nombre, self.apellido, self.email, self.clave, self.telefono, self.foto, self.id_especialidad, self.medicoUser)
 
     def __str__(self):
-        return "{} {} {} {} {} {} {} {} {} {} {}".format(self.id, self.matricula, self.nombre, self.apellido, self.email, self.clave, self.telefono, self.foto, self.id_horario, self.id_especialidad, self.medicoUser)
+        return "{} {} {} {} {} {} {} {} {}".format(self.id, self.matricula, self.nombre, self.apellido, self.email, self.clave, self.telefono, self.foto, self.id_especialidad, self.medicoUser)
 
     class Meta:
         db_table = "Medico"
@@ -111,6 +143,48 @@ class Medico(models.Model):
             models.UniqueConstraint(fields=['matricula'], name='Uk_Medico'),
         ]
 
+# Tabla HorarioDeAtención
+
+
+class HorarioDeAtencion(models.Model):
+    medico = models.ForeignKey(Medico, on_delete=models.CASCADE, null=True)
+    dia_de_la_semana = models.CharField(max_length=150)
+    hora_entrada = models.TimeField(default=time(hour=8))
+    hora_salida = models.TimeField(default=time(hour=16))
+
+    def __str__(self):
+        return f"{self.medico.nombre if self.medico else 'Sin médico asignado'} - {self.dia_de_la_semana}: {self.hora_entrada} - {self.hora_salida}"
+
+    class Meta:
+        db_table = "HorarioDeAtencion"
+        verbose_name = "HorarioDeAtencion"
+        verbose_name_plural = "HorariosDeAtencion"
+        constraints = [
+            models.UniqueConstraint(fields=['medico', 'dia_de_la_semana', 'hora_entrada', 'hora_salida'],
+                                    name='Uk_HorarioDeAtencion'),
+        ]
+
+
+# Nueva Tabla TurnosDisponibles
+class TurnosDisponibles(models.Model):
+    dia = models.DateField()
+    hora = models.TimeField()
+    medico = models.ForeignKey(Medico, on_delete=models.CASCADE)
+
+    def __unicode__(self):
+        return "{} {} {} {}".format(self.id, self.dia, self.hora, self.medico)
+
+    def __str__(self):
+        return "{} {} {} {}".format(self.id, self.dia, self.hora, self.medico)
+
+    class Meta:
+        db_table = "TurnosDisponibles"
+        verbose_name = "TurnosDisponible"
+        verbose_name_plural = "TurnosDisponibles"
+        constraints = [
+            models.UniqueConstraint(
+                fields=['dia', 'hora', 'medico'], name='Uk_TurnosDisponibles'),
+        ]
 # Tabla Turno
 
 
@@ -118,26 +192,29 @@ class Turno(models.Model):
     '''ENUM'''
     CONCLUIDO = "Concluido"
     RECHAZADO = "Rechazado"
-    PENDIENTE = "Pendiento"
+    PENDIENTE = "Pendiente"
     ESTADO = [
         (CONCLUIDO, "Concluido"),
         (RECHAZADO, "Rechazado"),
-        (PENDIENTE, "Pendiento"),
+        (PENDIENTE, "Pendiente"),
     ]
-    fecha = models.DateField()
-    horario = models.TimeField()
+
     pagado = models.BooleanField()
     estado = models.CharField(
         max_length=45, choices=ESTADO, blank=True, default=RECHAZADO)
+    turno_disponible = models.ForeignKey(
+        'TurnosDisponibles', on_delete=models.CASCADE)
     id_paciente = models.ForeignKey(
-        Paciente, on_delete=models.CASCADE, default=-1)
-    id_medico = models.ForeignKey(Medico, on_delete=models.CASCADE, default=-1)
+        'Paciente', on_delete=models.CASCADE, default=-1)
+    id_medico = models.ForeignKey(
+        'Medico', on_delete=models.CASCADE, default=-1)
+    obra_social = models.CharField(max_length=150, blank=True)  # Nuevo campo
 
     def __unicode__(self):
-        return "{} {} {} {} {} {} {}".format(self.id, self.fecha, self.horario, self.pagado, self.estado, self.id_paciente, self.id_medico)
+        return "{} {} {} {} {} {} {}".format(self.id, self.pagado, self.estado, self.id_paciente, self.id_medico, self.turno_disponible, self.obra_social)
 
-    def __string__(self):
-        return "{} {} {} {} {} {} {}".format(self.id, self.fecha, self.horario, self.pagado, self.estado, self.id_paciente, self.id_medico)
+    def __str__(self):
+        return "{} {} {} {} {} {} {}".format(self.id, self.pagado, self.estado, self.id_paciente, self.id_medico, self.turno_disponible, self.obra_social)
 
     class Meta:
         db_table = "Turno"

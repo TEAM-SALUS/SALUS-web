@@ -5,6 +5,7 @@ import { LoginService } from 'src/app/services/auth/login.service';
 import { SharedServicesComponent } from 'src/app/services/auth/shared-services/shared-services.component';
 import { LoginRequest } from 'src/app/services/auth/loginRequest';
 import Swal from'sweetalert2';
+import { LoggedInUser, UserCredentials } from 'src/app/services/auth/auth';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,7 @@ import Swal from'sweetalert2';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit{
+  profile!: LoggedInUser;
 
   loginForm = this.formBuilder.group({
     username: ['', Validators.required],
@@ -25,36 +27,56 @@ export class LoginComponent implements OnInit{
   get user(){
     return this.loginForm.controls.username;
   }
-  
+
   get password(){
     return this.loginForm.controls.password;
   }
-  
+
   login(){
     if(this.loginForm.valid){
       this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
         next: (userData) => {
           console.log(userData);
+
         },
         error: (errorData) => {
           console.error(errorData);
+          Swal.fire('Error', 'No se pudo iniciar sesión.', 'error');
         },
         complete: () => {
           console.info('Login completo');
-          this.router.navigateByUrl('/home');
+          this.loginService.getProfile().subscribe({
+            next: (userProfile) => {
+              //console.log(userProfile);
+               //this.profile = userProfile;
+               
+              //this.router.navigateByUrl(`user-profile/${userProfile.id}`); //
+              this.router.navigateByUrl(`home`);
+            
+            },
+            error: (errorData) => {
+            console.error(errorData);
+            Swal.fire('Error', 'No se pudo obtener el perfil del usuario.', 'error');
+            },
+            //complete: () => {
+            //console.info('perfil completo');
+            
+            //}
+        })
+
           this.loginForm.reset();
         }
       })
-    }else{
-      this.loginForm.markAllAsTouched();
-      Swal.fire({
-        icon:'warning',
-        title: `Los datos son incorrectos.`,
-        text: `Por favor verifique los datos.`
-      })
-      alert("Error al ingresar los datos")
-    }
-  }
+
+  //     this.loginForm.markAllAsTouched();
+  //     Swal.fire({
+  //       icon:'warning',
+  //       title: `Los datos son incorrectos.`,
+  //       text: `Por favor verifique los datos.`
+  //     })
+  //     alert("Error al ingresar los datos")
+  //   }
+  // }
 
   /*
   login(){
@@ -98,4 +120,4 @@ export class LoginComponent implements OnInit{
     }
   }
   */
-}
+}}}

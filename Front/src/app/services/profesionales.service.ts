@@ -21,7 +21,7 @@ export class ProfesionalesService {
   }
 
   public getProfesionalesByEspecialidad(idEspecialidad: number): Observable<ProfesionalInterface[]> {
-    return this.http.get<ProfesionalInterface[]>(`${this.url}?id_especialidad=${idEspecialidad}`);
+  return this.http.get<ProfesionalInterface[]>(`${this.url}?id_especialidad=${idEspecialidad}`);
   };
 
 
