@@ -16,7 +16,7 @@ export class RegistryService {
     return this.http.post<any>(url, data).pipe(
       map(userData => {
         sessionStorage.setItem('userData', JSON.stringify(userData));
-        this.info = sessionStorage.getItem("userData")
+        this.info = sessionStorage.getItem("userData");
         this.info = this.info = JSON.parse(this.info);
         sessionStorage.setItem('token', this.info.token);
       }),

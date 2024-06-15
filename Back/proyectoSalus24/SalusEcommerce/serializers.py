@@ -9,7 +9,8 @@ from .models import (
     Medico,
     Turno,
     Pago,
-    RegistroDeConsulta
+    RegistroDeConsulta,
+    TurnosDisponibles
 )
 # --- User
 
@@ -87,3 +88,14 @@ class RegistroDeConsultaSerializer(serializers.ModelSerializer):
     class Meta:
         model = RegistroDeConsulta
         fields = '__all__'
+
+# NUEVO TURNERO
+class TurnosDisponiblesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TurnosDisponibles
+        fields = ['id', 'dia', 'hora', 'medico']
+
+class TurnoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Turno
+        fields = ['id', 'pagado', 'estado', 'turno_disponible', 'id_paciente', 'id_medico', 'obra_social']

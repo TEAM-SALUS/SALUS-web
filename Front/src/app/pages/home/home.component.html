@@ -1,115 +1,131 @@
-<section>
-  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-        aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-        aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-        aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img
-          src="https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          class="d-block w-100" alt="estetoscopio y lapicera">
-        <div class="carousel-caption d-none d-md-block">
-          <h1>Sientete seguro de la mano de Salus!</h1>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img
-          src="https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          class="d-block w-100" alt="medicos mirando una radiografia">
-        <div class="carousel-caption d-none d-md-block">
-          <h2>Protege a tu familia con Salus.</h2>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img
-          src="https://images.pexels.com/photos/6502029/pexels-photo-6502029.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          class="d-block w-100" alt="radiografia">
-        <div class="carousel-caption d-none d-md-block">
-          <h2>Cobertura odontológica en todo el país.</h2>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+<div [ngSwitch]="rol">
+  <!-- SECCION ADMINISTRADO -->
+  <div *ngSwitchCase="'administrador'">
+    <p>seccion admin</p>
   </div>
-</section>
-
-<main class="container">
-  <section class="index-first">
-    <div class="index-first-info">
-      <h2>Seguro de cobertura odontológica al alcance de tu mano.</h2>
-      <p>En unos simples pasos, puedes estar protegido con SALUS!
-      </p>
-      <p>Adquirir un plan de seguro odontológico con SALUS es tan fácil como registrarte y dar de alta uno de nuestros
-        paquetes!
-      </p>
-      <a href="#" class="btn">Registrate</a>
-    </div>
-    <div class="index-first-img">
-      <img
-        src="https://images.pexels.com/photos/6528782/pexels-photo-6528782.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        alt="" class="index-first-img1">
-      <img
-        src="https://images.pexels.com/photos/6528781/pexels-photo-6528781.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        alt="" class="index-first-img2">
-    </div>
-  </section>
-  <section class="index-second">
-    <h2>Nuestros servicios</h2>
-    <div class="index-cards">
-      <div class="index-card">
-        <img src="/assets/Vector.png" alt="">
-        <p>Limpieza bucal</p>
+  <div *ngSwitchCase="'profesional'">
+    <!-- SECCION PROFESIONAL -->
+    <p>seccion profesional</p>
+  </div>
+  <div *ngSwitchCase="'paciente'">
+    <!-- SECCION PACIENTE -->
+    <app-user-profile></app-user-profile>
+  </div>
+  <div *ngSwitchDefault>
+    <!-- SECCION INVITADO -->
+    <section>
+      <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+            aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+            aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img
+              src="https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              class="d-block w-100" alt="estetoscopio y lapicera">
+            <div class="carousel-caption d-none d-md-block">
+              <h1>Sientete seguro de la mano de Salus!</h1>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              class="d-block w-100" alt="medicos mirando una radiografia">
+            <div class="carousel-caption d-none d-md-block">
+              <h2>Protege a tu familia con Salus.</h2>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="https://images.pexels.com/photos/6502029/pexels-photo-6502029.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              class="d-block w-100" alt="radiografia">
+            <div class="carousel-caption d-none d-md-block">
+              <h2>Cobertura odontológica en todo el país.</h2>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
-      <div class="index-card">
-        <img src="/assets/Vector.png" alt="">
-        <p>Extracciones</p>
-      </div>
-      <div class="index-card">
-        <img src="/assets/Vector.png" alt="">
-        <p>Tratamientos endodónticos</p>
-      </div>
-    </div>
-    <div class="index-cards">
-      <div class="index-card">
-        <img src="/assets//Vector.png" alt="">
-        <p>Radiografías</p>
-      </div>
-      <div class="index-card">
-        <img src="/assets/Vector.png" alt="">
-        <p>Resinas</p>
-      </div>
-      <div class="index-card">
-        <img src="/assets/Vector.png" alt="">
-        <p>Y mucho más..!</p>
-      </div>
-    </div>
-  </section>
-  <section class="index-third">
-    <div class="index-third-info">
-      <h2>Descarga la App</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius mod tempor incididunt ut labore
-        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-      </p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius mod tempor incididunt ut labore
-        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-      </p>
-      <div>
-        <img src="/assets/appstore.png" alt="">
-        <img src="/assets/googleplay.png" alt="">
-      </div>
-    </div>
-    <div class="iphone"><img src="/assets/iphone.png" alt=""></div>
-  </section>
-</main>
+    </section>
+    <main class="container">
+      <section class="index-first">
+        <div class="index-first-info">
+          <h2>Seguro de cobertura odontológica al alcance de tu mano.</h2>
+          <p>En unos simples pasos, puedes estar protegido con SALUS!
+          </p>
+          <p>Adquirir un plan de seguro odontológico con SALUS es tan fácil como registrarte y dar de alta uno de nuestros
+            paquetes!
+          </p>
+          <a href="#" class="btn">Registrate</a>
+        </div>
+        <div class="index-first-img">
+          <img
+            src="https://images.pexels.com/photos/6528782/pexels-photo-6528782.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt="" class="index-first-img1">
+          <img
+            src="https://images.pexels.com/photos/6528781/pexels-photo-6528781.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt="" class="index-first-img2">
+        </div>
+      </section>
+      <section class="index-second">
+        <h2>Nuestros servicios</h2>
+        <div class="index-cards">
+          <div class="index-card">
+            <img src="/assets/Vector.png" alt="">
+            <p>Limpieza bucal</p>
+          </div>
+          <div class="index-card">
+            <img src="/assets/Vector.png" alt="">
+            <p>Extracciones</p>
+          </div>
+          <div class="index-card">
+            <img src="/assets/Vector.png" alt="">
+            <p>Tratamientos endodónticos</p>
+          </div>
+        </div>
+        <div class="index-cards">
+          <div class="index-card">
+            <img src="/assets//Vector.png" alt="">
+            <p>Radiografías</p>
+          </div>
+          <div class="index-card">
+            <img src="/assets/Vector.png" alt="">
+            <p>Resinas</p>
+          </div>
+          <div class="index-card">
+            <img src="/assets/Vector.png" alt="">
+            <p>Y mucho más..!</p>
+          </div>
+        </div>
+      </section>
+      <section class="index-third">
+        <div class="index-third-info">
+          <h2>Descarga la App</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius mod tempor incididunt ut labore
+            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+          </p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius mod tempor incididunt ut labore
+            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+          </p>
+          <div>
+            <img src="/assets/appstore.png" alt="">
+            <img src="/assets/googleplay.png" alt="">
+          </div>
+        </div>
+        <div class="iphone"><img src="/assets/iphone.png" alt=""></div>
+      </section>
+    </main>
+  </div>
+</div>
