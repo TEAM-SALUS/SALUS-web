@@ -55,7 +55,9 @@ export class LoginComponent implements OnInit {
               //this.profile = userProfile;
 
               //this.router.navigateByUrl(`user-profile/${userProfile.id}`); //
+              this.loginForm.reset();
               this.router.navigateByUrl(`home`);
+              //window.location.reload();
             },
             error: (errorData) => {
               console.error(errorData);

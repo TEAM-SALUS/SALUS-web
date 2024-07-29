@@ -1,0 +1,86 @@
+<main class="box">
+  <div class="div" *ngIf="isLoading">Cargando...</div>
+  <div class="div" *ngIf="!isLoading && this.usuarioPerfil">
+    <h1 class="h1">Perfil de Usuario {{ rol }}</h1>
+    <div class="conteiner-figure div">
+      <figure>
+        <!-- src="http://localhost:8000{{ userProfile.foto }}" -->
+        <img
+          class="img"
+          src="../../../../assets/silueta-de-usuario.png"
+          alt="imagen de usuario de {{ this.usuarioPerfil.username }}"
+          title="{{ this.usuarioPerfil.username }}, Usuario"
+        />
+        <figcaption>
+          Fig - {{ this.usuarioPerfil.last_name }} -
+          {{ this.usuarioPerfil.first_name }}
+        </figcaption>
+      </figure>
+    </div>
+    <p class="p">ID: {{ this.usuarioPerfil.id }}</p>
+    <p class="p">Clave: {{ convertirString(this.usuarioPerfil.password) }}</p>
+    <p class="p">
+      Ultimo ingreso: {{ convertirFechaHora(this.usuarioPerfil.last_login) }}
+    </p>
+    <p class="p">Rol: {{ rol }}</p>
+    <p class="p">Usuario: {{ this.usuarioPerfil.username }}</p>
+    <p class="p">Nombre: {{ this.usuarioPerfil.first_name }}</p>
+    <p class="p">Apellido: {{ this.usuarioPerfil.last_name }}</p>
+    <p class="p">Email: {{ this.usuarioPerfil.email }}</p>
+    <p class="p">
+      Fecha registro: {{ convertirFechaHora(this.usuarioPerfil.date_joined) }}
+    </p>
+    <!-- Botón para abrir el modal perfil editar -->
+    <button
+      type="button"
+      class="button"
+      data-bs-toggle="modal"
+      data-bs-target="#editarPerfilUsuarioModal"
+      (click)="editarUsuarioToken()"
+    >
+      Editar Usuario
+    </button>
+    <button class="button" (click)="eliminarUsuarioToken()">Eliminar Usuario</button>
+  </div>
+  <div *ngIf="!isLoading && !this.usuarioPerfil && errorMessage">
+    <p>{{ errorMessage }}</p>
+  </div>
+</main>
+
+<!-- Modal perfil editar-->
+<div
+  class="modal fade"
+  id="editarPerfilUsuarioModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="editarPerfilUsuarioModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editarPerfilUsuarioModalLabel">
+          Editar usuario
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-perfil-edit-usuario></app-c-perfil-edit-usuario>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+              Crear
+            </button> -->
+      </div>
+    </div>
+  </div>
+</div>

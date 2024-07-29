@@ -1,10 +1,10 @@
-
 <main class="form-background">
   <div class="text-center">
-    <p>FECHA - {{fecha}}</p>
-    <p>HORA - {{horario}}</p>
-    <p>ID MEDICO - {{id_medico}}</p>
-    <p>ID PACIENTE - {{id_paciente}}</p>
+    <p>FECHA - {{ fecha }}</p>
+    <p>HORA - {{ horario }}</p>
+    <p>ID MEDICO - {{ id_medico }}</p>
+    <p>ID PACIENTE - {{ id_paciente }}</p>
+    <p>MONTO - {{ precio | currency : "$" }}</p>
   </div>
   <div class="container form-pago">
     <form [formGroup]="pagoForm" (ngSubmit)="nuevoPago()">
@@ -13,16 +13,38 @@
           <h1>Tarjeta de Crédito o Débito</h1>
         </div>
         <div class="col-6 text-end">
-          <img src="../../../assets/img-ecommerce/tarjeta-visa.png" alt="Visa" style="margin-right: 15px;">
-          <img src="../../../assets/img-ecommerce/tarjeta-mastercard.png" alt="Mastercard" style="margin-right: 15px;">
-          <img src="../../../assets/img-ecommerce/tarjeta-american_express.png" alt="American Express">
+          <img
+            src="../../../assets/img-ecommerce/tarjeta-visa.png"
+            alt="Visa"
+            style="margin-right: 15px"
+          />
+          <img
+            src="../../../assets/img-ecommerce/tarjeta-mastercard.png"
+            alt="Mastercard"
+            style="margin-right: 15px"
+          />
+          <img
+            src="../../../assets/img-ecommerce/tarjeta-american_express.png"
+            alt="American Express"
+          />
         </div>
       </div>
       <div class="row mt-2">
         <div class="col">
           <label for="numeroTarjeta">Número de Tarjeta</label>
-          <input type="text" id="numeroTarjeta" class="form-control" placeholder="4517 5124 5678 2215" formControlName="nroTarjeta">
-          <div *ngIf="nroTarjeta.invalid && (nroTarjeta.dirty || nroTarjeta.touched)" class="text-danger">
+          <input
+            type="text"
+            id="numeroTarjeta"
+            class="form-control"
+            placeholder="4517 5124 5678 2215"
+            formControlName="nroTarjeta"
+          />
+          <div
+            *ngIf="
+              nroTarjeta.invalid && (nroTarjeta.dirty || nroTarjeta.touched)
+            "
+            class="text-danger"
+          >
             <div *ngIf="nroTarjeta.errors?.['required']">
               el Número de Tarjeta es requerido.
             </div>
@@ -41,9 +63,22 @@
       <div class="row mt-2">
         <div class="col">
           <label for="vencimiento">Vencimiento</label>
-          <input type="text" id="vencimiento" class="form-control" [(ngModel)]="vencimiento" (input)="formatVencimiento()"
-          placeholder="08/25" formControlName="vencimientoTarjeta">
-          <div *ngIf="vencimientoTarjeta.invalid && (vencimientoTarjeta.dirty || vencimientoTarjeta.touched)" class="text-danger">
+          <input
+            type="text"
+            id="vencimiento"
+            class="form-control"
+            [(ngModel)]="vencimiento"
+            (input)="formatVencimiento()"
+            placeholder="08/25"
+            formControlName="vencimientoTarjeta"
+          />
+          <div
+            *ngIf="
+              vencimientoTarjeta.invalid &&
+              (vencimientoTarjeta.dirty || vencimientoTarjeta.touched)
+            "
+            class="text-danger"
+          >
             <div *ngIf="vencimientoTarjeta.errors?.['required']">
               el Vencimiento es requerido.
             </div>
@@ -54,8 +89,20 @@
         </div>
         <div class="col">
           <label for="codigoSeguridad">Código de Seguridad</label>
-          <input type="text" id="codigoSeguridad" class="form-control" placeholder="XXX" formControlName="codSeguridad">
-          <div *ngIf="codSeguridad.invalid && (codSeguridad.dirty || codSeguridad.touched)" class="text-danger">
+          <input
+            type="text"
+            id="codigoSeguridad"
+            class="form-control"
+            placeholder="XXX"
+            formControlName="codSeguridad"
+          />
+          <div
+            *ngIf="
+              codSeguridad.invalid &&
+              (codSeguridad.dirty || codSeguridad.touched)
+            "
+            class="text-danger"
+          >
             <div *ngIf="codSeguridad.errors?.['required']">
               el Código de Seguridad es requerido.
             </div>
@@ -74,8 +121,17 @@
       <div class="row mt-2">
         <div class="col">
           <label for="nombreTitular">Nombre del Titular</label>
-          <input type="text" id="nombreTitular" class="form-control" placeholder="Nombre Apellido" formControlName="nombre">
-          <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger">
+          <input
+            type="text"
+            id="nombreTitular"
+            class="form-control"
+            placeholder="Nombre Apellido"
+            formControlName="nombre"
+          />
+          <div
+            *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)"
+            class="text-danger"
+          >
             <div *ngIf="nombre.errors?.['required']">
               el Nombre del Titular es requerido.
             </div>
@@ -91,8 +147,17 @@
       <div class="row mt-2">
         <div class="col">
           <label for="dniTitular">DNI del Titular</label>
-          <input type="text" id="dniTitular" class="form-control" placeholder="12345678" formControlName="dni">
-          <div *ngIf="dni.invalid && (dni.dirty || dni.touched)" class="text-danger">
+          <input
+            type="text"
+            id="dniTitular"
+            class="form-control"
+            placeholder="12345678"
+            formControlName="dni"
+          />
+          <div
+            *ngIf="dni.invalid && (dni.dirty || dni.touched)"
+            class="text-danger"
+          >
             <div *ngIf="dni.errors?.['required']">
               el DNI del Titular es requerido.
             </div>
@@ -111,8 +176,17 @@
       <div class="row mt-2">
         <div class="col">
           <label for="email">E-mail</label>
-          <input type="email" id="email" class="form-control" placeholder="ejemplo@gmail.com" formControlName="email">
-          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            placeholder="ejemplo@gmail.com"
+            formControlName="email"
+          />
+          <div
+            *ngIf="email.invalid && (email.dirty || email.touched)"
+            class="text-danger"
+          >
             <div *ngIf="email.errors?.['required']">
               el E-mail es requerido.
             </div>
@@ -127,7 +201,11 @@
       </div>
       <div class="row mt-3">
         <div class="col">
-          <input class="botons" type="submit" value="PAGAR {{tipo_pago|uppercase}}">
+          <input
+            class="botons"
+            type="submit"
+            value="PAGAR {{ tipo_pago | uppercase }}"
+          />
         </div>
       </div>
     </form>

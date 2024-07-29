@@ -1,0 +1,193 @@
+<fieldset>
+  <legend>CRUD Usuarios</legend>
+  <div class="col-sm p-3">
+    <!-- Botón para abrir el modal alta -->
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#altaUsuarioModal"
+    >
+      Añadir Usuario
+    </button>
+  </div>
+  <table summary="Los usuarios registrados en la Clinica">
+    <caption>
+      Un listado de los usuario registrados en la Clinica
+    </caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th >PASSWORD</th>
+        <th>LAST LOGIN</th>
+        <th>IS SUPERUSER</th>
+        <th>USERNAME</th>
+        <th>FIRST NAME</th>
+        <th>LAST NAME</th>
+        <th>EMAIL</th>
+        <th>IS STAFF</th>
+        <th>IS ACTIVE</th>
+        <th>DATE JOINED</th>
+        <th>ACCIONES</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuariosLista">
+        <td>{{ usuario.id }}</td>
+        <td>{{ convertirString(usuario.password) }}</td>
+        <td>{{ usuario.last_login | date : "dd/MM/yyyy HH:MM" }}</td>
+        <td>{{ usuario.is_superuser }}</td>
+        <td>{{ usuario.username }}</td>
+        <td>{{ usuario.first_name }}</td>
+        <td>{{ usuario.last_name }}</td>
+        <td>{{ usuario.email }}</td>
+        <td>{{ usuario.is_staff }}</td>
+        <td>{{ usuario.is_active }}</td>
+        <td>{{ usuario.date_joined | date : "dd/MM/yyyy HH:MM" }}</td>
+        <td>
+          <!-- Botón para abrir el modal detalle -->
+          <button
+            type="button"
+            class="btn btn-success m-1"
+            data-bs-toggle="modal"
+            data-bs-target="#detalleUsuarioModal"
+            (click)="irDetalleUsuario(usuario)"
+          >
+            Detalle
+          </button>
+          <!-- Botón para abrir el modal editar -->
+          <button
+            type="button"
+            class="btn btn-warning m-1"
+            data-bs-toggle="modal"
+            data-bs-target="#editarUsuarioModal"
+            (click)="irEditarUsuario(usuario)"
+          >
+            Editar
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger m-1"
+            (click)="eliminarUsuario(usuario.id)"
+          >
+            Borrar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</fieldset>
+
+<!-- Modal alta-->
+<div
+  class="modal fade"
+  id="altaUsuarioModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="altaUsuarioModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="altaUsuarioModalLabel">
+          Crear usuario
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-form-usuario></app-c-form-usuario>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+              Crear
+            </button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal editar-->
+<div
+  class="modal fade"
+  id="editarUsuarioModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="editarUsuarioModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editarUsuarioModalLabel">
+          Editar usuario
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-edit-usuario></app-c-edit-usuario>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+              Crear
+            </button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal detalle-->
+<div
+  class="modal fade"
+  id="detalleUsuarioModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="detalleUsuarioModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="detalleUsuarioModalLabel">
+          Detalle usuario
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-detail-usuario></app-c-detail-usuario>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+              Crear
+            </button> -->
+      </div>
+    </div>
+  </div>
+</div>

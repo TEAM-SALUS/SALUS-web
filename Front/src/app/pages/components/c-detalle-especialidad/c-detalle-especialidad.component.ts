@@ -18,7 +18,7 @@ import Swal from 'sweetalert2';
 export class CDetalleEspecialidadComponent implements OnInit {
   especialidadId!: number;
   public profesionalLista: ProfesionalInterface[] = [];
-  public especialidad!: EspecialidadInterface;
+  public especialidad: EspecialidadInterface | any = {};
   public diaSemana: typeof DiaSemana = DiaSemana;
   public fechaHora: string = '';
   public mensajeFecha: string = '';
@@ -40,7 +40,8 @@ export class CDetalleEspecialidadComponent implements OnInit {
 
   public redirectToPay(
     diasSemana: string | undefined,
-    idm: number | undefined
+    idm: number | undefined,
+    precio: number
   ) {
     //this.router.navigate(['pago']);
     const fechaHora = new Date(this.fechaHora);
@@ -57,7 +58,12 @@ export class CDetalleEspecialidadComponent implements OnInit {
           //this.router.navigateByUrl(`pago/${idm}`);
           this.router.navigate([
             'pago',
-            { fecha_hora: fechaHora, id_medico: idm, tipo_pago: 'turno' },
+            {
+              fecha_hora: fechaHora,
+              id_medico: idm,
+              precio: precio,
+              tipo_pago: 'turno',
+            },
           ]);
         });
       } else {
@@ -89,7 +95,7 @@ export class CDetalleEspecialidadComponent implements OnInit {
       });
     }
     this.fechaHora = '';
-  };
+  }
 
   private obtenerEspecialidad() {
     this.especialidadService.getEspecialidadId(this.especialidadId).subscribe({
@@ -103,7 +109,7 @@ export class CDetalleEspecialidadComponent implements OnInit {
         this.obtenerProfesionalesPorEspecialidad();
       },
     });
-  };
+  }
 
   private obtenerProfesionalesPorEspecialidad() {
     this.profesionalService
@@ -119,7 +125,7 @@ export class CDetalleEspecialidadComponent implements OnInit {
           this.obtenerHorarioPorProfesionales();
         },
       });
-  };
+  }
 
   public obtenerHorarioPorProfesionales() {
     for (let profesional of this.profesionalLista) {
@@ -135,5 +141,5 @@ export class CDetalleEspecialidadComponent implements OnInit {
           complete: () => {},
         });
     }
-  };
+  }
 }

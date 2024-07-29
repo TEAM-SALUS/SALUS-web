@@ -40,15 +40,16 @@ export class ErrorInterceptorService implements HttpInterceptor{
               err.error.message = "Acceso denegado, credenciales invalidas";
               break;
               case 403:
-                // statement N
+                // statement 3
                 err.error.message = "Consulte adminstracion, no posee credenciales para recurso ";
                 break;
             case 404:
-              // statement N
+              // statement 4
               err.error.message = "Busque una time machine, recurso no encontrado";
               break;
             default: 
-              // 
+              // statement n
+              err.error.message = "Error desconocido, error no encontrado";
               break;
           }
 

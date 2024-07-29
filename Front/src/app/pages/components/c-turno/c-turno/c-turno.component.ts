@@ -25,13 +25,7 @@ export class CTurnoComponent implements OnInit {
     this.turnosService.obtenerTurnos().subscribe({
       next: (turnosData) => {
         this.turnosList = turnosData;
-      },
-      error: (errorData) => {
-        console.log(errorData);
-      },
-      complete: () => {
-        console.log('Turnos recuperados');
-      },
+      }
     });
   }
   /** Ir a detalle de turno */

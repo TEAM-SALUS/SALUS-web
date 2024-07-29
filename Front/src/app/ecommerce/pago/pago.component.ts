@@ -15,6 +15,10 @@ import { formatDate } from '@angular/common';
 import { ITurno } from 'src/app/model/iturno';
 import { EstadoTurno } from 'src/app/enums/estado-turno';
 import { TurnosService } from 'src/app/services/turnos.service';
+import { PacienteService } from 'src/app/services/paciente.service';
+import { IPago } from 'src/app/model/i-pago';
+import { EEstadoPago } from 'src/app/enums/e-estado-pago';
+import { PagoService } from 'src/app/services/pago.service';
 
 @Component({
   selector: 'app-pago',
@@ -38,8 +42,10 @@ export class PagoComponent implements OnInit {
   public fecha?: string;
   public horario?: string;
   public id_medico?: number;
-  public id_paciente?: number|string|null;
+  public precio?: number;
+  public id_paciente?: number | string | null;
   public nuevoTurno: ITurno = {};
+  public pago: IPago = {};
 
   constructor(
     private formBuilder: FormBuilder,
@@ -47,10 +53,13 @@ export class PagoComponent implements OnInit {
     private ventaService: VentaService,
     private suscriptionService: SuscriptionService,
     private activateRouter: ActivatedRoute,
-    private turnosService:TurnosService,
+    private turnosService: TurnosService,
+    private pacienteService: PacienteService,
+    private pagoService: PagoService
   ) {}
 
   ngOnInit(): void {
+    this.obtenerIdPacientePorUsuario();
     this.obtenerParametrosPorUrl();
   }
 
@@ -135,20 +144,28 @@ export class PagoComponent implements OnInit {
           this.nuevoTurno.id_medico = this.id_medico;
           this.nuevoTurno.id_paciente = this.id_paciente;
 
+          console.info(this.nuevoTurno);
+
           this.turnosService.registrarTurno(this.nuevoTurno).subscribe({
             next: (turnoData) => {
-            },
-            error: (errorData) => {
-            },
-            complete: () => {              
+              this.pago.monto = this.precio;
+              this.pago.hora = formatDate(Date.now(), 'hh:mm', 'es-AR');
+              this.pago.estado = EEstadoPago.ACEPTADO;
+              this.pago.id_turno = turnoData.id;
+
+              this.registrarPago();
+
               Swal.fire({
                 icon: 'success',
                 title: `Su pago ha sido exitoso`,
                 text: `Se ha confirmado el turno`,
               });
-              this.router.navigateByUrl('/home');
               this.pagoForm.reset();
-            }
+              this.router.navigateByUrl('/home');
+              window.location.reload;
+            },
+            error: (errorData) => {},
+            complete: () => {},
           });
 
           break;
@@ -199,8 +216,21 @@ export class PagoComponent implements OnInit {
     this.vencimiento = formattedValue;
   }
 
+  public obtenerIdPacientePorUsuario() {
+    this.pacienteService
+      .obtenerPacientePorIdUsuario(Number(sessionStorage.getItem('id')))
+      .subscribe({
+        next: (pacienteData) => {
+          console.info('PACIENTE POR USER', pacienteData);
+          this.id_paciente = pacienteData.id;
+        },
+        error: (errorData) => {},
+        complete: () => {},
+      });
+  }
+
   private obtenerParametrosPorUrl() {
-    this.id_paciente = sessionStorage.getItem('id');
+    //this.id_paciente = sessionStorage.getItem('id');
     this.activateRouter.params.subscribe((params: Params) => {
       this.tipo_pago = params['tipo_pago'];
       switch (this.tipo_pago) {
@@ -208,6 +238,7 @@ export class PagoComponent implements OnInit {
           this.fecha = formatDate(params['fecha_hora'], 'yyyy-MM-dd', 'es-ar');
           this.horario = formatDate(params['fecha_hora'], 'HH:mm', 'es-AR');
           this.id_medico = params['id_medico'];
+          this.precio = params['precio'];
           break;
         case 'ventas':
           this.suscripcionActual = history.state.suscripcion;
@@ -225,6 +256,19 @@ export class PagoComponent implements OnInit {
         default:
           break;
       }
+    });
+  }
+
+  /** Registra pago */
+  public registrarPago() {
+    this.pagoService.registrarPago(this.pago).subscribe({
+      next: (pagoData) => {
+        console.info('pago', pagoData);
+      },
+      error: (errorData) => {
+        console.error('error pago', errorData);
+      },
+      complete: () => {},
     });
   }
 }

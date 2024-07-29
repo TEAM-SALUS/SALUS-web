@@ -1,0 +1,21 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{ this.especialidad.id }}</h5>
+    <p class="card-text">{{ this.especialidad.nombre }}</p>
+    <p class="card-text">{{ this.especialidad.precio | currency : "$" }}</p>
+    <p class="card-text">{{ this.especialidad.duracion }}</p>
+    <p class="card-text">{{ this.especialidad.descripcion }}</p>
+    <p class="card-text">
+      <small class="text-muted">{{ this.especialidad.is_active }}</small>
+    </p>
+  </div>
+  <figure>
+    <img
+      class="card-img-bottom"
+      src="{{ this.especialidad.foto }}"
+      alt="imagen de usuario a ver"
+      title="Figura, Usuario"
+    />
+    <figcaption class="text-center">Fig - Figura seleccionada</figcaption>
+  </figure>
+</div>

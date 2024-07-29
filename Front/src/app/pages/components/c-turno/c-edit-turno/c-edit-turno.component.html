@@ -1,0 +1,220 @@
+<main class="form-background">
+  <section class="form-registro">
+    <form [formGroup]="registroForm">
+      <!-- ID Turno -->
+      <input
+        class="control"
+        readonly
+        type="text"
+        name="id"
+        placeholder="Ingrese id de turno"
+        formControlName="id"
+      />
+      <div *ngIf="id.invalid && (id.dirty || id.touched)" class="text-danger">
+        <small *ngIf="id.errors?.['required']"> El id es requerida. </small>
+      </div>
+      <!-- fecha -->
+      <input
+        class="control"
+        type="date"
+        name="fecha"
+        placeholder="Ingrese fecha de turno"
+        formControlName="fecha"
+      />
+      <div
+        *ngIf="fecha.invalid && (fecha.dirty || fecha.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="fecha.errors?.['required']">
+          La fecha es requerida.
+        </small>
+      </div>
+      <!-- horario -->
+      <input
+        class="control"
+        type="time"
+        name="horario"
+        placeholder="Ingrese horario de turno"
+        formControlName="horario"
+      />
+      <div
+        *ngIf="horario.invalid && (horario.dirty || horario.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="horario.errors?.['required']">
+          El horario es requerido.
+        </small>
+      </div>
+      <!-- pagado -->
+      <div class="radio-container">
+        <input
+          class="control-rg"
+          type="radio"
+          name="pagado"
+          formControlName="pagado"
+          value="true"
+        />
+        PAGADO
+        <input
+          class="control-rg"
+          type="radio"
+          name="pagado"
+          formControlName="pagado"
+          value="false"
+        />
+        NO PAGADO
+      </div>
+      <div
+        *ngIf="pagado.invalid && (pagado.dirty || pagado.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="pagado.errors?.['required']">
+          El pagado es requerido.
+        </small>
+      </div>
+      <!-- estado -->
+      <select
+        class="control"
+        type="text"
+        name="estado"
+        placeholder="Ingrese estado de turno"
+        formControlName="estado"
+      >
+        <option
+          *ngFor="let eEstado of estadoTurno | keyvalue"
+          [ngValue]="eEstado.value"
+        >
+          {{ eEstado.key }}
+        </option>
+      </select>
+      <div
+        *ngIf="estado.invalid && (estado.dirty || estado.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="estado.errors?.['required']">
+          El estado es requerido.
+        </small>
+      </div>
+      <!-- sintomas -->
+      <input
+        [readonly]="this.rol == 'paciente'"
+        class="control"
+        type="text"
+        name="sintomas"
+        placeholder="Ingrese sintomas de turno"
+        formControlName="sintomas"
+      />
+      <div
+        *ngIf="sintomas.invalid && (sintomas.dirty || sintomas.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="sintomas.errors?.['required']">
+          El sintomas es requerido.
+        </small>
+      </div>
+      <!-- diagnostico -->
+      <input
+        [readonly]="this.rol == 'paciente'"
+        class="control"
+        type="text"
+        name="diagnostico"
+        placeholder="Ingrese diagnostico de turno"
+        formControlName="diagnostico"
+      />
+      <div
+        *ngIf="
+          diagnostico.invalid && (diagnostico.dirty || diagnostico.touched)
+        "
+        class="text-danger"
+      >
+        <small *ngIf="diagnostico.errors?.['required']">
+          El diagnostico es requerido.
+        </small>
+      </div>
+      <!-- tratamiento -->
+      <input
+        [readonly]="this.rol == 'paciente'"
+        class="control"
+        type="text"
+        name="tratamiento"
+        placeholder="Ingrese tratamiento de turno"
+        formControlName="tratamiento"
+      />
+      <div
+        *ngIf="
+          tratamiento.invalid && (tratamiento.dirty || tratamiento.touched)
+        "
+        class="text-danger"
+      >
+        <small *ngIf="tratamiento.errors?.['required']">
+          El tratamiento es requerido.
+        </small>
+      </div>
+      <!-- is_active -->
+      <!-- <input
+              class="control"
+              type="radio"
+              name="is_active"
+              placeholder="Ingrese is_active de paciente"
+              formControlName="is_active"
+            />
+            <div
+              *ngIf="is_active.invalid && (is_active.dirty || is_active.touched)"
+              class="text-danger"
+            >
+              <small *ngIf="is_active.errors?.['required']">
+                El is_active es requerido.
+              </small>
+            </div> -->
+      <!-- id_medico -->
+      <select class="control" name="id_medico" formControlName="id_medico">
+        <option *ngFor="let medico of this.medicoLista" [ngValue]="medico.id">
+          {{
+            medico.id +
+              " - " +
+              medico.matricula +
+              " - " +
+              medico.nombre +
+              " - " +
+              medico.apellido
+          }}
+          <figure>
+            <img src="{{ medico.foto }}" alt="Icono de medico" />
+          </figure>
+        </option>
+      </select>
+      <div
+        *ngIf="id_medico.invalid && (id_medico.dirty || id_medico.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="id_medico.errors?.['required']">
+          Ea id_medico es requeridao
+        </small>
+      </div>
+      <!-- id_paciente -->
+      <select class="control" name="id_paciente" formControlName="id_paciente">
+        <option *ngFor="let paciente of pacienteLista" [ngValue]="paciente.id">
+          {{ paciente.id }} - {{ paciente.dni_paciente }} -
+          {{ paciente.nombre }} - {{ paciente.apellido }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          id_paciente.invalid && (id_paciente.dirty || id_paciente.touched)
+        "
+        class="text-danger"
+      >
+        <small *ngIf="id_paciente.errors?.['required']">
+          El id_paciente es requerido.
+        </small>
+      </div>
+      <!-- submit -->
+      <input
+        type="submit"
+        class="boton"
+        value="Registrar"
+        (click)="editarTurno()"
+      />
+    </form>
+  </section>
+</main>

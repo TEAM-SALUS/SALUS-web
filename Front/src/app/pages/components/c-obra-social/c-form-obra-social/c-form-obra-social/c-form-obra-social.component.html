@@ -1,0 +1,55 @@
+<main class="form-background">
+  <section class="form-registro">
+    <form [formGroup]="registroForm">
+      <!-- nombre -->
+      <input
+        class="control"
+        type="text"
+        name="nombre"
+        placeholder="Ingrese nombre de obra social"
+        formControlName="nombre"
+      />
+      <div
+        *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="nombre.errors?.['required']">
+          El nombre es requerido.
+        </small>
+      </div>
+      <!-- foto -->
+      <input
+        class="control"
+        type="file"
+        name="foto"
+        placeholder="Ingrese foto de obra social"
+        formControlName="foto"
+        (change)="onFileSelected($event)"
+      />
+      <div class="conteiner-figure" *ngIf="previsualizacion">
+        <figure>
+          <img
+            class="img"
+            [src]="previsualizacion"
+            alt="imagen de obra social a cambiar"
+            title="Figura, Obra Social"
+          />
+          <figcaption>Fig - Figura seleccionada</figcaption>
+        </figure>
+      </div>
+      <div
+        *ngIf="foto.invalid && (foto.dirty || foto.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="foto.errors?.['required']"> La foto es requerida. </small>
+      </div>
+      <!-- submit -->
+      <input
+        type="submit"
+        class="boton"
+        value="Registrar"
+        (click)="registrarObraSocial()"
+      />
+    </form>
+  </section>
+</main>

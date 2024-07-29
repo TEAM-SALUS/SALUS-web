@@ -1,0 +1,149 @@
+<fieldset>
+  <legend>CRUD Especialidades</legend>
+  <div class="col-sm p-3">
+    <!-- Botón para abrir el modal alta -->
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#altaEspecialidadModal"
+    >
+      Añadir Especialidad
+    </button>
+  </div>
+  <table summary="Las especialidaes registradas en la Clinica">
+    <caption>
+      Un listado de las especialdiades registradas en la Clinica
+    </caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>NOMBRE</th>
+        <th>PRECIO</th>
+        <th>DURACION</th>
+        <th>DESCRIPCION</th>
+        <th>FOTO</th>
+        <th>IS_ACTIVE</th>
+        <th>OPTION</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let especialidad of especialidadesList">
+        <td>{{ especialidad.id }}</td>
+        <td>{{ especialidad.nombre }}</td>
+        <td>{{ especialidad.precio | currency : "$"}}</td>
+        <td>{{ especialidad.duracion }}</td>
+        <td>{{ especialidad.descripcion }}</td>
+        <td>
+          <img
+            class="card-img-top"
+            src="{{ especialidad.foto }}"
+            alt="imagen-especialidad"
+          />
+        </td>
+        <td>{{ especialidad.is_active }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-success m-1"
+            data-bs-toggle="modal"
+            data-bs-target="#detalleEspecialidadModal"
+            (click)="irDetalleEspecialidad(especialidad)"
+          >
+            Detalle
+          </button>
+          <button
+            type="button"
+            class="btn btn-warning m-1"
+            (click)="redirectToEdit(especialidad.id)"
+          >
+            Editar
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger m-1"
+            (click)="eliminarEspecialidad(especialidad.id)"
+          >
+            Borrar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</fieldset>
+
+<!-- Modal alta-->
+<div
+  class="modal fade"
+  id="altaEspecialidadModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="altaEspecialidadModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="altaEspecialidadModalLabel">
+          Crear especialidad
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-form-especialidad></app-c-form-especialidad>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+          Crear
+        </button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal detalle-->
+<div
+  class="modal fade"
+  id="detalleEspecialidadModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="detalleEspecialidadModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="detalleEspecialidadModalLabel">
+          Detalle usuario
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-detail-especialidad></app-c-detail-especialidad>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+              Crear
+            </button> -->
+      </div>
+    </div>
+  </div>
+</div>

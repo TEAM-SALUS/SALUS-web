@@ -1,0 +1,201 @@
+<fieldset>
+  <legend>CRUD Medicos</legend>
+  <div class="col-sm p-3">
+    <!-- Botón para abrir el modal alta -->
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#altaMedicoModal"
+    >
+      Añadir Medico
+    </button>
+  </div>
+  <table summary="Los medicos registrados en la Clinica">
+    <caption>
+      Un listado de los medicos registrados en la Clinica
+    </caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>MATRICULA</th>
+        <th>NOMBRE</th>
+        <th>APELLIDO</th>
+        <th>EMAIL</th>
+        <th>CLAVE</th>
+        <th>TELEFONO</th>
+        <th>FOTO</th>
+        <th>IS ACTIVE</th>
+        <th>ID ESPECIALIDAD</th>
+        <th>ID HORARIO</th>
+        <th>ID MEDICOUSER</th>
+        <th>ACCIONES</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let medico of medicosLista">
+        <td>{{ medico.id }}</td>
+        <td>{{ medico.matricula }}</td>
+        <td>{{ medico.nombre }}</td>
+        <td>{{ medico.apellido }}</td>
+        <td>{{ medico.email }}</td>
+        <td>{{ medico.clave }}</td>
+        <td>{{ medico.telefono }}</td>
+        <td>
+          <img
+            class="card-img-top"
+            src="{{ medico.foto }}"
+            alt="imagen-medico"
+          />
+        </td>
+        <td>{{ medico.is_active }}</td>
+        <td>{{ medico.id_especialidad }}</td>
+        <td>{{ medico.id_horario }}</td>
+        <td>{{ medico.medicoUser }}</td>
+        <td>
+          <!-- Botón para abrir el modal detalle -->
+          <button
+            type="button"
+            class="btn btn-success m-1"
+            data-bs-toggle="modal"
+            data-bs-target="#detalleMedicoModal"
+            (click)="irDetalleMedico(medico)"
+          >
+            Detalle
+          </button>
+          <!-- Botón para abrir el modal editar -->
+          <button
+            type="button"
+            class="btn btn-warning m-1"
+            data-bs-toggle="modal"
+            data-bs-target="#editarMedicoModal"
+            (click)="irEditarMedico(medico)"
+          >
+            Editar
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger m-1"
+            (click)="eliminarMedico(medico.id)"
+          >
+            Borrar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</fieldset>
+
+<!-- Modal alta-->
+<div
+  class="modal fade"
+  id="altaMedicoModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="altaMedicoModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="altaMedicoModalLabel">
+          Crear medico
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-form-medico></app-c-form-medico>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+              Crear
+            </button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal editar-->
+<div
+  class="modal fade"
+  id="editarMedicoModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="editarMedicoModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editarMedicoModalLabel">
+          Editar medico
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-edit-medico></app-c-edit-medico>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+              Crear
+            </button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal detalle-->
+<div
+  class="modal fade"
+  id="detalleMedicoModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="detalleMedicoModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="detalleMedicoModalLabel">
+          Detalle medico
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-detail-medico></app-c-detail-medico>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+              Crear
+            </button> -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,204 @@
+<main class="form-background">
+  <section class="form-registro">
+    <form [formGroup]="registroForm">
+      <!-- dni_paciente -->
+      <input
+        class="control"
+        type="text"
+        name="dni_paciente"
+        placeholder="Ingrese dni_paciente de paciente"
+        formControlName="dni_paciente"
+      />
+      <div
+        *ngIf="
+          dni_paciente.invalid && (dni_paciente.dirty || dni_paciente.touched)
+        "
+        class="text-danger"
+      >
+        <small *ngIf="dni_paciente.errors?.['required']">
+          El dni_paciente es requerido.
+        </small>
+      </div>
+      <!-- nombre -->
+      <input
+        class="control"
+        type="text"
+        name="nombre"
+        placeholder="Ingrese nombre de paciente"
+        formControlName="nombre"
+      />
+      <div
+        *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="nombre.errors?.['required']">
+          El nombre es requerido.
+        </small>
+      </div>
+      <!-- apellido -->
+      <input
+        class="control"
+        type="text"
+        name="apellido"
+        placeholder="Ingrese apellido de paciente"
+        formControlName="apellido"
+      />
+      <div
+        *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="apellido.errors?.['required']">
+          El apellido es requerido.
+        </small>
+      </div>
+      <!-- email -->
+      <input
+        class="control"
+        type="text"
+        name="email"
+        placeholder="Ingrese email de paciente"
+        formControlName="email"
+      />
+      <div
+        *ngIf="email.invalid && (email.dirty || email.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="email.errors?.['required']">
+          El email es requerido.
+        </small>
+      </div>
+      <!-- clave -->
+      <input
+        class="control"
+        type="text"
+        name="clave"
+        placeholder="Ingrese clave de paciente"
+        formControlName="clave"
+      />
+      <div
+        *ngIf="clave.invalid && (clave.dirty || clave.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="clave.errors?.['required']">
+          La clave es requerido.
+        </small>
+      </div>
+      <!-- telefono -->
+      <input
+        class="control"
+        type="text"
+        name="telefono"
+        placeholder="Ingrese telefono de paciente"
+        formControlName="telefono"
+      />
+      <div
+        *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="telefono.errors?.['required']">
+          El telefono es requerido.
+        </small>
+      </div>
+      <!-- foto -->
+      <input
+        class="control"
+        type="file"
+        name="foto"
+        placeholder="Ingrese foto de paciente"
+        formControlName="foto"
+        (change)="onFileSelected($event)"
+      />
+      <div class="conteiner-figure" *ngIf="previsualizacion">
+        <figure>
+          <img
+            class="img"
+            [src]="previsualizacion"
+            alt="imagen de paciente a cambiar"
+            title="Figura, Paciente"
+          />
+          <figcaption>Fig - Figura seleccionada</figcaption>
+        </figure>
+      </div>
+      <div
+        *ngIf="foto.invalid && (foto.dirty || foto.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="foto.errors?.['required']"> La foto es requerida. </small>
+      </div>
+      <!-- is_active -->
+      <!-- <input
+        class="control"
+        type="radio"
+        name="is_active"
+        placeholder="Ingrese is_active de paciente"
+        formControlName="is_active"
+      />
+      <div
+        *ngIf="is_active.invalid && (is_active.dirty || is_active.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="is_active.errors?.['required']">
+          El is_active es requerido.
+        </small>
+      </div> -->
+      <!-- id_obra_social -->
+      <select
+        class="control"
+        name="id_obra_social"
+        formControlName="id_obra_social"
+      >
+        <option value="" disabled hidden>
+          Seleccione una obra social porfavor
+        </option>
+        <option
+          *ngFor="let obraSocial of this.obraSocialLista"
+          [ngValue]="obraSocial.id"
+        >
+          {{ obraSocial.id + " - " + obraSocial.nombre }}
+          <figure>
+            <img src="{{ obraSocial.foto }}" alt="Icono de obra social" />
+          </figure>
+        </option>
+      </select>
+      <div
+        *ngIf="
+          id_obra_social.invalid &&
+          (id_obra_social.dirty || id_obra_social.touched)
+        "
+        class="text-danger"
+      >
+        <small *ngIf="id_obra_social.errors?.['required']">
+          El id_obra_social es requerido.
+        </small>
+      </div>
+      <!-- pacienteUser -->
+      <select
+        class="control"
+        name="pacienteUser"
+        formControlName="pacienteUser"
+      >
+        <option value="" disabled hidden>Seleccione un usuario porfavor</option>
+        <option *ngFor="let usuario of usuarioLista" [ngValue]="usuario.id">
+          {{ usuario.id + " - " + usuario.username }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          pacienteUser.invalid && (pacienteUser.dirty || pacienteUser.touched)
+        "
+        class="text-danger"
+      >
+        <small *ngIf="pacienteUser.errors?.['required']">
+          El pacienteUser es requerido.
+        </small>
+      </div>
+      <!-- submit -->
+      <input
+        type="submit"
+        class="boton"
+        value="Registrar"
+        (click)="registrarPaciente()"
+      />
+    </form>
+  </section>
+</main>

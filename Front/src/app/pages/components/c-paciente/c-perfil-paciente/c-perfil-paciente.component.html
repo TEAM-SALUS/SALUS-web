@@ -1,0 +1,84 @@
+<main class="box">
+  <div class="div" *ngIf="isLoading">Cargando...</div>
+  <div class="div" *ngIf="!isLoading && this.pacientePerfil">
+    <h1 class="h1">Perfil de Paciente</h1>
+    <div class="conteiner-figure div">
+      <figure>
+        <img
+          class="img"
+          src="http://localhost:8000{{ this.pacientePerfil.foto }}"
+          alt="imagen de usuario de {{ this.pacientePerfil.nombre }}"
+          title="{{ this.pacientePerfil.nombre }}, Paciente"
+        />
+        <figcaption>
+          Fig - {{ this.pacientePerfil.apellido }} -
+          {{ this.pacientePerfil.nombre }}
+        </figcaption>
+      </figure>
+    </div>
+    <p class="p">ID: {{ this.pacientePerfil.id }}</p>
+    <p class="p">DNI: {{ this.pacientePerfil.dni_paciente }}</p>
+    <p class="p">Nombre: {{ this.pacientePerfil.nombre }}</p>
+    <p class="p">Apellido: {{ this.pacientePerfil.apellido }}</p>
+    <p class="p">Email: {{ this.pacientePerfil.email }}</p>
+    <p class="p">Clave: {{ convertirString(this.pacientePerfil.clave) }}</p>
+    <p class="p">Telefono: {{ this.pacientePerfil.telefono }}</p>
+    <p class="p">Is active: {{ pacientePerfil.is_active }}</p>
+    <p class="p">Obra social: {{ this.pacientePerfil.id_obra_social }}</p>
+    <p class="p">Usuario: {{ this.pacientePerfil.pacienteUser }}</p>
+    <!-- Botón para abrir el modal perfil editar -->
+    <button
+      type="button"
+      class="button"
+      data-bs-toggle="modal"
+      data-bs-target="#editarPerfilPacienteModal"
+      (click)="editarPaciente()"
+    >
+      Editar Paciente
+    </button>
+    <button class="button" (click)="eliminarPaciente()">
+      Eliminar Paciente
+    </button>
+  </div>
+  <div *ngIf="!isLoading && !this.pacientePerfil && errorMessage">
+    <p>{{ errorMessage }}</p>
+  </div>
+</main>
+
+<!-- Modal perfil editar-->
+<div
+  class="modal fade"
+  id="editarPerfilPacienteModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="editarPerfilPacienteModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editarPerfilPacienteModalLabel">
+          Editar paciente
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-perfil-edit-paciente></app-c-perfil-edit-paciente>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+            Crear
+          </button> -->
+      </div>
+    </div>
+  </div>
+</div>

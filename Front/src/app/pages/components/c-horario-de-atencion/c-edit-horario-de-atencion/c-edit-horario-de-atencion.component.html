@@ -1,0 +1,67 @@
+<main class="form-background">
+    <section class="form-registro">
+      <form [formGroup]="registroForm">
+        <!-- ID HorarioDeAtencion -->
+      <input type="text" readonly class="control" value="{{ horarioDeAtencion.id }}" />
+        <!-- dia_de_la_semana -->
+        <input
+          class="control"
+          type="text"
+          name="dia_de_la_semana"
+          placeholder="Ingrese dia de la semana de horario de atencion"
+          formControlName="dia_de_la_semana"
+          value="{{horarioDeAtencion.dia_de_la_semana}}"
+        />
+        <div
+          *ngIf="dia_de_la_semana.invalid && (dia_de_la_semana.dirty || dia_de_la_semana.touched)"
+          class="text-danger"
+        >
+          <small *ngIf="dia_de_la_semana.errors?.['required']">
+            El dia de la semana es requerido.
+          </small>
+        </div>
+        <!-- hora_entrada -->
+        <input
+          class="control"
+          type="time"
+          name="hora_entrada"
+          placeholder="Ingrese hora entrada de horario de atencion"
+          formControlName="hora_entrada"
+          value="{{horarioDeAtencion.hora_entrada}}"
+        />
+        <div
+          *ngIf="hora_entrada.invalid && (hora_entrada.dirty || hora_entrada.touched)"
+          class="text-danger"
+        >
+          <small *ngIf="hora_entrada.errors?.['required']">
+            La hora entrada es requerida.
+          </small>
+        </div>
+        <!-- hora_salida -->
+        <input
+          class="control"
+          type="time"
+          name="hora_salida"
+          placeholder="Ingrese hora salida de horario de atencion"
+          formControlName="hora_salida"
+          value="{{horarioDeAtencion.hora_salida}}"
+        />
+        <div
+          *ngIf="hora_salida.invalid && (hora_salida.dirty || hora_salida.touched)"
+          class="text-danger"
+        >
+          <small *ngIf="hora_salida.errors?.['required']">
+            La hora salida es requerida.
+          </small>
+        </div>
+        <!-- submit -->
+        <input
+          type="submit"
+          class="boton"
+          value="Registrar"
+          (click)="editarHorarioDeAtencion()"
+        />
+      </form>
+    </section>
+  </main>
+  

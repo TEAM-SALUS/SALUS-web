@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-body">
+    <span>
+        <ul>
+          <li
+            *ngFor="let d of horarioDeAtencion.dia_de_la_semana?.split(';')"
+          >
+            <img src="../../../../assets/flecha.png" alt="" />
+            {{ diaSemana[+d] }}
+          </li>
+        </ul>
+      </span>
+    <p class="card-text">{{ this.horarioDeAtencion.hora_entrada }}</p>
+    <p class="card-text">{{ this.horarioDeAtencion.hora_salida }}</p>
+    <p class="card-text">
+      <small class="text-muted">{{ this.horarioDeAtencion.is_active }}.</small>
+    </p>
+  </div>
+  <figure>
+    <img
+      class="card-img-bottom"
+      src="../../../../assets/reloj.png"
+      alt="imagen de horario de atencion a ver"
+      title="Figura, Horario De Atencion"
+    />
+    <figcaption class="text-center">Fig - Figura seleccionada</figcaption>
+  </figure>
+</div>

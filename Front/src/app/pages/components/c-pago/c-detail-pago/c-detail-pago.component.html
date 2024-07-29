@@ -1,0 +1,21 @@
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ this.pago.monto | currency:"$" }}</h5>
+      <h5 class="card-title">{{ this.pago.fecha | date : "dd/MM/yyyy" }}</h5>
+      <h5 class="card-title">{{ this.pago.hora }}</h5>
+      <h5 class="card-title">{{ this.pago.estado }}</h5>
+      <h5 class="card-title">{{ this.pago.id_turno }}</h5>
+      <p class="card-text">{{ this.pago.is_active }}</p>
+      <p class="card-text"><small class="text-muted">Bajo eleccion del usaurio.</small></p>
+    </div>
+    <figure>
+        <img
+          class="card-img-bottom"
+          src="../../../../../assets/cajero.png"
+          alt="imagen de medico ver"
+          title="Figura, Medico"
+        />
+        <figcaption class="text-center">Fig - Figura seleccionada</figcaption>
+      </figure>
+  </div>
+

@@ -48,7 +48,7 @@ export class CEspecialidadComponent implements OnInit{
     this.router.navigate(['editar-servicio',id]);
   }
 
-  public irAgreagrEspecialidad() {
+  public irAgreagarEspecialidad() {
     this.router.navigate(['agregar-servicio']);
   }
 
@@ -76,8 +76,7 @@ export class CEspecialidadComponent implements OnInit{
           }
         });
       }
-    });
-    
+    });    
   }
   
 }

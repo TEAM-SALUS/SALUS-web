@@ -1,25 +1,47 @@
 <div [ngSwitch]="rol">
-  <!-- SECCION ADMINISTRADO -->
+  <!-- SECCION ADMINISTRADOR -->
   <div *ngSwitchCase="'admin'">
     <p class="text-center py-3">perfil works!</p>
-    <app-user-profile></app-user-profile>
+    <app-c-perfil-usuario></app-c-perfil-usuario>
+    <p class="text-center py-3">tabla obra paciente works!</p>
+    <app-c-table-usuario></app-c-table-usuario>
+    <p class="text-center py-3">tabla obra social works!</p>
+    <app-c-table-obra-social></app-c-table-obra-social>
+    <p class="text-center py-3">paciente works!</p>
+    <app-c-table-paciente></app-c-table-paciente>
+    <p class="text-center py-3">tabla especialidad works!</p>
+    <app-c-table-especialidad></app-c-table-especialidad>
+    <p class="text-center py-3">horario de atencion works!</p>
+    <app-c-table-horario-de-atencion></app-c-table-horario-de-atencion>
+    <p class="text-center py-3">medico works!</p>
+    <app-c-table-medico></app-c-table-medico>
     <p class="text-center py-3">turno works!</p>
-    <app-c-turno></app-c-turno>
-    <p class="text-center py-3">consulta works!</p>
-    <app-c-consulta></app-c-consulta>
+    <app-c-table-turno></app-c-table-turno>
+    <p class="text-center py-3">pago works!</p>
+    <app-c-table-pago></app-c-table-pago>
   </div>
   <div *ngSwitchCase="'profesional'">
     <!-- SECCION PROFESIONAL -->
     <p>seccion profesional</p>
+    <p class="text-center py-3">perfil usuario works!</p>
+    <app-c-perfil-usuario></app-c-perfil-usuario>
+    <p class="text-center py-3">perfil medico works!</p>
+    <app-c-perfil-medico></app-c-perfil-medico>
+    <p class="text-center py-3">turno works!</p>
+    <app-c-table-turno></app-c-table-turno>
   </div>
   <div *ngSwitchCase="'paciente'">
     <!-- SECCION PACIENTE -->
-    <p class="text-center py-3">perfil works!</p>
-    <app-user-profile></app-user-profile>
+    <p class="text-center py-3">perfil usuario works!</p>
+    <app-c-perfil-usuario></app-c-perfil-usuario>
+    <p class="text-center py-3">perfil paciente works!</p>
+    <app-c-perfil-paciente></app-c-perfil-paciente>
+    <!-- <p class="text-center py-3">perfil works!</p>
+    <app-user-profile></app-user-profile> -->
     <p class="text-center py-3">turno works!</p>
-    <app-c-turno></app-c-turno>
-    <p class="text-center py-3">consulta works!</p>
-    <app-c-consulta></app-c-consulta>
+    <app-c-table-turno></app-c-table-turno>
+    <p class="text-center py-3">pago works!</p>
+    <app-c-table-pago></app-c-table-pago>
   </div>
   <div *ngSwitchDefault>
     <!-- SECCION INVITADO -->

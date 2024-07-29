@@ -22,7 +22,9 @@ export class RegistroComponent {
     email: '',
     clave: '',
     telefono: '',
-    pacienteUser: ''
+    id_obra_social:'1',
+    pacienteUser: '',
+    is_active: true,
   };
   
   loginError:string="";
@@ -34,7 +36,10 @@ export class RegistroComponent {
     password:['',Validators.required],
     password2: [Validators.required],
     username:['', Validators.required],
-    number:['', [Validators.required, Validators.minLength(10), Validators.maxLength(15)]]
+    number:['', [Validators.required, Validators.minLength(10), Validators.maxLength(15)]],
+    is_superuser:[false],
+    is_staff:[false],
+    is_active:[true],
   })
 
 

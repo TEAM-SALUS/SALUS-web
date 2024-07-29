@@ -30,9 +30,9 @@ export class NavbarComponent implements OnInit, OnDestroy{
   
   logout(){
     console.log('Cerrando sesión');
-    this.router.navigate(['/home']);
-    //window.location.reload();
     this.loginService.logout();
+    this.router.navigate(['/home']);
+    window.location.reload();
   }
   
   ngOnDestroy(): void {

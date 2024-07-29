@@ -1,0 +1,269 @@
+<main class="form-background">
+    <div class="div" *ngIf="isLoading">Cargando...</div>
+    <div class="div" *ngIf="!isLoading && this.medico">
+      <section class="form-registro">
+        <form [formGroup]="registroForm">
+          <!-- ID Medico -->
+          <input
+            type="text"
+            readonly
+            class="control"
+            name="id"
+            placeholder="Ingrese id de medico"
+            formControlName="id"
+          />
+          <div
+            *ngIf="id.invalid && (id.dirty || id.touched)"
+            class="text-danger"
+          >
+            <small *ngIf="id.errors?.['required']">
+              El id es requerido.
+            </small>
+          </div>
+          <!-- matricula -->
+          <input
+            class="control"
+            type="text"
+            name="matricula"
+            placeholder="Ingrese matricula de medico"
+            formControlName="matricula"
+          />
+          <div
+            *ngIf="
+            matricula.invalid && (matricula.dirty || matricula.touched)
+            "
+            class="text-danger"
+          >
+            <small *ngIf="matricula.errors?.['required']">
+              La matricula es requerida.
+            </small>
+          </div>
+          <!-- nombre -->
+          <input
+            class="control"
+            type="text"
+            name="nombre"
+            placeholder="Ingrese nombre de paciente"
+            formControlName="nombre"
+            value="{{ this.medico.nombre }}"
+          />
+          <div
+            *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)"
+            class="text-danger"
+          >
+            <small *ngIf="nombre.errors?.['required']">
+              El nombre es requerido.
+            </small>
+          </div>
+          <!-- apellido -->
+          <input
+            class="control"
+            type="text"
+            name="apellido"
+            placeholder="Ingrese apellido de paciente"
+            formControlName="apellido"
+            value="{{ this.medico.apellido }}"
+          />
+          <div
+            *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)"
+            class="text-danger"
+          >
+            <small *ngIf="apellido.errors?.['required']">
+              El apellido es requerido.
+            </small>
+          </div>
+          <!-- email -->
+          <input
+            class="control"
+            type="text"
+            name="email"
+            placeholder="Ingrese email de paciente"
+            formControlName="email"
+            value="{{ this.medico.email }}"
+          />
+          <div
+            *ngIf="email.invalid && (email.dirty || email.touched)"
+            class="text-danger"
+          >
+            <small *ngIf="email.errors?.['required']">
+              El email es requerido.
+            </small>
+          </div>
+          <!-- clave -->
+          <input
+            class="control"
+            type="text"
+            name="clave"
+            placeholder="Ingrese clave de paciente"
+            formControlName="clave"
+            value="{{ this.medico.clave }}"
+          />
+          <div
+            *ngIf="clave.invalid && (clave.dirty || clave.touched)"
+            class="text-danger"
+          >
+            <small *ngIf="clave.errors?.['required']">
+              La clave es requerido.
+            </small>
+          </div>
+          <!-- telefono -->
+          <input
+            class="control"
+            type="text"
+            name="telefono"
+            placeholder="Ingrese telefono de paciente"
+            formControlName="telefono"
+            value="{{ this.medico.telefono }}"
+          />
+          <div
+            *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)"
+            class="text-danger"
+          >
+            <small *ngIf="telefono.errors?.['required']">
+              El telefono es requerido.
+            </small>
+          </div>
+          <!-- foto -->
+          <input
+            class="control"
+            type="file"
+            name="foto"
+            placeholder="Ingrese foto de paciente"
+            formControlName="foto"
+            (change)="onFileSelected($event)"
+          />
+          <div class="conteiner-figure" *ngIf="previsualizacion == ''">
+            <figure>
+              <img
+                class="img"
+                src="http://localhost:8000{{ this.medico.foto }}"
+                alt="imagen de medico a cambiar"
+                title="Figura, Medico"
+              />
+              <figcaption>Fig - Figura seleccionada</figcaption>
+            </figure>
+          </div>
+          <div class="conteiner-figure" *ngIf="previsualizacion">
+            <figure>
+              <img
+                class="img"
+                [src]="previsualizacion"
+                alt="imagen de medico a cambiar"
+                title="Figura, Medico"
+              />
+              <figcaption>Fig - Figura seleccionada</figcaption>
+            </figure>
+          </div>
+          <div
+            *ngIf="foto.invalid && (foto.dirty || foto.touched)"
+            class="text-danger"
+          >
+            <small *ngIf="foto.errors?.['required']">
+              La foto es requerida.
+            </small>
+          </div>
+          <!-- is_active -->
+          <!-- <input
+              class="control"
+              type="radio"
+              name="is_active"
+              placeholder="Ingrese is_active de paciente"
+              formControlName="is_active"
+            />
+            <div
+              *ngIf="is_active.invalid && (is_active.dirty || is_active.touched)"
+              class="text-danger"
+            >
+              <small *ngIf="is_active.errors?.['required']">
+                El is_active es requerido.
+              </small>
+            </div> -->
+          <!-- id_especialidad -->
+          <select
+            class="control"
+            name="id_especialidad"
+            formControlName="id_especialidad"
+          >
+            <option
+              *ngFor="let especialidad of this.especialidadLista"
+              [ngValue]="especialidad.id"
+            >
+              {{ especialidad.id + " - " + especialidad.nombre }}
+              <figure>
+                <img src="{{ especialidad.foto }}" alt="Icono de especialidad" />
+              </figure>
+            </option>
+          </select>
+          <div
+            *ngIf="
+            id_especialidad.invalid &&
+              (id_especialidad.dirty || id_especialidad.touched)
+            "
+            class="text-danger"
+          >
+            <small *ngIf="id_especialidad.errors?.['required']">
+              El id_especialidad es requerido.
+            </small>
+          </div>
+          <!-- id_horario -->
+          <select
+            class="control"
+            name="id_horario"
+            formControlName="id_horario"
+          >
+            <option
+              *ngFor="let horario of this.horarioAtencionLista"
+              [ngValue]="horario.id"
+            >
+              {{ horario.id + " - " + horario.dia_de_la_semana + " - " + horario.hora_entrada + " - " + horario.hora_salida }}
+              <figure>
+                <img src="../../../../../assets/reloj.png" alt="Icono de horarrio" />
+              </figure>
+            </option>
+          </select>
+          <div
+            *ngIf="
+            id_horario.invalid &&
+              (id_horario.dirty || id_horario.touched)
+            "
+            class="text-danger"
+          >
+            <small *ngIf="id_horario.errors?.['required']">
+              El id_horario es requerido.
+            </small>
+          </div>
+          <!-- medicoUser -->
+          <input
+            class="control"
+            readonly
+            type="text"
+            name="medicoUser"
+            placeholder="Ingrese medicoUser de medico"
+            formControlName="medicoUser"
+            value="{{ this.medico.medicoUser }}"
+          />
+          <div
+            *ngIf="
+            medicoUser.invalid && (medicoUser.dirty || medicoUser.touched)
+            "
+            class="text-danger"
+          >
+            <small *ngIf="medicoUser.errors?.['required']">
+              El medicoUser es requerido.
+            </small>
+          </div>
+          <!-- submit -->
+          <input
+            type="submit"
+            class="boton"
+            value="Registrar"
+            (click)="editarMedico()"
+          />
+        </form>
+      </section>
+    </div>
+    <div *ngIf="!isLoading && !this.medico && errorMessage">
+      <p>{{ errorMessage }}</p>
+    </div>
+  </main>
+  

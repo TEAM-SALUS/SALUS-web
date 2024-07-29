@@ -1,0 +1,192 @@
+<fieldset>
+  <legend>CRUD Hora De Atencion</legend>
+  <div class="col-sm p-3">
+    <!-- Botón para abrir el modal alta -->
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#altaHorarioDeAtencionModal"
+    >
+      Añadir Horario De Atencion
+    </button>
+  </div>
+  <table summary="Los horario de atencion registrados en la Clinica">
+    <caption>
+      Un listado de los horarios de atencion registrados en la Clinica
+    </caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>DIA DE LA SEMANA</th>
+        <th>HORA ENTRADA</th>
+        <th>HORA SALIDA</th>
+        <th>IS_ACTIVE</th>
+        <th>ACCIONES</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let horarioDeAtencion of horariosDeAtencionesLista">
+        <td>{{ horarioDeAtencion.id }}</td>
+        <td>
+          <span>
+            <ul>
+              <li
+                *ngFor="let d of horarioDeAtencion.dia_de_la_semana?.split(';')"
+              >
+                <img src="../../../../assets/flecha.png" alt="" />
+                {{ diaSemana[+d] }}
+              </li>
+            </ul>
+          </span>
+        </td>
+        <td>{{ horarioDeAtencion.hora_entrada }}</td>
+        <td>{{ horarioDeAtencion.hora_salida }}</td>
+        <td>{{ horarioDeAtencion.is_active }}</td>
+        <td>
+          <!-- Botón para abrir el modal detalle -->
+          <button
+            type="button"
+            class="btn btn-success m-1"
+            data-bs-toggle="modal"
+            data-bs-target="#detalleHorarioDeAtencionModal"
+            (click)="irDetalleHorarioDeAtencion(horarioDeAtencion)"
+          >
+            Detalle
+          </button>
+          <!-- Botón para abrir el modal editar -->
+          <button
+            type="button"
+            class="btn btn-warning m-1"
+            data-bs-toggle="modal"
+            data-bs-target="#editarHorarioDeAtencionModal"
+            (click)="irEditarHorarioDeAtencion(horarioDeAtencion)"
+          >
+            Editar
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger m-1"
+            (click)="eliminarHorarioDeAtencion(horarioDeAtencion.id)"
+          >
+            Borrar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</fieldset>
+
+<!-- Modal alta-->
+<div
+  class="modal fade"
+  id="altaHorarioDeAtencionModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="altaHorarioDeAtencionModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="altaHorarioDeAtencionModalLabel">
+          Crear horario de atencion
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-form-horario-de-atencion></app-c-form-horario-de-atencion>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+              Crear
+            </button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal editar-->
+<div
+  class="modal fade"
+  id="editarHorarioDeAtencionModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="editarHorarioDeAtencionModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editarHorarioDeAtencionLabel">
+          Editar orario de atencion
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-edit-horario-de-atencion></app-c-edit-horario-de-atencion>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+              Crear
+            </button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal detalle-->
+<div
+  class="modal fade"
+  id="detalleHorarioDeAtencionModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="detalleHorarioDeAtencionModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="detalleHorarioDeAtencionModalLabel">
+          Detalle horario de atencion
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-detail-horario-de-atencion></app-c-detail-horario-de-atencion>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+              Crear
+            </button> -->
+      </div>
+    </div>
+  </div>
+</div>

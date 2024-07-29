@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ this.paciente.dni_paciente }}</h5>
+      <h5 class="card-title">{{ this.paciente.nombre }}</h5>
+      <h5 class="card-title">{{ this.paciente.apellido }}</h5>
+      <h5 class="card-title">{{ this.paciente.email }}</h5>
+      <h5 class="card-title">{{ this.paciente.clave }}</h5>
+      <h5 class="card-title">{{ this.paciente.telefono }}</h5>
+      <h5 class="card-title">{{ this.paciente.id_obra_social }}</h5>
+      <h5 class="card-title">{{ this.paciente.pacienteUser }}</h5>
+      <p class="card-text">{{ this.paciente.is_active }}</p>
+      <p class="card-text"><small class="text-muted">Bajo eleccion del usaurio.</small></p>
+    </div>
+    <figure>
+        <img
+          class="card-img-bottom"
+          src="{{ this.paciente.foto }}"
+          alt="imagen de pacientea ver"
+          title="Figura, Paciente"
+        />
+        <figcaption class="text-center">Fig - Figura seleccionada</figcaption>
+      </figure>
+  </div>

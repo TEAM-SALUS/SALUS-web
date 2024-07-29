@@ -1,0 +1,185 @@
+<fieldset>
+  <legend>CRUD Obras Sociales</legend>
+  <div class="col-sm p-3">
+    <!-- Botón para abrir el modal alta -->
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#altaObraSocialModal"
+    >
+      Añadir Obra Social
+    </button>
+  </div>
+  <table summary="Las especialidaes registradas en la Clinica">
+    <caption>
+      Un listado de las especialdiades registradas en la Clinica
+    </caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>NOMBRE</th>
+        <th>FOTO</th>
+        <th>IS_ACTIVE</th>
+        <th>ACCIONES</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let obraSocial of obrasSocialesLista">
+        <td>{{ obraSocial.id }}</td>
+        <td>{{ obraSocial.nombre }}</td>
+        <td>
+          <img
+            class="card-img-top"
+            src="{{ obraSocial.foto }}"
+            alt="imagen-especialidad"
+          />
+        </td>
+        <td>{{ obraSocial.is_active }}</td>
+        <td>
+          <!-- Botón para abrir el modal detalle -->
+          <button
+            type="button"
+            class="btn btn-success m-1"
+            data-bs-toggle="modal"
+            data-bs-target="#detalleObraSocialModal"
+            (click)="irDetalleObraSocial(obraSocial)"
+          >
+            Detalle
+          </button>
+          <!-- Botón para abrir el modal editar -->
+          <button
+            type="button"
+            class="btn btn-warning m-1"
+            data-bs-toggle="modal"
+            data-bs-target="#editarObraSocialModal"
+            (click)="irEditarObraSocial(obraSocial)"
+          >
+            Editar
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger m-1"
+            (click)="eliminarObraSocial(obraSocial.id)"
+          >
+            Borrar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</fieldset>
+
+<!-- Modal alta-->
+<div
+  class="modal fade"
+  id="altaObraSocialModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="altaObraSocialModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="altaObraSocialModalLabel">
+          Crear obra social
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-form-obra-social></app-c-form-obra-social>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+            Crear
+          </button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal editar-->
+<div
+  class="modal fade"
+  id="editarObraSocialModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="editarObraSocialModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editarObraSocialModalLabel">
+          Editar obra social
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-edit-obra-social></app-c-edit-obra-social>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+            Crear
+          </button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal detalle-->
+<div
+  class="modal fade"
+  id="detalleObraSocialModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="detalleObraSocialModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="detalleObraSocialModalLabel">
+          Detalle obra social
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-detail-obra-social></app-c-detail-obra-social>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+            Crear
+          </button> -->
+      </div>
+    </div>
+  </div>
+</div>

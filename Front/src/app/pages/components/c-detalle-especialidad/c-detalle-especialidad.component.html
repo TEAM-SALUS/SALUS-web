@@ -59,7 +59,7 @@
           <input type="datetime-local" required [(ngModel)] = fechaHora id="fecha-hora">
         </div>
         <div class="buttons pb-3">
-          <a class="btn btn-reservar-turno" (click)="redirectToPay(jesus[1].dia_de_la_semana,jesus[0].id)"
+          <a class="btn btn-reservar-turno" (click)="redirectToPay(jesus[1].dia_de_la_semana,jesus[0].id,especialidad.precio)"
             >Reservar turno con {{ jesus[0].apellido }}</a
           >
         </div>

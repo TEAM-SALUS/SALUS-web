@@ -6,6 +6,10 @@ export interface ITurno {
   horario?: string;
   pagado?: boolean;
   estado?: EstadoTurno;
+  sintomas?:string,
+  diagnostico?:string,
+  tratamiento?:string,
+  is_active?:boolean,
   id_medico?: number;
   id_paciente?: number|string|null;
 }

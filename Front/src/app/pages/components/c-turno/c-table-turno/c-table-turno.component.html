@@ -1,0 +1,191 @@
+<fieldset>
+  <legend>CRUD Turnos</legend>
+  <div class="col-sm p-3" *ngIf="rol=='admin'">
+    <!-- Botón para abrir el modal alta -->
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#altaTurnoModal"
+    >
+      Añadir Turno
+    </button>
+  </div>
+  <table summary="Los turnos registrados en la Clinica">
+    <caption>
+      Un listado de los turnos registrados en la Clinica
+    </caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>FECHA</th>
+        <th>HORARIO</th>
+        <th>PAGADO</th>
+        <th>ESTADO</th>
+        <th>SINTOMAS</th>
+        <th>DIAGNOSTICO</th>
+        <th>TRATAMIENTO</th>
+        <th>IS ACTIVE</th>
+        <th>ID MEDICO</th>
+        <th>ID PACIENTE</th>
+        <th>ACCIONES</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let turno of turnosLista">
+        <td>{{ turno.id }}</td>
+        <td>{{ turno.fecha }}</td>
+        <td>{{ turno.horario }}</td>
+        <td>{{ turno.pagado }}</td>
+        <td>{{ turno.estado }}</td>
+        <td>{{ turno.sintomas }}</td>
+        <td>{{ turno.diagnostico }}</td>
+        <td>{{ turno.tratamiento }}</td>
+        <td>{{ turno.is_active }}</td>
+        <td>{{ turno.id_medico }}</td>
+        <td>{{ turno.id_paciente }}</td>
+        <td>
+          <!-- Botón para abrir el modal detalle -->
+          <button
+            type="button"
+            class="btn btn-success m-1"
+            data-bs-toggle="modal"
+            data-bs-target="#detalleTurnoModal"
+            (click)="irDetalleTurno(turno)"
+          >
+            Detalle
+          </button>
+          <!-- Botón para abrir el modal editar -->
+          <button
+            type="button"
+            class="btn btn-warning m-1"
+            data-bs-toggle="modal"
+            data-bs-target="#editarTurnoModal"
+            (click)="irEditarTurno(turno)"
+          >
+            Editar
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger m-1"
+            (click)="eliminarTurno(turno.id)"
+          >
+            Borrar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</fieldset>
+
+<!-- Modal alta-->
+<div
+  class="modal fade"
+  id="altaTurnoModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="altaTurnoModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="altaTurnoModalLabel">Crear turno</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-form-turno></app-c-form-turno>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+                Crear
+              </button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal editar-->
+<div
+  class="modal fade"
+  id="editarTurnoModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="editarTurnoModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editarTurnoModalLabel">
+          Editar turno
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-edit-turno></app-c-edit-turno>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+                Crear
+              </button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal detalle-->
+<div
+  class="modal fade"
+  id="detalleTurnoModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="detalleTurnoModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="detalleTurnoModalLabel">
+          Detalle turno
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-detail-turno></app-c-detail-turno>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+                Crear
+              </button> -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,150 @@
+<main class="form-background">
+  <div *ngIf="isLoading">Cargando...</div>
+  <div *ngIf="!isLoading && usuario">
+    <section class="form-registro">
+      <form [formGroup]="registroForm">
+        <!-- ID Usurio -->
+        <input
+          type="text"
+          readonly
+          class="control"
+          value="{{ this.usuario.id }}"
+        />
+        <!-- password -->
+        <input
+          class="control"
+          type="password"
+          name="password"
+          placeholder="Ingrese password de usuario"
+          readonly
+          value="{{ this.usuario.password }}"
+        />
+        <!-- <div
+          *ngIf="password.invalid && (password.dirty || password.touched)"
+          class="text-danger"
+        >
+          <small *ngIf="password.errors?.['required']">
+            El password es requerido.
+          </small>
+        </div> -->
+        <!-- username -->
+        <input
+          class="control"
+          type="text"
+          name="username"
+          placeholder="Ingrese username de usuario"
+          formControlName="username"
+          value="{{ this.usuario.username }}"
+        />
+        <div
+          *ngIf="username.invalid && (username.dirty || username.touched)"
+          class="text-danger"
+        >
+          <small *ngIf="username.errors?.['required']">
+            El username es requerido.
+          </small>
+        </div>
+        <!-- first_name -->
+        <input
+          class="control"
+          type="text"
+          name="first_name"
+          placeholder="Ingrese first_name de usuario"
+          formControlName="first_name"
+          value="{{ this.usuario.first_name }}"
+        />
+        <div
+          *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)"
+          class="text-danger"
+        >
+          <small *ngIf="first_name.errors?.['required']">
+            El first_name es requerido.
+          </small>
+        </div>
+        <!-- last_name -->
+        <input
+          class="control"
+          type="text"
+          name="last_name"
+          placeholder="Ingrese last_name de usuario"
+          formControlName="last_name"
+          value="{{ this.usuario.last_name }}"
+        />
+        <div
+          *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)"
+          class="text-danger"
+        >
+          <small *ngIf="last_name.errors?.['required']">
+            El last_name es requerido.
+          </small>
+        </div>
+        <!-- email -->
+        <input
+          class="control"
+          type="email"
+          name="email"
+          placeholder="Ingrese email de usuario"
+          formControlName="email"
+          value="{{ this.usuario.email }}"
+        />
+        <div
+          *ngIf="email.invalid && (email.dirty || email.touched)"
+          class="text-danger"
+        >
+          <small *ngIf="email.errors?.['required']">
+            El email es requerido.
+          </small>
+        </div>
+        <!-- roles -->
+        <fieldset *ngIf="rol == 'admin'">
+          <legend>Roles:</legend>
+          <div class="radio-container">
+            <input
+              class="control-rg"
+              type="radio"
+              name="roles"
+              formControlName="roles"
+              value="is_superuser"
+            />
+            ADMIN
+            <input
+              class="control-rg"
+              type="radio"
+              name="roles"
+              formControlName="roles"
+              value="is_staff"
+            />
+            STAFF
+            <input
+              class="control-rg"
+              type="radio"
+              name="roles"
+              formControlName="roles"
+              value="is_active"
+            />
+            PACIENTE
+          </div>
+          <div
+            *ngIf="roles.invalid && (roles.dirty || roles.touched)"
+            class="text-danger"
+          >
+            <small *ngIf="roles.errors?.['required']">
+              El rol es requerido.
+            </small>
+          </div>
+        </fieldset>
+
+        <!-- submit -->
+        <input
+          type="submit"
+          class="boton"
+          value="Editar"
+          (click)="editarUsuario()"
+        />
+      </form>
+    </section>
+  </div>
+  <div *ngIf="!isLoading && !usuario && errorMessage">
+    <p>{{ errorMessage }}</p>
+  </div>
+</main>

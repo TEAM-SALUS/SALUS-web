@@ -1,0 +1,200 @@
+<fieldset>
+    <legend>CRUD Pacientes</legend>
+    <div class="col-sm p-3">
+      <!-- Botón para abrir el modal alta -->
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#altaPacienteModal"
+      >
+        Añadir Paciente
+      </button>
+    </div>
+    <table summary="Los pacientes registrados en la Clinica">
+      <caption>
+        Un listado de los pacientes registrados en la Clinica
+      </caption>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>DNI</th>
+          <th>NOMBRE</th>
+          <th>APELLIDO</th>
+          <th>EMAIL</th>
+          <th>CLAVE</th>
+          <th>TELEFONO</th>
+          <th>FOTO</th>
+          <th>IS_ACTIVE</th>
+          <th>ID OBRA SOCIAL</th>
+          <th>PACIENTEUSER</th>
+          <th>ACCIONES</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let paciente of pacientesLista">
+          <td>{{ paciente.id }}</td>
+          <td>{{ paciente.dni_paciente }}</td>
+          <td>{{ paciente.nombre }}</td>
+          <td>{{ paciente.apellido }}</td>
+          <td>{{ paciente.email }}</td>
+          <td>{{ paciente.clave }}</td>
+          <td>{{ paciente.telefono }}</td>
+          <td>
+            <img
+              class="card-img-top"
+              src="{{ paciente.foto }}"
+              alt="imagen-especialidad"
+            />
+          </td>
+          <td>{{ paciente.is_active }}</td>
+          <td>{{ paciente.id_obra_social }}</td>
+          <td>{{ paciente.pacienteUser }}</td>
+          <td>
+            <!-- Botón para abrir el modal detalle -->
+            <button
+              type="button"
+              class="btn btn-success m-1"
+              data-bs-toggle="modal"
+              data-bs-target="#detallePacienteModal"
+              (click)="irDetallePaciente(paciente)"
+            >
+              Detalle
+            </button>
+            <!-- Botón para abrir el modal editar -->
+            <button
+              type="button"
+              class="btn btn-warning m-1"
+              data-bs-toggle="modal"
+              data-bs-target="#editarPacienteModal"
+              (click)="irEditarPaciente(paciente)"
+            >
+              Editar
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger m-1"
+              (click)="eliminarPaciente(paciente.id)"
+            >
+              Borrar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </fieldset>
+  
+  <!-- Modal alta-->
+  <div
+    class="modal fade"
+    id="altaPacienteModal"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="altaPacienteModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="altaPacienteModalLabel">
+            Crear paciente
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <app-c-form-paciente></app-c-form-paciente>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cerrar
+          </button>
+          <!-- <button type="button" class="btn btn-primary">
+              Crear
+            </button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal editar-->
+  <div
+    class="modal fade"
+    id="editarPacienteModal"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="editarPacienteModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editarPacienteModalLabel">
+            Editar paciente
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <app-c-edit-paciente></app-c-edit-paciente>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cerrar
+          </button>
+          <!-- <button type="button" class="btn btn-primary">
+              Crear
+            </button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal detalle-->
+  <div
+    class="modal fade"
+    id="detallePacienteModal"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="detallePacienteModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="detalleOPacienteModalLabel">
+            Detalle paciente
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <app-c-detail-paciente></app-c-detail-paciente>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cerrar
+          </button>
+          <!-- <button type="button" class="btn btn-primary">
+              Crear
+            </button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,183 @@
+<fieldset>
+  <legend>CRUD Pagos</legend>
+  <div class="col-sm p-3" *ngIf="rol == 'admin'">
+    <!-- Botón para abrir el modal alta -->
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#altaPagoModal"
+    >
+      Añadir Pago
+    </button>
+  </div>
+  <table summary="Los pagos registrados en la Clinica">
+    <caption>
+      Un listado de los pagos registrados en la Clinica
+    </caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>MONTO</th>
+        <th>FECHA</th>
+        <th>HORA</th>
+        <th>ESTADO</th>
+        <th>IS ACTIVE</th>
+        <th>ID TURNO</th>
+        <th>ACCIONES</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pago of pagosLista">
+        <td>{{ pago.id }}</td>
+        <td>{{ pago.monto | currency : "$" }}</td>
+        <td>{{ pago.fecha | date : "dd/MM/yyyy" }}</td>
+        <td>{{ pago.hora }}</td>
+        <td>{{ pago.estado }}</td>
+        <td>{{ pago.is_active }}</td>
+        <td>{{ pago.id_turno }}</td>
+        <td>
+          <!-- Botón para abrir el modal detalle -->
+          <button
+            type="button"
+            class="btn btn-success m-1"
+            data-bs-toggle="modal"
+            data-bs-target="#detallePagoModal"
+            (click)="irDetallePago(pago)"
+          >
+            Detalle
+          </button>
+          <!-- Botón para abrir el modal editar -->
+          <button
+            *ngIf="rol == 'admin'"
+            type="button"
+            class="btn btn-warning m-1"
+            data-bs-toggle="modal"
+            data-bs-target="#editarPagoModal"
+            (click)="irEditarPago(pago)"
+          >
+            Editar
+          </button>
+          <button
+            *ngIf="rol == 'admin'"
+            type="button"
+            class="btn btn-danger m-1"
+            (click)="eliminarPago(pago.id)"
+          >
+            Borrar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</fieldset>
+
+<!-- Modal alta-->
+<div
+  class="modal fade"
+  id="altaPagoModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="altaPagoModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="altaPagoModalLabel">Crear pago</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-form-pago></app-c-form-pago>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+                  Crear
+                </button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal editar-->
+<div
+  class="modal fade"
+  id="editarPagoModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="editarPagoModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editarPagoModalLabel">Editar pago</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-edit-pago></app-c-edit-pago>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+                  Crear
+                </button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal detalle-->
+<div
+  class="modal fade"
+  id="detallePagoModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="detallePagoModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="detallePagoModalLabel">
+          Detalle pago
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-c-detail-pago></app-c-detail-pago>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!-- <button type="button" class="btn btn-primary">
+                  Crear
+                </button> -->
+      </div>
+    </div>
+  </div>
+</div>

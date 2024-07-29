@@ -1,0 +1,24 @@
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ this.medico.matricula }}</h5>
+      <h5 class="card-title">{{ this.medico.nombre }}</h5>
+      <h5 class="card-title">{{ this.medico.apellido }}</h5>
+      <h5 class="card-title">{{ this.medico.email }}</h5>
+      <h5 class="card-title">{{ this.medico.clave }}</h5>
+      <h5 class="card-title">{{ this.medico.telefono }}</h5>
+      <h5 class="card-title">{{ this.medico.id_especialidad }}</h5>
+      <h5 class="card-title">{{ this.medico.id_horario }}</h5>
+      <h5 class="card-title">{{ this.medico.medicoUser }}</h5>
+      <p class="card-text">{{ this.medico.is_active }}</p>
+      <p class="card-text"><small class="text-muted">Bajo eleccion del usaurio.</small></p>
+    </div>
+    <figure>
+        <img
+          class="card-img-bottom"
+          src="{{ this.medico.foto }}"
+          alt="imagen de medico ver"
+          title="Figura, Medico"
+        />
+        <figcaption class="text-center">Fig - Figura seleccionada</figcaption>
+      </figure>
+  </div>

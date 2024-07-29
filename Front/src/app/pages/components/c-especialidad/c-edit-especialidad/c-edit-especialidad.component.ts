@@ -9,11 +9,11 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-c-edit-especialidad',
   templateUrl: './c-edit-especialidad.component.html',
-  styleUrls: ['./c-edit-especialidad.component.css']
+  styleUrls: ['./c-edit-especialidad.component.css'],
 })
-export class CEditEspecialidadComponent implements OnInit{
-  public especialidad: EspecialidadInterface|any = {};
-  public previsualizacion: string="";
+export class CEditEspecialidadComponent implements OnInit {
+  public especialidad: EspecialidadInterface | any = {};
+  public previsualizacion: string = '';
 
   public registroForm = this.formBuilder.group({
     nombre: ['', Validators.required],
@@ -27,7 +27,7 @@ export class CEditEspecialidadComponent implements OnInit{
     private formBuilder: FormBuilder,
     private especialidadService: EspecialidadesService,
     private sanitizer: DomSanitizer,
-    private activatedRoute:ActivatedRoute,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   public ngOnInit(): void {
@@ -51,38 +51,60 @@ export class CEditEspecialidadComponent implements OnInit{
     return this.registroForm.controls.descripcion;
   }
 
+  /** @description Obtiene especialidad por Behavior Subject */
+  private obtenerEspecialidad() {
+    this.especialidadService.getEspecialidadId(this.especialidad.id).subscribe({
+      next: (especialidadData) => {
+        this.especialidad = especialidadData;
+      },
+      complete: () => {},
+    });
+  }
+
+  /** @description Edita especialidad por Behavior Subject*/
   public editarEspecialidad() {
     if (this.registroForm.valid) {
       this.especialidad.nombre = this.nombre.value;
       this.especialidad.precio = this.precio.value;
       this.especialidad.duracion = this.duracion.value;
       this.especialidad.descripcion = this.descripcion.value;
+      this.especialidad.is_active = true;
 
       const formData = new FormData();
-      formData.append('nombre',this.especialidad.nombre);
-      formData.append('precio',this.especialidad.precio);
-      formData.append('duracion',this.especialidad.duracion);
-      formData.append('descripcion',this.especialidad.descripcion);
-      formData.append('foto',this.especialidad.foto);
+      formData.append('nombre', this.especialidad.nombre);
+      formData.append('precio', this.especialidad.precio);
+      formData.append('duracion', this.especialidad.duracion);
+      formData.append('descripcion', this.especialidad.descripcion);
+      formData.append('is_active', this.especialidad.is_active);
+      formData.append('foto', this.especialidad.foto);
 
       this.especialidadService
-        .editarEspecialidad(this.especialidad.id,formData)
+        .editarEspecialidad(this.especialidad.id, formData)
         .subscribe({
           next: (especialidadData) => {
             this.especialidad = especialidadData;
+            Swal.fire({
+              icon: 'success',
+              title: `Editado`,
+              text: `Se ha actualizado la especialidad.`,
+              timer: 3000,
+            }).then(() => {
+              this.registroForm.reset();
+              window.location.reload();
+            });
           },
           error: (errorData) => {
             console.error(errorData);
-          },
-          complete: () => {
-
             Swal.fire({
-                icon: 'success',
-                title: `Su especialidad ha sido actualizada`,
-                text: `Se ha actualizado la especialidad`,
-              });
+              icon: 'error',
+              title: 'Error',
+              text: 'No se pudo editar la especialidad.',
+              timer: 3000,
+            }).then(() => {
               window.location.reload();
+            });
           },
+          complete: () => {},
         });
     } else {
       this.registroForm.markAllAsTouched();
@@ -93,7 +115,7 @@ export class CEditEspecialidadComponent implements OnInit{
     const file = event.target.files[0];
     this.extraerBase64(file).then((imagen: any) => {
       this.previsualizacion = imagen.base;
-    })
+    });
     this.especialidad.foto = file;
   }
 
@@ -122,14 +144,4 @@ export class CEditEspecialidadComponent implements OnInit{
         resolve(null);
       }
     });
-
-    private obtenerEspecialidad() {
-      this.especialidadService.getEspecialidadId(this.especialidad.id).subscribe({
-        next: (especialidadData) => {
-          this.especialidad = especialidadData;
-        },
-        complete: () => {
-        },
-      });
-    };
 }

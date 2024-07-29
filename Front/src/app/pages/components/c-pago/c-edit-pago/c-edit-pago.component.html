@@ -1,0 +1,142 @@
+<main class="form-background">
+  <section class="form-registro">
+    <form [formGroup]="registroForm">
+      <!-- ID Pago -->
+      <input
+        class="control"
+        readonly
+        type="text"
+        name="id"
+        placeholder="Ingrese id de pago"
+        formControlName="id"
+      />
+      <div *ngIf="id.invalid && (id.dirty || id.touched)" class="text-danger">
+        <small *ngIf="id.errors?.['required']"> El id es requerido. </small>
+      </div>
+      <!-- monto -->
+      <select class="control" name="monto" formControlName="monto">
+        <option value="" disabled hidden>Seleccione un monto porfavor</option>
+        <option
+          *ngFor="let especialidad of this.especialidLista"
+          [ngValue]="especialidad.precio"
+        >
+          -ID {{ especialidad.id }} {{ especialidad.nombre }}:
+          {{ especialidad.id }} precio:
+          {{ especialidad.precio | currency : "$" }}
+          <figure>
+            <img src="{{ especialidad.foto }}" alt="Icono de especialidad" />
+          </figure>
+        </option>
+      </select>
+      <div
+        *ngIf="monto.invalid && (monto.dirty || monto.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="fecha.errors?.['required']">
+          El monto es requerida.
+        </small>
+      </div>
+      <!-- fecha -->
+      <input
+        class="control"
+        type="date"
+        name="fecha"
+        placeholder="Ingrese fecha de pago"
+        formControlName="fecha"
+      />
+      <div
+        *ngIf="fecha.invalid && (fecha.dirty || fecha.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="fecha.errors?.['required']">
+          La fecha es requerida.
+        </small>
+      </div>
+      <!-- hora -->
+      <input
+        class="control"
+        type="time"
+        name="hora"
+        placeholder="Ingrese hora de pago"
+        formControlName="hora"
+      />
+      <div
+        *ngIf="hora.invalid && (hora.dirty || hora.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="hora.errors?.['required']"> La hora es requerido. </small>
+      </div>
+      <!-- estado -->
+      <select
+        class="control"
+        type="text"
+        name="estado"
+        placeholder="Ingrese estado de turno"
+        formControlName="estado"
+      >
+        <option value="" disabled hidden>Seleccione un estado porfavor</option>
+        <option
+          *ngFor="let eEstado of estadoPago | keyvalue"
+          [ngValue]="eEstado.value"
+        >
+          {{ eEstado.key }}
+        </option>
+      </select>
+      <div
+        *ngIf="estado.invalid && (estado.dirty || estado.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="estado.errors?.['required']">
+          El estado es requerido.
+        </small>
+      </div>
+      <!-- is_active -->
+      <!-- <input
+                class="control"
+                type="radio"
+                name="is_active"
+                placeholder="Ingrese is_active de paciente"
+                formControlName="is_active"
+              />
+              <div
+                *ngIf="is_active.invalid && (is_active.dirty || is_active.touched)"
+                class="text-danger"
+              >
+                <small *ngIf="is_active.errors?.['required']">
+                  El is_active es requerido.
+                </small>
+              </div> -->
+      <!-- id_medico -->
+      <select class="control" name="id_turno" formControlName="id_turno">
+        <option value="" disabled hidden>Seleccione un turno porfavor</option>
+        <option *ngFor="let turno of this.turnoLista" [ngValue]="turno">
+          -ID: {{ turno.id }} fecha: {{ turno.fecha | date : "d/MM/yyyy" }} -ID
+          medico:{{ turno.id_medico }} -ID: paciente
+          {{ turno.id_paciente }} -estado: {{ turno.estado }}
+          {{ especialidadPorMedico() }}
+          <figure>
+            <img
+              src="../../../../../assets/calendario-de-fechas.png"
+              alt="Icono de medico"
+            />
+          </figure>
+        </option>
+      </select>
+      <div
+        *ngIf="id_turno.invalid && (id_turno.dirty || id_turno.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="id_turno.errors?.['required']">
+          Ea id_turno es requeridao
+        </small>
+      </div>
+      <!-- submit -->
+      <input
+        type="submit"
+        class="boton"
+        value="Registrar"
+        (click)="editarPago()"
+      />
+    </form>
+  </section>
+</main>

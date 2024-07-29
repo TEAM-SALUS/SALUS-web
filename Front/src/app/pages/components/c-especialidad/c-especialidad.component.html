@@ -1,18 +1,16 @@
 <div class="div-especialidad">
   <div class="card" style="width: 18rem" *ngFor="let e of especialidadLista">
-    <img
-      class="card-img-top"
-      src="{{e.foto}}"
-      alt="imagen-especialidad"
-    />
+    <img class="card-img-top" src="{{ e.foto }}" alt="imagen-especialidad" />
 
     <div class="card-body">
       <h5 class="card-title">{{ e.nombre }}</h5>
 
-      <p class="card-p-nombre-dr" *ngFor="let p of profesionalLista"> Dr. {{ p.nombre }}</p>
+      <p class="card-p-nombre-dr" *ngFor="let p of profesionalLista">
+        Dr. {{ p.nombre }}
+      </p>
 
       <p class="card-descripcion">
-        {{e.descripcion}}
+        {{ e.descripcion }}
       </p>
 
       <p class="precio">
@@ -22,23 +20,39 @@
       <div class="buttons">
         <div class="row">
           <div class="col-6">
-            <a class="btn btn-reservar-turno" (click)="getEspecialidadId(e.id)">Reservar turno</a>
+            <a class="btn btn-reservar-turno" (click)="getEspecialidadId(e.id)"
+              >Reservar turno</a
+            >
           </div>
-          <div class="div-link col-6" *ngIf="rol == 'admin'" [hidden]="!(rol == 'admin')">
+          <div
+            class="div-link col-6"
+            *ngIf="rol == 'admin'"
+            [hidden]="!(rol == 'admin')"
+          >
             <a
-            [routerLink]="['/detalle-servicio', e.id]"
-            class="link-ver-mas"
-            (click)="redirectToEdit(e.id)"
-            >Editar</a
+              [routerLink]="['/detalle-servicio', e.id]"
+              class="link-ver-mas"
+              (click)="redirectToEdit(e.id)"
+              >Editar</a
             >
           </div>
         </div>
-        <div class="row py-3" *ngIf="rol == 'admin'" [hidden]="!(rol == 'admin')">
+        <div
+          class="row py-3"
+          *ngIf="rol == 'admin'"
+          [hidden]="!(rol == 'admin')"
+        >
           <div class="col-6">
-            <a class="btn btn-reservar-turno" (click)="irAgreagrEspecialidad()">Agregar especialidad</a>
+            <a class="btn btn-reservar-turno" (click)="irAgreagarEspecialidad()"
+              >Agregar especialidad</a
+            >
           </div>
           <div class="col-6">
-            <a class="btn btn-reservar-turno" (click)="eliminarEspecialidad(e.id)">Eliminar especialidad</a>
+            <a
+              class="btn btn-reservar-turno"
+              (click)="eliminarEspecialidad(e.id)"
+              >Eliminar especialidad</a
+            >
           </div>
         </div>
       </div>

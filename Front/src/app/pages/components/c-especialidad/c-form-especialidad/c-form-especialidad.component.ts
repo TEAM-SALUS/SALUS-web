@@ -12,8 +12,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./c-form-especialidad.component.css'],
 })
 export class CFormEspecialidadComponent implements OnInit {
-  public nuevaEspecialidad: EspecialidadInterface|any = {};
-  public previsualizacion: string="";
+  public nuevaEspecialidad: EspecialidadInterface | any = {};
+  public previsualizacion: string = '';
 
   public registroForm = this.formBuilder.group({
     nombre: ['', Validators.required],
@@ -48,49 +48,52 @@ export class CFormEspecialidadComponent implements OnInit {
     return this.registroForm.controls.descripcion;
   }
 
-  registrarServicio() {
+  /** @description Registra servicio */
+  public registrarServicio() {
     if (this.registroForm.valid) {
       this.nuevaEspecialidad.nombre = this.nombre.value;
       this.nuevaEspecialidad.precio = this.precio.value;
       this.nuevaEspecialidad.duracion = this.duracion.value;
       this.nuevaEspecialidad.descripcion = this.descripcion.value;
+      this.nuevaEspecialidad.is_active = true;
 
       const formData = new FormData();
-      formData.append('nombre',this.nuevaEspecialidad.nombre);
-      formData.append('precio',this.nuevaEspecialidad.precio);
-      formData.append('duracion',this.nuevaEspecialidad.duracion);
-      formData.append('descripcion',this.nuevaEspecialidad.descripcion);
-      formData.append('foto',this.nuevaEspecialidad.foto);
+      formData.append('nombre', this.nuevaEspecialidad.nombre);
+      formData.append('precio', this.nuevaEspecialidad.precio);
+      formData.append('duracion', this.nuevaEspecialidad.duracion);
+      formData.append('descripcion', this.nuevaEspecialidad.descripcion);
+      formData.append('is_active', this.nuevaEspecialidad.is_active);
+      formData.append('foto', this.nuevaEspecialidad.foto);
 
-      this.especialidadService
-        .registrarEspecialidad(formData)
-        .subscribe({
-          next: (especialidadData) => {
-            console.info(especialidadData);
-            Swal.fire({
-              icon: 'success',
-              title: `Su especialidad ha sido agregada`,
-              text: `Se ha agreagdo la especialidad`,
-            });
-          },
-          error: (errorData) => {
-            console.error(errorData);
-          },
-          complete: () => {
+      this.especialidadService.registrarEspecialidad(formData).subscribe({
+        next: (especialidadData) => {
+          console.info(especialidadData);
+          Swal.fire({
+            icon: 'success',
+            title: `Creado`,
+            text: `Se ha agreagdo la especialidad.`,
+            timer: 3000,
+          }).then(() => {
             this.registroForm.reset();
-            this.router.navigate(['servicios']);
-          },
-        });
+            //this.router.navigate(['servicios']);
+            window.location.reload();
+          });
+        },
+        error: (errorData) => {
+          console.error(errorData);
+        },
+        complete: () => {},
+      });
     } else {
       this.registroForm.markAllAsTouched();
     }
-  };
+  }
 
   public onFileSelected(event: any) {
     const file = event.target.files[0];
     this.extraerBase64(file).then((imagen: any) => {
       this.previsualizacion = imagen.base;
-    })
+    });
     this.nuevaEspecialidad.foto = file;
   }
 

@@ -1,0 +1,132 @@
+<main class="form-background">
+  <section class="form-registro">
+    <form [formGroup]="registroForm">
+      <!-- password -->
+      <input
+        class="control"
+        type="password"
+        name="password"
+        placeholder="Ingrese password de usuario"
+        formControlName="password"
+      />
+      <div
+        *ngIf="password.invalid && (password.dirty || password.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="password.errors?.['required']">
+          El password es requerido.
+        </small>
+      </div>
+      <!-- username -->
+      <input
+        class="control"
+        type="text"
+        name="username"
+        placeholder="Ingrese username de usuario"
+        formControlName="username"
+      />
+      <div
+        *ngIf="username.invalid && (username.dirty || username.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="username.errors?.['required']">
+          El username es requerido.
+        </small>
+      </div>
+      <!-- first_name -->
+      <input
+        class="control"
+        type="text"
+        name="first_name"
+        placeholder="Ingrese first_name de usuario"
+        formControlName="first_name"
+      />
+      <div
+        *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="first_name.errors?.['required']">
+          El first_name es requerido.
+        </small>
+      </div>
+      <!-- last_name -->
+      <input
+        class="control"
+        type="text"
+        name="last_name"
+        placeholder="Ingrese last_name de usuario"
+        formControlName="last_name"
+      />
+      <div
+        *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="last_name.errors?.['required']">
+          El last_name es requerido.
+        </small>
+      </div>
+      <!-- password -->
+      <input
+        class="control"
+        type="email"
+        name="email"
+        placeholder="Ingrese email de usuario"
+        formControlName="email"
+      />
+      <div
+        *ngIf="email.invalid && (email.dirty || email.touched)"
+        class="text-danger"
+      >
+        <small *ngIf="email.errors?.['required']">
+          El email es requerido.
+        </small>
+      </div>
+      <!-- roles -->
+      <fieldset>
+        <legend>Roles:</legend>
+        <div class="radio-container">
+          <input
+            class="control-rg"
+            type="radio"
+            name="roles"
+            formControlName="roles"
+            value="is_superuser"
+          />
+          ADMIN
+          <input
+            class="control-rg"
+            type="radio"
+            name="roles"
+            formControlName="roles"
+            value="is_staff"
+          />
+          STAFF
+          <input
+            class="control-rg"
+            type="radio"
+            name="roles"
+            formControlName="roles"
+            value="is_active"
+          />
+          PACIENTE
+        </div>
+        <div
+          *ngIf="roles.invalid && (roles.dirty || roles.touched)"
+          class="text-danger"
+        >
+          <small *ngIf="roles.errors?.['required']">
+            El rol es requerido.
+          </small>
+        </div>
+      </fieldset>
+
+      <!-- submit -->
+      <input
+        type="submit"
+        class="boton"
+        value="Registrar"
+        (click)="registrarUsuario()"
+      />
+    </form>
+  </section>
+</main>

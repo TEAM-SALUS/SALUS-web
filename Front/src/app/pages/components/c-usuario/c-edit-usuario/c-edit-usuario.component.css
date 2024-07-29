@@ -1,0 +1,95 @@
+.form-background {
+    background-color: var(--terciary-color);
+  }
+  
+  .form-registro h1 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  
+  .form-registro p {
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 40px;
+  }
+  
+  .form-registro a {
+    color: var(--white-color);
+    text-decoration: none;
+  }
+  
+  .form-registro a:hover {
+    color: var(--white-color);
+    text-decoration: underline;
+  }
+  
+  .form-registro {
+    width: 50%;
+    background: var(--secondary-color);
+    padding: 30px;
+    margin: auto;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    font-family: "calibri";
+    color: var(--black-color);
+    box-shadow: 7px 13px 37px var(--black-color);
+  }
+  
+  .control {
+    width: 100%;
+    background: var(--white-color);
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid var(--terciary-color);
+    font-size: 18px;
+    color: var(--black-color);
+    outline: none;
+  }
+
+  /* radio controler */
+  .control-rg {
+    vertical-align: middle;
+    margin: 0;
+  }
+  
+  .radio-container {
+    display: flex;
+    justify-content:space-around;
+  }
+  /**/
+  
+  .form-registro .boton {
+    display: inline-block;
+    width: 100%;
+    padding: 12px;
+    justify-content: center;
+    background: var(--primary-color);
+    margin: 8px 0;
+    border: none;
+    color: var(--black-color);
+    border-radius: 10px;
+    box-shadow: 1px 2px var(--terciary-color);
+    cursor: pointer;
+    letter-spacing: 3px;
+    text-decoration: none;
+  }
+  
+  .form-registro .boton:hover {
+    background: var(--secondary-color);
+    scale: 1.1;
+  }
+  
+  .conteiner-figure {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    width: cover;
+  }
+  
+  .img {
+    width: 100%;
+  }
