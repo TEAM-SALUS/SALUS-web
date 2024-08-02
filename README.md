@@ -37,3 +37,32 @@ Por otra parte, los profesionales de la salud podrán acceder al historial médi
 * Melani Elizabeth Quiroga López
 * Rosana Quispe
 * Verónica Elena Nievas Guardia
+
+## Para levantar Angular
+* instalar NPM
+	* se instala junto nodejs https://nodejs.org/es
+	* npm install -g npm
+* saber version
+	* npm -v
+* actualizar NPM
+	* npm install -g npm@latest
+	* npm cache clean --force
+	* npm set audit false
+* para compilar:
+ * ng serve --proxy-config
+ * "npm i sweetalert2" comando para installar sweetalert2 en angular
+ * para contacto "npm install --save @emailjs/browser"
+## Para levantar Django
+ * en carpeta Back: python -m venv venv
+ * en carpeta venv/Script: activate
+ * en carpeta Back: pip install -r ".\requirements.txt"
+ * desde el proyecto (crear la base de datos ):
+
+* python manage.py makemigrations
+
+* python manage.py migrate
+
+* python manage.py createsuperuser
+	(admin - admin@email.com - 12345678)
+
+* python manage.py runserver
