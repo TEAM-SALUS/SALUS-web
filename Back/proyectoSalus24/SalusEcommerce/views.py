@@ -45,18 +45,39 @@ class PacienteViewSet(viewsets.ModelViewSet):
 
 # Obtiene Paciente por id usuario
 class PacientePorIdUsuarioView(APIView):
-    permission_classes=(permissions.IsAuthenticated,)
+    permission_classes=(permissions.AllowAny,)
 
-    def get_object(self,idpu=None,format=None):
+    def get_object(self,id=None,format=None):
         try:
-            return Paciente.objects.get(pacienteUser=idpu)
+            return Paciente.objects.get(pacienteUser=id)
         except Paciente.DoesNotExist:
             raise Http404
         
-    def get(self,request,idpu,format=None):
-        modelo=self.get_object(idpu)
+    def get(self,request,id,format=None):
+        modelo=self.get_object(id)
         serializer=PacienteSerializer(modelo)
         return Response(serializer.data)
+    
+    def put(self, request, id, format=None):
+        modelo = self.get_object(id)
+        serializer = PacienteSerializer(modelo, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def patch(self, request, id, format=None):
+        modelo = self.get_object(id)
+        serializer = PacienteSerializer(modelo, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, request, id, format=None):
+        modelo = self.get_object(id)
+        modelo.delete()  # Elimina el objeto
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 # Lista, Actualiza y borra Pacientes por Usuario
 class PacientePorUserView(generics.RetrieveUpdateDestroyAPIView):
@@ -158,10 +179,21 @@ class EspecialidadViewSet(viewsets.ModelViewSet):
 class EspecialidadPorIdView(APIView):
     permission_classes=(permissions.IsAuthenticated,)
 
-    def get(self,request,ide=None):
+    def get_object(self,id):
+        try:
+            return Especialidad.objects.get(id=id)
+        except Especialidad.DoesNotExist:
+            raise Http404    
+    
+    def get(self,request,id,format=None):
+        modelo=self.get_object(id)
+        serializer=EspecialidadSerializer(modelo)
+        return Response(serializer.data)
+
+    """ def get(self,request,ide=None):
         especialidadId=Especialidad.objects.filter(id=ide)
         serializer=EspecialidadSerializer(especialidadId,many=True)
-        return Response(serializer.data)
+        return Response(serializer.data) """
     
 # Lista Especialidad
 class EspecialidadListView(APIView):
@@ -184,12 +216,23 @@ class HorarioDeAtencionViewSet(viewsets.ModelViewSet):
 
 # Lista HorarioDeAtencion por id
 class HorarioDeAtencionPorIdView(APIView):
-    permission_classes=(permissions.IsAuthenticated,)
+    permission_classes=(permissions.AllowAny,)
 
-    def get(self,request,idh=None):
+    def get_object(self,id=None,format=None):
+        try:
+            return HorarioDeAtencion.objects.get(id=id)
+        except HorarioDeAtencion.DoesNotExist:
+            raise Http404
+        
+    def get(self,request,id,format=None):
+        modelo=self.get_object(id)
+        serializer=HorarioDeAtencionSerializer(modelo)
+        return Response(serializer.data)
+
+    """ def get(self,request,idh=None):
         horarioDeAtencionId=HorarioDeAtencion.objects.filter(id=idh)
         serializer=HorarioDeAtencionSerializer(horarioDeAtencionId,many=True)
-        return Response(serializer.data)
+        return Response(serializer.data) """
 
 """
 TABLA Medico
