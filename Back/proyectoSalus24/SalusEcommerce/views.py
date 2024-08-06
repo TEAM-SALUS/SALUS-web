@@ -1,5 +1,6 @@
 
 from django.http import Http404
+
 import logging
 from rest_framework.decorators import action
 from django.shortcuts import render
@@ -164,8 +165,7 @@ class EspecialidadPorIdView(APIView):
         especialidadId = Especialidad.objects.filter(id=ide)
         serializer = EspecialidadSerializer(especialidadId, many=True)
         return Response(serializer.data)
- 
-# Lista Especialidad
+
 
 class EspecialidadListView(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -204,6 +204,12 @@ class MedicoViewSet(viewsets.ModelViewSet):
     queryset = Medico.objects.all()
     serializer_class = MedicoSerializer
 
+    @action(detail=False, methods=['get'], url_path='especialidad/(?P<especialidad_id>[^/.]+)')
+    def get_medicos_por_especialidad(self, request, especialidad_id=None):
+        medicos = Medico.objects.filter(id_especialidad=especialidad_id)
+        serializer = self.get_serializer(medicos, many=True)
+        return Response(serializer.data)
+
 
 # Obtiene medico por id
 class MedicoPorIdView(APIView):
@@ -235,6 +241,7 @@ class MedicoPorUserView(APIView):
         return Response(serializer.data)
 
 
+
 # Lista Medico por Especialidad
 class MedicoPorEspecialidadView(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -245,6 +252,7 @@ class MedicoPorEspecialidadView(APIView):
         return Response(serializer.data)
     
 # Lista Medico
+
 
 class MedicoListView(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -501,7 +509,6 @@ class RegistroDeConsultaListView(APIView):
             registroDeConsultaList, many=True)
         return Response(serializer.data)
 
-#nuevo turnero
 class TurnosDisponiblesList(generics.ListAPIView):
     serializer_class = TurnosDisponiblesSerializer
     permission_classes = [permissions.AllowAny]
@@ -511,6 +518,12 @@ class TurnosDisponiblesList(generics.ListAPIView):
         if medico_id is not None:
             return TurnosDisponibles.objects.filter(medico_id=medico_id)
         return TurnosDisponibles.objects.all()
+
+
+class TurnosDisponiblesViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.AllowAny,)
+    queryset = TurnosDisponibles.objects.all()
+    serializer_class = TurnosDisponiblesSerializer
 
 
 class CreateTurnoView(generics.CreateAPIView):
