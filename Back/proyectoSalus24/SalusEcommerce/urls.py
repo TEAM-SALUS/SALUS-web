@@ -34,7 +34,7 @@ router.register(r'medico', views.MedicoViewSet)
 router.register(r'turno', views.TurnoViewSet)
 router.register(r'pago', views.PagoViewSet)
 router.register(r'registroDeConsulta', views.RegistroDeConsultaViewSet)
-router.register(r'turnos-disponibles', views.TurnosDisponiblesViewSet)
+router.register(r'turnosdisponibles', views.TurnosDisponiblesViewSet)
 
 # --
 urlpatterns = [
