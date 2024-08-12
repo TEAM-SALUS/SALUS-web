@@ -352,6 +352,10 @@ class TurnosDisponiblesList(generics.ListAPIView):
             return TurnosDisponibles.objects.filter(medico_id=medico_id)
         return TurnosDisponibles.objects.all()
 
+class TurnosDisponiblesViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.AllowAny,)
+    queryset = TurnosDisponibles.objects.all()
+    serializer_class = TurnosDisponiblesSerializer
 
 class CreateTurnoView(generics.CreateAPIView):
     serializer_class = TurnoSerializer
