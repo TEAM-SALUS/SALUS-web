@@ -11,7 +11,7 @@ import { NosotrosComponent } from './pages/nosotros/nosotros.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SuscripcionComponent } from './ecommerce/suscripcion/suscripcion.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormComponent } from './ecommerce/form/form.component';
 import { PacienteComponent } from './pages/paciente/paciente.component';
 import { SuscripcionAdminComponent } from './ecommerce/suscripcion-admin/suscripcion-admin.component';
@@ -19,10 +19,6 @@ import { RegistroComponent } from './pages/registro/registro.component';
 import { SharedServicesComponent } from './services/auth/shared-services/shared-services.component';
 import { FormsModule } from '@angular/forms';
 import { FormEditComponent } from './ecommerce/form-edit/form-edit.component';
-import { MedicosAdminComponent } from './medicos/medicos-admin/medicos-admin.component';
-import { MedicoDetailComponent } from './medicos/medico-detail/medico-detail.component';
-import { FormDoctorComponent } from './medicos/form-doctor/form-doctor.component';
-import { FormEditDoctorComponent } from './medicos/form-edit-doctor/form-edit-doctor.component';
 import { PagoComponent } from './ecommerce/pago/pago.component';
 import { PagoAdminComponent } from './ecommerce/pago-admin/pago-admin.component';
 import { PagoClienteComponent } from './ecommerce/pago-cliente/pago-cliente.component';
@@ -32,6 +28,9 @@ import { EspecialidadComponent } from './pages/especialidad/especialidad.compone
 import { DetalleEspecialidadComponent } from './pages/detalle-especialidad/detalle-especialidad.component';
 import { JwtInterceptorService } from './services/auth/jwt-interceptor.service';
 import { ErrorInterceptorService } from './services/auth/error-interceptor.service';
+import { ProfesionalesComponent } from './pages/profesionales/profesionales.component';
+import { CProfesionalComponent } from './pages/components/c-profesionales/c-profesionales.component';
+import { ProtegidosModule } from './protegidos/protegidos.module';
 
 @NgModule({
   declarations: [
@@ -49,10 +48,6 @@ import { ErrorInterceptorService } from './services/auth/error-interceptor.servi
     RegistroComponent,
     SharedServicesComponent,
     FormEditComponent,
-    MedicosAdminComponent,
-    MedicoDetailComponent,
-    FormDoctorComponent,
-    FormEditDoctorComponent,
     PagoComponent,
     PagoAdminComponent,
     PagoClienteComponent,
@@ -60,6 +55,8 @@ import { ErrorInterceptorService } from './services/auth/error-interceptor.servi
     CDetalleEspecialidadComponent,
     EspecialidadComponent,
     DetalleEspecialidadComponent,
+    ProfesionalesComponent,
+    CProfesionalComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +64,7 @@ import { ErrorInterceptorService } from './services/auth/error-interceptor.servi
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    ProtegidosModule
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptorService,multi:true},

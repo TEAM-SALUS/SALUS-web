@@ -37,4 +37,3 @@ Por otra parte, los profesionales de la salud podrán acceder al historial médi
 * Melani Elizabeth Quiroga López
 * Rosana Quispe
 * Verónica Elena Nievas Guardia
-

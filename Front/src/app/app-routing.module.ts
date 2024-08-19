@@ -11,42 +11,47 @@ import { FormEditComponent } from './ecommerce/form-edit/form-edit.component';
 import { CuentaComponent } from './pages/cuenta/cuenta.component';
 import { SuscripcionAdminComponent } from './ecommerce/suscripcion-admin/suscripcion-admin.component';
 import { PacienteComponent } from './pages/paciente/paciente.component';
-import { MedicosAdminComponent } from './medicos/medicos-admin/medicos-admin.component';
-import { FormDoctorComponent } from './medicos/form-doctor/form-doctor.component';
-import { FormEditDoctorComponent } from './medicos/form-edit-doctor/form-edit-doctor.component';
 import { PagoComponent } from './ecommerce/pago/pago.component';
 import { PagoAdminComponent } from './ecommerce/pago-admin/pago-admin.component';
 import { PagoClienteComponent } from './ecommerce/pago-cliente/pago-cliente.component';
 import { EspecialidadComponent } from './pages/especialidad/especialidad.component';
 import { DetalleEspecialidadComponent } from './pages/detalle-especialidad/detalle-especialidad.component';
-
-
+import { ProfesionalesComponent } from './pages/profesionales/profesionales.component';
+import { CProfesionalComponent } from './pages/components/c-profesionales/c-profesionales.component';
+import { ProtegidosModule } from './protegidos/protegidos.module';
+import { UserProfileComponent } from './protegidos/pages/user-profile/user-profile.component';
+import { AuthGuard } from './pages/login/auth.guard';
+import { EditarPerfilComponent } from './protegidos/pages/editar-perfil/editar-perfil.component';
 const routes: Routes = [
-  {path:'home', component:HomeComponent},
+  {path:'home', component:HomeComponent,
+    children:[{path:'home',component: UserProfileComponent}]
+  },
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path:'servicios', component:EspecialidadComponent},
   {path:'detalle-servicio/:id', component: DetalleEspecialidadComponent},
   {path:'nosotros', component:NosotrosComponent},
   {path:'contacto', component:ContactoComponent},
   {path:'registro', component:RegistroComponent},
-  {path:'suscripcion', component:SuscripcionComponent},
-  {path:'login', component:LoginComponent},
-  {path:'formSuscripcion', component:FormComponent},
-  {path:'formSuscripcionEdit', component:FormEditComponent},
-  {path:'cuenta', component:CuentaComponent},
-  {path:'adminSuscripcion', component:SuscripcionAdminComponent},
-  {path:'paciente', component:PacienteComponent},
-  {path:'adminMedico', component:MedicosAdminComponent},
-  {path:'formDoctor', component:FormDoctorComponent},
-  {path:'formDoctorEdit', component:FormEditDoctorComponent},
   {path:'pago', component:PagoComponent},
-  {path:'adminPago', component:PagoAdminComponent},
-  {path:'clientePago', component:PagoClienteComponent},
+  {path:'login', component:LoginComponent},
+  {path:'paciente', component:PacienteComponent},
+  {path:'profesionales',component:ProfesionalesComponent},
+  {path:'cprofesionales',component:CProfesionalComponent},
+  { path: 'user-profile/:id', component: UserProfileComponent, canActivate: [AuthGuard] },
+  { path: 'editar-perfil/:id', component: EditarPerfilComponent, canActivate: [AuthGuard] },
+
+  // {path:'suscripcion', component:SuscripcionComponent},
+  // {path:'formSuscripcion', component:FormComponent},
+  // {path:'formSuscripcionEdit', component:FormEditComponent},
+  // {path:'cuenta', component:CuentaComponent},
+  // {path:'adminSuscripcion', component:SuscripcionAdminComponent},
+  // {path:'adminPago', component:PagoAdminComponent},
+  // {path:'clientePago', component:PagoClienteComponent},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule,ProtegidosModule]
 })
 
 export class AppRoutingModule { }

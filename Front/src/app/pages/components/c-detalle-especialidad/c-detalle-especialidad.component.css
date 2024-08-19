@@ -31,7 +31,7 @@
     font-family: poppins, sans-serif;
     font-weight: 600;
     letter-spacing: 1px;
-    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.638);
 }
 
 hr{
@@ -40,9 +40,9 @@ hr{
 }
 
 .card-p-nombre-dr{
-    font-weight: 600;
     font-size: 18px;
     margin-top: 15px;
+    color: var(--primary-color);
 }
 
 .card-descripcion{
@@ -52,11 +52,12 @@ hr{
 
 .horarios, .contacto{
     margin-top: 8px;
-    font-weight: 600;
+    color: var(--primary-color);
 }
 
 .contacto span{
     font-weight: 400;
+    color: rgba(0, 0, 0, 0.766);
 }
 
 ul li{
@@ -113,8 +114,9 @@ ul li{
     }
 
     .card-title{
-        margin-top: 20px;
+        margin-top: 24px;
         font-size: 22px;
+        text-align: center;
     }
 
     hr{

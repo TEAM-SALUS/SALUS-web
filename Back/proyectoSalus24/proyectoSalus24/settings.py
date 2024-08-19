@@ -27,7 +27,16 @@ SECRET_KEY = 'django-insecure-9(t75mlxygl=d^h3(yxt8eu(ryei+d1@y)n$^0&*fx#gpv$_sy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost',
+                 '172.20.10.4',
+                 '127.0.0.1',
+                 '192.168.0.44',
+                 '192.168.0.26',
+                 '192.168.1.6',
+                 '192.168.1.13',
+                 '192.168.1.2',
+                 '192.168.1.11'
+                 ]
 
 
 # Application definition
@@ -95,7 +104,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'BD_Salus',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
@@ -150,8 +159,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-	'knox.auth.TokenAuthentication',
-    ]  
+        'knox.auth.TokenAuthentication',
+    ]
 }
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
